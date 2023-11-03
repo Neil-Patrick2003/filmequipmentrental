@@ -5,7 +5,9 @@
 package com.mycompany.filmequipmentrentalservice;
 
 import java.util.Scanner;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -109,6 +111,11 @@ public class Login extends javax.swing.JPanel {
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jButton2.setText("Sign up");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         IN_password.setBackground(new java.awt.Color(255, 255, 255));
         IN_password.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -221,8 +228,7 @@ public class Login extends javax.swing.JPanel {
             System.out.println(admin.name);
             Admin_Dashboard C_dash = new Admin_Dashboard();
             C_dash.setVisible(true);
-            
-           
+
         }
 
 
@@ -232,21 +238,37 @@ public class Login extends javax.swing.JPanel {
         String username = IN_username.getText();
         char[] passwordChars = IN_password.getPassword();
         String password = new String(passwordChars);
-        
-         
+
         Boolean buttonEnabled = !"".equals(username) && !"".equals(password);
         btnLogin.setEnabled(buttonEnabled);
     }//GEN-LAST:event_IN_usernameKeyReleased
 
     private void IN_passwordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IN_passwordKeyReleased
-         String username = IN_username.getText();
+        String username = IN_username.getText();
         char[] passwordChars = IN_password.getPassword();
         String password = new String(passwordChars);
-        
-        
+
         Boolean buttonEnabled = !"".equals(username) && !"".equals(password);
         btnLogin.setEnabled(buttonEnabled);
+
     }//GEN-LAST:event_IN_passwordKeyReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        System.out.println("test");
+        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+//        this.setVisible(false);
+        mainFrame.remove(this);
+        NewJPanel pan = new NewJPanel();
+        mainFrame.add(pan);
+
+        mainFrame.revalidate();
+        mainFrame.repaint();
+
+        System.out.print(mainFrame);
+
+//        pan.setVisible(true);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
