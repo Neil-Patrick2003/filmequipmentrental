@@ -13,14 +13,19 @@ import java.sql.SQLException;
  */
 public class AccessDatabaseConnector {
     // JDBC URL, username, and password of the database to connect
-    private static final String URL = "jdbc:ucanaccess://C://Users//Neil Patrick//OneDrive//Documents//Film Equipment Rental Service.accdb";
+    private static final String DATABASE = "filmequipmentrs";
+    private static final String PORT = "3306";
+    private static final String URL = "jdbc:mysql://localhost:" + PORT + "/" + DATABASE + "?zeroDateTimeBehavior=CONVERT_TO_NULL";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "";
+
     
     // Method to establish a connection to the Access database
     public static Connection connect() {
         Connection connection = null;
         try {
             // Establish a connection
-            connection = DriverManager.getConnection(URL);
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             System.out.println("Connected to the database.");
         } catch (SQLException e) {
             // Handle any errors
