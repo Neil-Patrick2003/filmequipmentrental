@@ -258,7 +258,7 @@ public class Login extends javax.swing.JPanel {
         JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 //        this.setVisible(false);
         mainFrame.remove(this);
-        NewJPanel pan = new NewJPanel();
+        AdminDashBoard pan = new AdminDashBoard();
         mainFrame.add(pan);
 
         mainFrame.revalidate();

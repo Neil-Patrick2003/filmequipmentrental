@@ -18,7 +18,7 @@ public class FilmEquipmentRentalService {
 //        Login frame = new Login();
 //        frame.setVisible(true);
         
-        JFrame frame = new JFrame("Login Frame");
+        JFrame frame = new JFrame("Film Equipment Rental Service");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(new Login()); // Add the Login panel to the frame
         frame.pack(); // Resize the frame to fit the components
