@@ -14,8 +14,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdminDashBoard extends javax.swing.JPanel {
 
-    List<Category> categories;
-
     /**
      * Creates new form NewJPanel
      */
@@ -23,6 +21,11 @@ public class AdminDashBoard extends javax.swing.JPanel {
         initComponents();
         refreshEquipmentList();
 
+        List<Category> categories = CategoryService.getAllCategories();
+
+        for (int i = 0; i < categories.size(); i++) {
+            equipmentCategoryCombobox.addItem(categories.get(i).name);
+        }
     }
 
     /**
@@ -46,16 +49,16 @@ public class AdminDashBoard extends javax.swing.JPanel {
         EqupmentNameLabel2 = new javax.swing.JLabel();
         EqupmentNameLabel3 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        DailyFeeTextField2 = new javax.swing.JTextField();
-        EquipmeentNameTextField3 = new javax.swing.JTextField();
-        DescriptionTextField4 = new javax.swing.JTextField();
-        WeeklyFeeTextField5 = new javax.swing.JTextField();
+        equipmentDailyFeeInputField = new javax.swing.JTextField();
+        equipmentNameInputField = new javax.swing.JTextField();
+        equipmentDescriptionInputField = new javax.swing.JTextField();
+        equipmentWeeklyFeeInputField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        CategoryIDTextField6 = new javax.swing.JTextField();
         addEquipmentBtn = new javax.swing.JButton();
         deleteCustomerButton1 = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
         updateEquipmentButton = new javax.swing.JButton();
+        equipmentCategoryCombobox = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(0, 102, 102));
@@ -176,29 +179,25 @@ public class AdminDashBoard extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(0, 102, 102));
         jLabel3.setText("Weekly Fee");
 
-        DailyFeeTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        DailyFeeTextField2.setForeground(new java.awt.Color(0, 102, 102));
-        DailyFeeTextField2.setMinimumSize(new java.awt.Dimension(4, 19));
+        equipmentDailyFeeInputField.setBackground(new java.awt.Color(255, 255, 255));
+        equipmentDailyFeeInputField.setForeground(new java.awt.Color(0, 102, 102));
+        equipmentDailyFeeInputField.setMinimumSize(new java.awt.Dimension(4, 19));
 
-        EquipmeentNameTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        EquipmeentNameTextField3.setForeground(new java.awt.Color(0, 102, 102));
-        EquipmeentNameTextField3.setMinimumSize(new java.awt.Dimension(4, 19));
+        equipmentNameInputField.setBackground(new java.awt.Color(255, 255, 255));
+        equipmentNameInputField.setForeground(new java.awt.Color(0, 102, 102));
+        equipmentNameInputField.setMinimumSize(new java.awt.Dimension(4, 19));
 
-        DescriptionTextField4.setBackground(new java.awt.Color(255, 255, 255));
-        DescriptionTextField4.setForeground(new java.awt.Color(0, 102, 102));
-        DescriptionTextField4.setMinimumSize(new java.awt.Dimension(4, 19));
+        equipmentDescriptionInputField.setBackground(new java.awt.Color(255, 255, 255));
+        equipmentDescriptionInputField.setForeground(new java.awt.Color(0, 102, 102));
+        equipmentDescriptionInputField.setMinimumSize(new java.awt.Dimension(4, 19));
 
-        WeeklyFeeTextField5.setBackground(new java.awt.Color(255, 255, 255));
-        WeeklyFeeTextField5.setForeground(new java.awt.Color(0, 102, 102));
-        WeeklyFeeTextField5.setMinimumSize(new java.awt.Dimension(4, 19));
+        equipmentWeeklyFeeInputField.setBackground(new java.awt.Color(255, 255, 255));
+        equipmentWeeklyFeeInputField.setForeground(new java.awt.Color(0, 102, 102));
+        equipmentWeeklyFeeInputField.setMinimumSize(new java.awt.Dimension(4, 19));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel4.setText("Category ID");
-
-        CategoryIDTextField6.setBackground(new java.awt.Color(255, 255, 255));
-        CategoryIDTextField6.setForeground(new java.awt.Color(0, 102, 102));
-        CategoryIDTextField6.setMinimumSize(new java.awt.Dimension(4, 19));
+        jLabel4.setText("Category");
 
         addEquipmentBtn.setText("Add");
         addEquipmentBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -233,27 +232,29 @@ public class AdminDashBoard extends javax.swing.JPanel {
         equipmentTabLayout.setHorizontalGroup(
             equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(equipmentTabLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(equipmentTabLayout.createSequentialGroup()
-                        .addComponent(EqupmentNameLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                        .addGap(102, 102, 102))
-                    .addComponent(EquipmeentNameTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DescriptionTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DailyFeeTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(equipmentTabLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(equipmentTabLayout.createSequentialGroup()
+                                .addComponent(EqupmentNameLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                                .addGap(102, 102, 102))
+                            .addComponent(equipmentNameInputField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(equipmentDescriptionInputField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(equipmentDailyFeeInputField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2)
-                            .addComponent(EqupmentNameLabel1)
                             .addComponent(jLabel3)
                             .addComponent(EqupmentNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(WeeklyFeeTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CategoryIDTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, equipmentTabLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(addEquipmentBtn)))
+                            .addComponent(jLabel4)
+                            .addComponent(EqupmentNameLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(equipmentWeeklyFeeInputField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, equipmentTabLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(addEquipmentBtn))))
+                    .addGroup(equipmentTabLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(equipmentCategoryCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(equipmentTabLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -273,27 +274,27 @@ public class AdminDashBoard extends javax.swing.JPanel {
             .addGroup(equipmentTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(63, 63, 63)
+                .addGap(12, 12, 12)
                 .addComponent(EqupmentNameLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EquipmeentNameTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(equipmentNameInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EqupmentNameLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DescriptionTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(equipmentDescriptionInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(EqupmentNameLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DailyFeeTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(equipmentDailyFeeInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(WeeklyFeeTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(equipmentWeeklyFeeInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CategoryIDTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(equipmentCategoryCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addComponent(addEquipmentBtn)
                 .addGap(213, 213, 213))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, equipmentTabLayout.createSequentialGroup()
@@ -359,44 +360,43 @@ public class AdminDashBoard extends javax.swing.JPanel {
         for (int i = 0; i < equipments.size(); i++) {
             System.out.println(i);
             Equipment equipment = equipments.get(i);
-            Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category_id};
+            Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
             customerTable.addRow(rowData);
-            EquipmeentNameTextField3.setText("");
-            DescriptionTextField4.setText("");
-            DailyFeeTextField2.setText("");
-            WeeklyFeeTextField5.setText("");
-            CategoryIDTextField6.setText("");
         }
 
     }
 
+    private void clearEquipmentForm() {
+        equipmentNameInputField.setText("");
+        equipmentDescriptionInputField.setText("");
+        equipmentDailyFeeInputField.setText("");
+        equipmentWeeklyFeeInputField.setText("");
+        equipmentCategoryCombobox.setSelectedIndex(-1);
+    }
 
     private void addEquipmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEquipmentBtnActionPerformed
-        String name = EquipmeentNameTextField3.getText();
-        String description = DescriptionTextField4.getText();
+        String name = equipmentNameInputField.getText();
+        String description = equipmentDescriptionInputField.getText();
 
-        String dailyFeeText = DailyFeeTextField2.getText();
+        String dailyFeeText = equipmentDailyFeeInputField.getText();
         double dailyFee = Double.parseDouble(dailyFeeText);
 
-        String weeklFeeText = WeeklyFeeTextField5.getText();
+        String weeklFeeText = equipmentWeeklyFeeInputField.getText();
         double weeklyFee = Double.parseDouble(weeklFeeText);
 
-        String categoryIDText = CategoryIDTextField6.getText();
-        int categoryID = Integer.parseInt(categoryIDText);
+        Category category = null;
+
+        if (equipmentCategoryCombobox.getSelectedIndex() >= 0) {
+            category = CategoryService.getCategoryByName(equipmentCategoryCombobox.getSelectedItem().toString());
+        }
 
         if (name.equals("") || description.equals("") || dailyFeeText.equals("")
-                || weeklFeeText.equals("") || categoryIDText.equals("")) {
+                || weeklFeeText.equals("") || category == null) {
             JOptionPane.showMessageDialog(null, "Please complete the form.");
         } else {
-
-            EquipmentService.addEquipment(name, description, dailyFee, weeklyFee, categoryID);
-            EquipmeentNameTextField3.setText("");
-            DescriptionTextField4.setText("");
-            DailyFeeTextField2.setText("");
-            WeeklyFeeTextField5.setText("");
-            CategoryIDTextField6.setText("");
+            EquipmentService.addEquipment(name, description, dailyFee, weeklyFee, category.id);
+            clearEquipmentForm();
             refreshEquipmentList();
-
         }
     }//GEN-LAST:event_addEquipmentBtnActionPerformed
 
@@ -408,11 +408,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
         System.out.println(equipmentId);
 
         EquipmentService.deleteEquipment(equipmentId);
-        EquipmeentNameTextField3.setText("");
-        DescriptionTextField4.setText("");
-        DailyFeeTextField2.setText("");
-        WeeklyFeeTextField5.setText("");
-        CategoryIDTextField6.setText("");
+        clearEquipmentForm();
         refreshEquipmentList();
 
 
@@ -433,54 +429,46 @@ public class AdminDashBoard extends javax.swing.JPanel {
         String description = (String) EquipmentTable.getValueAt(row, 2);
 
 // Retrieve and parse updated fees from text fields
-        String updatedDailyFeeText = DailyFeeTextField2.getText();
+        String updatedDailyFeeText = equipmentDailyFeeInputField.getText();
         double updatedDailyFee = Double.parseDouble(updatedDailyFeeText);
 
-        String updatedWeeklyFeeText = WeeklyFeeTextField5.getText();
+        String updatedWeeklyFeeText = equipmentWeeklyFeeInputField.getText();
         double updatedWeeklyFee = Double.parseDouble(updatedWeeklyFeeText);
 
-        String categoryIDText = CategoryIDTextField6.getText();
         int categoryID = (int) EquipmentTable.getValueAt(row, 4);
 
-// Validation if necessary
-// Update the equipment object
         Equipment equipment = new Equipment(equipmentId, name, description, updatedDailyFee, updatedWeeklyFee, categoryID);
 
-// Update the equipment in the service
         EquipmentService.updateEquipment(equipmentId, equipment);
 
-        EquipmeentNameTextField3.setText("");
-        DescriptionTextField4.setText("");
-        DailyFeeTextField2.setText("");
-        WeeklyFeeTextField5.setText("");
-        CategoryIDTextField6.setText("");
+        clearEquipmentForm();
+        refreshEquipmentList();
     }//GEN-LAST:event_updateEquipmentButtonActionPerformed
 
     private void EquipmentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EquipmentTableMouseClicked
         // TODO add your handling code here:
         int i = EquipmentTable.getSelectedRow();
-        EquipmeentNameTextField3.setText(EquipmentTable.getValueAt(i, 1).toString());
-        DescriptionTextField4.setText(EquipmentTable.getValueAt(i, 2).toString());
-        DailyFeeTextField2.setText(EquipmentTable.getValueAt(i, 3).toString());
-        WeeklyFeeTextField5.setText(EquipmentTable.getValueAt(i, 4).toString());
-        CategoryIDTextField6.setText(EquipmentTable.getValueAt(i, 4).toString());
+        equipmentNameInputField.setText(EquipmentTable.getValueAt(i, 1).toString());
+        equipmentDescriptionInputField.setText(EquipmentTable.getValueAt(i, 2).toString());
+        equipmentDailyFeeInputField.setText(EquipmentTable.getValueAt(i, 3).toString());
+        equipmentWeeklyFeeInputField.setText(EquipmentTable.getValueAt(i, 4).toString());
 
     }//GEN-LAST:event_EquipmentTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CategoryIDTextField6;
-    private javax.swing.JTextField DailyFeeTextField2;
-    private javax.swing.JTextField DescriptionTextField4;
-    private javax.swing.JTextField EquipmeentNameTextField3;
     private javax.swing.JTable EquipmentTable;
     private javax.swing.JLabel EqupmentNameLabel1;
     private javax.swing.JLabel EqupmentNameLabel2;
     private javax.swing.JLabel EqupmentNameLabel3;
-    private javax.swing.JTextField WeeklyFeeTextField5;
     private javax.swing.JButton addEquipmentBtn;
     private javax.swing.JButton deleteCustomerButton1;
+    private javax.swing.JComboBox<String> equipmentCategoryCombobox;
+    private javax.swing.JTextField equipmentDailyFeeInputField;
+    private javax.swing.JTextField equipmentDescriptionInputField;
+    private javax.swing.JTextField equipmentNameInputField;
     private javax.swing.JPanel equipmentTab;
+    private javax.swing.JTextField equipmentWeeklyFeeInputField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

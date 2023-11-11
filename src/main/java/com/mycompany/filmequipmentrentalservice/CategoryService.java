@@ -17,15 +17,19 @@ import java.util.List;
  */
 public class CategoryService {
 
-    public static void addCategory(Category category) {
+    public static final String CATEGORIES_TABLE = "categories2";
+    public static final String ID_COLUMN = "id";
+    public static final String NAME_COLUMN = "name";
+
+    public static void addCategory(String name) {
         Connection conn = AccessDatabaseConnector.connect();
         try {
 
             // Execute an INSERT query
             try (Statement statement = conn.createStatement()) {
                 // Execute an INSERT query
-                String insertQuery = "INSERT Into categoris (categories_name ) VALUES ('" + category.name + "');";
-                System.out.println(insertQuery);
+                String insertQuery = "INSERT INTO " + CATEGORIES_TABLE + " (" + NAME_COLUMN + ") VALUES ('" + name + "');";
+
                 int rowsAffected = statement.executeUpdate(insertQuery);
                 // Check the number of rows affected
                 if (rowsAffected > 0) {
@@ -50,20 +54,16 @@ public class CategoryService {
             Statement statement = conn.createStatement();
 
             // Execute a SELECT query
-            String selectQuery = "SELECT * FROM categories";
+            String selectQuery = "SELECT * FROM " + CATEGORIES_TABLE;
             ResultSet resultSet = statement.executeQuery(selectQuery);
 
             // Process the results
             while (resultSet.next()) {
                 // Retrieve data from the result set
-                int id = resultSet.getInt("ID");
-
-                String name = resultSet.getString("Category Name");
-
-                Category category = new Category("name");
-
+                int id = resultSet.getInt(ID_COLUMN);
+                String name = resultSet.getString(NAME_COLUMN);
+                Category category = new Category(id, name);
                 categories.add(category);
-
             }
 
             // Close the result set and statement
@@ -80,4 +80,34 @@ public class CategoryService {
         return null;
     }
 
+ public static Category getCategoryByName(String name) {
+        String selectQuery = "SELECT * FROM " + CATEGORIES_TABLE + " WHERE " + NAME_COLUMN + " = '" + name + "' LIMIT 1;";
+
+        Connection conn = AccessDatabaseConnector.connect();
+        try {
+            Statement statement = conn.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(selectQuery);
+
+            Category category = null;
+
+            // Process the results
+            while (resultSet.next()) {
+                int id = resultSet.getInt(ID_COLUMN);
+                category = new Category(id, name);
+            }
+
+            // Close the result set and statement
+            resultSet.close();
+            statement.close();
+
+            return category;
+        } catch (SQLException e) {
+            System.out.print(e);
+        } finally {
+            AccessDatabaseConnector.closeConnection(conn);
+        }
+
+        return null;
+    }
 }

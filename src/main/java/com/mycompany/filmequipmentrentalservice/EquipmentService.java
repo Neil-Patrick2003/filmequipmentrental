@@ -33,7 +33,7 @@ public class EquipmentService {
             Statement statement = conn.createStatement();
 
             // Execute a SELECT query
-            String selectQuery = "SELECT * FROM " + EQUIPMENTS_TABLE;
+            String selectQuery = "SELECT " + EQUIPMENTS_TABLE + ".*, " + CategoryService.CATEGORIES_TABLE + ".name as category_name from " + EQUIPMENTS_TABLE + " left join " + CategoryService.CATEGORIES_TABLE + " ON " + EQUIPMENTS_TABLE + "." + CATEGORY_ID_COLUMN + "  = " + CategoryService.CATEGORIES_TABLE + "." + CategoryService.ID_COLUMN;
             ResultSet resultSet = statement.executeQuery(selectQuery);
 
             // Process the results
@@ -46,10 +46,11 @@ public class EquipmentService {
                 Double weekly_fee = resultSet.getDouble(WEEKLY_RENTAL_FEE_COLUMN);
                 int category_id = resultSet.getInt(CATEGORY_ID_COLUMN);
 
-                Equipment equipments = new Equipment(id, name, description, daily_fee, weekly_fee, category_id);
+                Equipment equipment = new Equipment(id, name, description, daily_fee, weekly_fee, category_id);
+                Category category = new Category(category_id, resultSet.getString("category_name"));
+                equipment.setCategory(category);
 
-                FilmEquipments.add(equipments);
-
+                FilmEquipments.add(equipment);
             }
 
             // Close the result set and statement

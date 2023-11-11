@@ -9,13 +9,13 @@ package com.mycompany.filmequipmentrentalservice;
  * @author Neil Patrick
  */
 public class Equipment {
-
     int id;
     String name;
     String description;
     Double daily_fee;
     Double weekly_fee;
     int category_id;
+    Category category;
 
     public Equipment(int id, String name, String description, Double daily_fee, Double weekly_fee, int category_id) {
         this.id = id;
@@ -24,7 +24,9 @@ public class Equipment {
         this.daily_fee = daily_fee;
         this.weekly_fee = weekly_fee;
         this.category_id = category_id;
-
     }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }
