@@ -16,7 +16,15 @@ import java.util.List;
  * @author Neil Patrick
  */
 public class EquipmentService {
-    
+
+    private static final String EQUIPMENTS_TABLE = "equipments";
+    private static final String ID_COLUMN = "id";
+    private static final String NAME_COLUMN = "name";
+    private static final String DESCRIPTION_COLUMN = "description";
+    private static final String DAILY_RENTAL_FEE_COLUMN = "daily_rental_fee";
+    private static final String WEEKLY_RENTAL_FEE_COLUMN = "weekly_rental_fee";
+    private static final String CATEGORY_ID_COLUMN = "category_id";
+
     public static List getAllEquipments() {
         List<Equipment> FilmEquipments = new ArrayList<>();
 
@@ -25,21 +33,20 @@ public class EquipmentService {
             Statement statement = conn.createStatement();
 
             // Execute a SELECT query
-            String selectQuery = "SELECT * FROM equipments";
+            String selectQuery = "SELECT * FROM " + EQUIPMENTS_TABLE;
             ResultSet resultSet = statement.executeQuery(selectQuery);
 
             // Process the results
             while (resultSet.next()) {
-                // Retrieve data from the result set
-                int id = resultSet.getInt("equipment_id");
 
-                String equipment_name = resultSet.getString("equipment_name");
-                String description = resultSet.getString("description");
-                Double daily_fee = resultSet.getDouble("daily_rental_fee");
-                Double weekly_fee = resultSet.getDouble("weekly_rental_fee");
-                int category_id = resultSet.getInt("category_id");
+                int id = resultSet.getInt(ID_COLUMN);
+                String name = resultSet.getString(NAME_COLUMN);
+                String description = resultSet.getString(DESCRIPTION_COLUMN);
+                Double daily_fee = resultSet.getDouble(DAILY_RENTAL_FEE_COLUMN);
+                Double weekly_fee = resultSet.getDouble(WEEKLY_RENTAL_FEE_COLUMN);
+                int category_id = resultSet.getInt(CATEGORY_ID_COLUMN);
 
-                Equipment equipments = new Equipment(id, equipment_name, description, daily_fee, weekly_fee, category_id);
+                Equipment equipments = new Equipment(id, name, description, daily_fee, weekly_fee, category_id);
 
                 FilmEquipments.add(equipments);
 
@@ -59,17 +66,17 @@ public class EquipmentService {
         return null;
     }
 
-    public static void addEquipments(Equipment equipments) {
+    public static void addEquipment(String name, String description, Double daily_rental_fee, Double weekly_rental_fee, int category_id) {
         Connection conn = AccessDatabaseConnector.connect();
         try {
 
             // Execute an INSERT query
             try (Statement statement = conn.createStatement()) {
                 // Execute an INSERT query
-               
-                String insertQuery = "INSERT Into equipments (equipment_id, equipment_name, description, daily_rental_fee, weekly_rental_fee, category_id) VALUES ('" + equipments.equipment_id + "', '" + equipments.equipment_name + "', '" + equipments.description  + "', '" + equipments.daily_fee + "', '" + equipments.weekly_fee + "', '" +  equipments.category_id + "');";
+
+                String insertQuery = "INSERT INTO " + EQUIPMENTS_TABLE + " (" + NAME_COLUMN + ", " + DESCRIPTION_COLUMN + ", " + DAILY_RENTAL_FEE_COLUMN + ", " + WEEKLY_RENTAL_FEE_COLUMN + ", " + CATEGORY_ID_COLUMN + ") VALUES ('" + name + "', '" + description + "', '" + daily_rental_fee + "', '" + weekly_rental_fee + "', '" + category_id + "');";
                 System.out.println(insertQuery);
-                
+
                 int rowsAffected = statement.executeUpdate(insertQuery);
                 // Check the number of rows affected
                 if (rowsAffected > 0) {
@@ -106,7 +113,7 @@ public class EquipmentService {
     public static void updateEquipment(int equipmentId, Equipment updatedEquipment) {
         Connection conn = AccessDatabaseConnector.connect();
         try (Statement statement = conn.createStatement()) {
-            String updateQuery = "UPDATE FROM equipments ( daily_rental_fee, weekly_rental_fee) SET ('" +  updatedEquipment.daily_fee + "', '" + updatedEquipment.weekly_fee  + "');"
+            String updateQuery = "UPDATE FROM equipments ( daily_rental_fee, weekly_rental_fee) SET ('" + updatedEquipment.daily_fee + "', '" + updatedEquipment.weekly_fee + "');"
                     + "WHERE equipment_id = " + equipmentId;
             int rowsAffected = statement.executeUpdate(updateQuery);
             if (rowsAffected > 0) {
@@ -120,6 +127,5 @@ public class EquipmentService {
             AccessDatabaseConnector.closeConnection(conn);
         }
     }
-    
-    
+
 }

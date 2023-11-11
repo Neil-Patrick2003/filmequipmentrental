@@ -4,35 +4,27 @@
  */
 package com.mycompany.filmequipmentrentalservice;
 
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.Statement;
-//import java.util.ArrayList;
-//import java.util.List;
 /**
  *
  * @author Neil Patrick
  */
 public class Equipment {
 
-    
-    int equipment_id;
-    String equipment_name;
+    int id;
+    String name;
     String description;
-    
     Double daily_fee;
     Double weekly_fee;
-    
     int category_id;
 
-    public Equipment(int equipment_id, String equipment_name, String description, Double daily_fee, Double weekly_fee, int category_id)  {
-        this.equipment_name = equipment_name;
+    public Equipment(int id, String name, String description, Double daily_fee, Double weekly_fee, int category_id) {
+        this.id = id;
+        this.name = name;
         this.description = description;
         this.daily_fee = daily_fee;
         this.weekly_fee = weekly_fee;
         this.category_id = category_id;
-        this.equipment_id = equipment_id;
-       
+
     }
 
 }
