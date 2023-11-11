@@ -20,11 +20,12 @@ public class FilmEquipmentRentalService {
         
         JFrame frame = new JFrame("Film Equipment Rental Service");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new Login()); // Add the Login panel to the frame
+        frame.add(new StartingPage()); // Add the Login panel to the frame
         frame.pack(); // Resize the frame to fit the components
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
     }
+
 }
 //        Scanner choiceScanner = new Scanner(System.in);
 //        int userChoice;

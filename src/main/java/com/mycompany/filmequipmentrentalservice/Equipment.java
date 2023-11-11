@@ -15,24 +15,24 @@ package com.mycompany.filmequipmentrentalservice;
  */
 public class Equipment {
 
-    int id;
+    
+    int equipment_id;
     String equipment_name;
     String description;
-    Double hourly_fee;
+    
     Double daily_fee;
     Double weekly_fee;
-    Double monthly_fee;
+    
     int category_id;
 
-    public Equipment(String equipment_name, String description, Double hourly_fee, Double daily_fee, Double weekly_fee, Double monthly_fee, int category_id)  {
+    public Equipment(int equipment_id, String equipment_name, String description, Double daily_fee, Double weekly_fee, int category_id)  {
         this.equipment_name = equipment_name;
         this.description = description;
-        this.hourly_fee = hourly_fee;
         this.daily_fee = daily_fee;
         this.weekly_fee = weekly_fee;
-        this.monthly_fee = weekly_fee;
         this.category_id = category_id;
-        this.id = id;
+        this.equipment_id = equipment_id;
+       
     }
 
 }

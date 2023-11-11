@@ -161,15 +161,14 @@ public class CustomerLogin extends javax.swing.JPanel {
         String password = new String(passwordChars);
 
         //        if( IN_username.getText().equals("") || ){
-            //            JOptionPane.showMessageDialog(null, "Please fill out username.");
-            //        }
+        //            JOptionPane.showMessageDialog(null, "Please fill out username.");
+        //        }
         //        if(IN_password.getText().equals("")){
-            //            JOptionPane.showMessageDialog(null, "Please fill out password.");
-            //        }
+        //            JOptionPane.showMessageDialog(null, "Please fill out password.");
+        //        }
         //        else{
-            //            JOptionPane.showMessageDialog(null, "Wrong username or password.", "Message", JOptionPane.ERROR_MESSAGE);
-            //        }
-        
+        //            JOptionPane.showMessageDialog(null, "Wrong username or password.", "Message", JOptionPane.ERROR_MESSAGE);
+        //        }
         Customer customer = CustomerService.getByUsernameAndPassword(username, password);
         if (customer == null) {
             JOptionPane.showMessageDialog(null, "Wrong username or password.", "Message", JOptionPane.ERROR_MESSAGE);
@@ -185,8 +184,10 @@ public class CustomerLogin extends javax.swing.JPanel {
             mainFrame.repaint();
 
             System.out.print(mainFrame);
+            
+            
 
-            //        pan.setVisible(true);
+            
 
         }
     }//GEN-LAST:event_loginButtonActionPerformed

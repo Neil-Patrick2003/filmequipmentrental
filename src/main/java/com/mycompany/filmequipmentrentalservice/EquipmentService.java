@@ -35,13 +35,11 @@ public class EquipmentService {
 
                 String equipment_name = resultSet.getString("equipment_name");
                 String description = resultSet.getString("description");
-                Double hourly_fee = resultSet.getDouble("hourly_rental_fee");
                 Double daily_fee = resultSet.getDouble("daily_rental_fee");
                 Double weekly_fee = resultSet.getDouble("weekly_rental_fee");
-                Double monthly_fee = resultSet.getDouble("monthly_rental_fee");
                 int category_id = resultSet.getInt("category_id");
 
-                Equipment equipments = new Equipment(equipment_name, description, hourly_fee, daily_fee, weekly_fee, monthly_fee, category_id);
+                Equipment equipments = new Equipment(id, equipment_name, description, daily_fee, weekly_fee, category_id);
 
                 FilmEquipments.add(equipments);
 
@@ -68,8 +66,10 @@ public class EquipmentService {
             // Execute an INSERT query
             try (Statement statement = conn.createStatement()) {
                 // Execute an INSERT query
-                String insertQuery = "INSERT Into equipments (equipment_name, description, hourly_rental_fee, daily_rental_fee, weekly_rental_fee, monthly_rental_fee, category_id) VALUES ('" + equipments.equipment_name + "', '" + equipments.description + "', '" + equipments.hourly_fee + "', '" + equipments.daily_fee + "', '" + equipments.weekly_fee + "', '" + equipments.monthly_fee + "', '" + equipments.category_id + "');";
+               
+                String insertQuery = "INSERT Into equipments (equipment_id, equipment_name, description, daily_rental_fee, weekly_rental_fee, category_id) VALUES ('" + equipments.equipment_id + "', '" + equipments.equipment_name + "', '" + equipments.description  + "', '" + equipments.daily_fee + "', '" + equipments.weekly_fee + "', '" +  equipments.category_id + "');";
                 System.out.println(insertQuery);
+                
                 int rowsAffected = statement.executeUpdate(insertQuery);
                 // Check the number of rows affected
                 if (rowsAffected > 0) {
@@ -106,7 +106,7 @@ public class EquipmentService {
     public static void updateEquipment(int equipmentId, Equipment updatedEquipment) {
         Connection conn = AccessDatabaseConnector.connect();
         try (Statement statement = conn.createStatement()) {
-            String updateQuery = "UPDATE FROM equipments (hourly_rental_fee, daily_rental_fee, weekly_rental_fee, monthly_rental_fee) SET ('" + updatedEquipment.hourly_fee + "', '" + updatedEquipment.daily_fee + "', '" + updatedEquipment.weekly_fee + "', '" + updatedEquipment.monthly_fee + "');"
+            String updateQuery = "UPDATE FROM equipments ( daily_rental_fee, weekly_rental_fee) SET ('" +  updatedEquipment.daily_fee + "', '" + updatedEquipment.weekly_fee  + "');"
                     + "WHERE equipment_id = " + equipmentId;
             int rowsAffected = statement.executeUpdate(updateQuery);
             if (rowsAffected > 0) {
