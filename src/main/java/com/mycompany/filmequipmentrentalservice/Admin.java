@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class Admin {
 
+    int id;
     String name;
     String email;
     String address;
@@ -23,7 +24,8 @@ public class Admin {
     String username;
     String password; 
 
-    public Admin(String name, String email, String address, String phone_number, String username, String password) {
+    public Admin(int id, String name, String email, String address, String phone_number, String username, String password) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.address = address;

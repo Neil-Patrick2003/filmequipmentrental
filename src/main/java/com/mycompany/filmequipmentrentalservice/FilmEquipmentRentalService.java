@@ -3,10 +3,6 @@
  */
 package com.mycompany.filmequipmentrentalservice;
 
-import java.util.List;
-import java.util.Scanner;
-import java.awt.AWTEvent;
-import java.awt.*;
 import javax.swing.*;
 /**
  *

@@ -16,8 +16,18 @@ import java.util.List;
  * @author Neil Patrick
  */
 public class AdminService {
+
+    private static final String ADMINS_TABLE = "admins";
+    private static final String ID_COLUMN = "id";
+    private static final String NAME_COLUMN = "name";
+    private static final String EMAIL_COLUMN = "email";
+    private static final String USERNAME_COLUMN = "username";
+    private static final String ADDRESS_COLUMN = "address";
+    private static final String PHONE_NUMBER_COLUMN = "phone_number";
+    private static final String PASSWORD_COLUMN = "password";
+
     public static Admin getByUsernameAndPassword(String username, String password) {
-        String selectQuery = "SELECT * FROM admins WHERE admin_user_name = '" + username + "' AND admin_password = '" + password + "' LIMIT 1;";
+        String selectQuery = "SELECT * FROM " + ADMINS_TABLE + " WHERE " + USERNAME_COLUMN + " = '" + username + "' AND " + PASSWORD_COLUMN + " = '" + password + "' LIMIT 1;";
 
         Connection conn = AccessDatabaseConnector.connect();
         try {
@@ -30,16 +40,15 @@ public class AdminService {
             // Process the results
             while (resultSet.next()) {
                 // Retrieve data from the result set
-                int id = resultSet.getInt("admin_id");
+                int id = resultSet.getInt(ID_COLUMN);
+                String name = resultSet.getString(NAME_COLUMN);
+                String email = resultSet.getString(EMAIL_COLUMN);
+                String address = resultSet.getString(ADDRESS_COLUMN);
+                String phone_number = resultSet.getString(PHONE_NUMBER_COLUMN);
+                String admin_username = resultSet.getString(USERNAME_COLUMN);
+                String admin_password = resultSet.getString(PASSWORD_COLUMN);
 
-                String name = resultSet.getString("admin_name");
-                String email = resultSet.getString("admin_email");
-                String address = resultSet.getString("admin_address");
-                String phone_number = resultSet.getString("admin_phoneNumber");
-                String admin_username = resultSet.getString("admin_user_name");
-                String admin_password = resultSet.getString("admin_password");
-
-                admin = new Admin(name, email, address, phone_number, admin_username, admin_password);
+                admin = new Admin(id, name, email, address, phone_number, admin_username, admin_password);
             }
 
             // Close the result set and statement
@@ -55,7 +64,7 @@ public class AdminService {
 
         return null;
     }
-    
+
     public static List getAllAdmins() {
         List<Admin> AdminList = new ArrayList<>();
 
@@ -64,22 +73,20 @@ public class AdminService {
             Statement statement = conn.createStatement();
 
             // Execute a SELECT query
-            String selectQuery = "SELECT * FROM admins";
+            String selectQuery = "SELECT * FROM " + ADMINS_TABLE;
             ResultSet resultSet = statement.executeQuery(selectQuery);
 
             // Process the results
             while (resultSet.next()) {
-                // Retrieve data from the result set
-                int id = resultSet.getInt("admin_id");
+                int id = resultSet.getInt(ID_COLUMN);
+                String name = resultSet.getString(NAME_COLUMN);
+                String email = resultSet.getString(EMAIL_COLUMN);
+                String address = resultSet.getString(ADDRESS_COLUMN);
+                String phone_number = resultSet.getString(PHONE_NUMBER_COLUMN);
+                String username = resultSet.getString(USERNAME_COLUMN);
+                String password = resultSet.getString(PASSWORD_COLUMN);
 
-                String name = resultSet.getString("admin_name");
-                String email = resultSet.getString("admin_email");
-                String address = resultSet.getString("admin_address");
-                String phone_number = resultSet.getString("admin_phoneNumber");
-                String username = resultSet.getString("admin_user_name");
-                String password = resultSet.getString("admin_password");
-
-                Admin admin = new Admin(name, email, address, phone_number, username, password);
+                Admin admin = new Admin(id, name, email, address, phone_number, username, password);
 
                 AdminList.add(admin);
 
@@ -98,30 +105,5 @@ public class AdminService {
 
         return null;
 
-    }
-
-    public static void addAdmin(Admin admin) {
-        Connection conn = AccessDatabaseConnector.connect();
-        try {
-
-            // Execute an INSERT query
-            try (Statement statement = conn.createStatement()) {
-                // Execute an INSERT query
-                String insertQuery = "INSERT Into admins (admin_name, admin_email, admin_address, admin_phoneNumber, admin_user_name, admin_password) VALUES ('" + admin.name + "', '" + admin.email + "', '" + admin.address + "', '" + admin.phone_number + "', '" + admin.username + "', '" + admin.password + "');";
-                System.out.println(insertQuery);
-                int rowsAffected = statement.executeUpdate(insertQuery);
-                // Check the number of rows affected
-                if (rowsAffected > 0) {
-                    System.out.println("Insertion successful. Rows affected: " + rowsAffected);
-                } else {
-                    System.out.println("Insertion failed.");
-                }
-                // Close the statement
-            }
-        } catch (SQLException e) {
-            System.out.print(e);
-        } finally {
-            AccessDatabaseConnector.closeConnection(conn);
-        }
     }
 }
