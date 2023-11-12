@@ -434,9 +434,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
         int categoryID = (int) EquipmentTable.getValueAt(row, 4);
 
-        Equipment equipment = new Equipment(equipmentId, name, description, updatedDailyFee, updatedWeeklyFee, categoryID);
-
-        EquipmentService.updateEquipment(equipmentId, equipment);
+        EquipmentService.updateEquipment(equipmentId, name, description, updatedDailyFee, updatedWeeklyFee, categoryID);
 
         clearEquipmentForm();
         refreshEquipmentList();

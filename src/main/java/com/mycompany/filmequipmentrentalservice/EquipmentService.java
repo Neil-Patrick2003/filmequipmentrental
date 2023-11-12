@@ -97,13 +97,8 @@ public class EquipmentService {
     public static void deleteEquipment(int equipmentId) {
         Connection conn = AccessDatabaseConnector.connect();
         try (Statement statement = conn.createStatement()) {
-            String deleteQuery = "DELETE FROM equipments WHERE equipment_id = " + equipmentId;
-            int rowsAffected = statement.executeUpdate(deleteQuery);
-            if (rowsAffected > 0) {
-                System.out.println("Deletion successful. Rows affected: " + rowsAffected);
-            } else {
-                System.out.println("No equipment found with ID: " + equipmentId);
-            }
+            String deleteQuery = "DELETE FROM " + EQUIPMENTS_TABLE + " WHERE " + ID_COLUMN + " = " + equipmentId;
+            statement.executeUpdate(deleteQuery);
         } catch (SQLException e) {
             e.printStackTrace(); // Handle SQL exceptions
         } finally {
@@ -111,17 +106,11 @@ public class EquipmentService {
         }
     }
 
-    public static void updateEquipment(int equipmentId, Equipment updatedEquipment) {
+    public static void updateEquipment(int equipmentId, String name, String description, Double daily_rental_fee, Double weekly_rental_fee, int category_id) {
         Connection conn = AccessDatabaseConnector.connect();
         try (Statement statement = conn.createStatement()) {
-            String updateQuery = "UPDATE FROM equipments ( daily_rental_fee, weekly_rental_fee) SET ('" + updatedEquipment.daily_fee + "', '" + updatedEquipment.weekly_fee + "');"
-                    + "WHERE equipment_id = " + equipmentId;
-            int rowsAffected = statement.executeUpdate(updateQuery);
-            if (rowsAffected > 0) {
-                System.out.println("Updated successful. Rows affected: " + rowsAffected);
-            } else {
-                System.out.println("No equipment found with ID: " + equipmentId);
-            }
+            String updateQuery = "Update " + EQUIPMENTS_TABLE + " SET " + NAME_COLUMN + " = '" + name + "', " + DESCRIPTION_COLUMN + " = '" + description + "', " + DAILY_RENTAL_FEE_COLUMN + " = '" + daily_rental_fee + "', " + WEEKLY_RENTAL_FEE_COLUMN + " = '" + weekly_rental_fee + "', " + CATEGORY_ID_COLUMN + " = '" + category_id + "' WHERE '" + ID_COLUMN + "' = " + "'" + equipmentId + "';";
+            statement.executeUpdate(updateQuery);
         } catch (SQLException e) {
             e.printStackTrace(); // Handle SQL exceptions
         } finally {
