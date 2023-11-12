@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CategoryService {
 
-    public static final String CATEGORIES_TABLE = "categories2";
+    public static final String CATEGORIES_TABLE = "categories";
     public static final String ID_COLUMN = "id";
     public static final String NAME_COLUMN = "name";
 
