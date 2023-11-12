@@ -78,18 +78,19 @@ public class CustomerService {
             // Process the results
             while (resultSet.next()) {
                 // Retrieve data from the result set
-                int id = resultSet.getInt("customer_id");
+                int id = resultSet.getInt(ID_COLUMN);
 
                 String name = resultSet.getString(NAME_COLUMN);
                 String email = resultSet.getString(EMAIL_COLUMN);
                 String phone_number = resultSet.getString(PHONE_NUMBER_COLUMN);
                 String username = resultSet.getString(USERNAME_COLUMN);
                 String password = resultSet.getString(PASSWORD_COLUMN);
+
                 String address = resultSet.getString(ADDRESS_COLUMN);
 
-                Customer customers = new Customer(id, name, email, phone_number, username, password, address);
+                Customer customer = new Customer(id, name, email, phone_number, username, password, address);
 
-                CustomersList.add(customers);
+                CustomersList.add(customer);
 
             }
 
@@ -114,7 +115,7 @@ public class CustomerService {
             // Execute an INSERT query
             try (Statement statement = conn.createStatement()) {
                 // Execute an INSERT query
-                String insertQuery = "INSERT INTO " + CUSTOMERS_TABLE + " (" + NAME_COLUMN + ", " +EMAIL_COLUMN + ", " + PHONE_NUMBER_COLUMN +", " + USERNAME_COLUMN +", " + PASSWORD_COLUMN +", " + ADDRESS_COLUMN +" ) VALUES ('" + name + "', '" + email + "', '" + phone_number + "', '" + username + "', '" + password + "', '" + address + "');";
+                String insertQuery = "INSERT INTO " + CUSTOMERS_TABLE + " (" + NAME_COLUMN + ", " + EMAIL_COLUMN + ", " + PHONE_NUMBER_COLUMN + ", " + USERNAME_COLUMN + ", " + PASSWORD_COLUMN + ", " + ADDRESS_COLUMN + " ) VALUES ('" + name + "', '" + email + "', '" + phone_number + "', '" + username + "', '" + password + "', '" + address + "');";
                 System.out.println(insertQuery);
                 int rowsAffected = statement.executeUpdate(insertQuery);
                 // Check the number of rows affected

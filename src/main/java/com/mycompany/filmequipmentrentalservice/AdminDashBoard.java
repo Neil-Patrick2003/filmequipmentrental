@@ -358,12 +358,10 @@ public class AdminDashBoard extends javax.swing.JPanel {
         customerTable.setRowCount(0);
 
         for (int i = 0; i < equipments.size(); i++) {
-            System.out.println(i);
             Equipment equipment = equipments.get(i);
             Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
             customerTable.addRow(rowData);
         }
-
     }
 
     private void clearEquipmentForm() {
