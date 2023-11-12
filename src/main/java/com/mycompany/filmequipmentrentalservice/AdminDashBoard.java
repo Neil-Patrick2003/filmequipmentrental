@@ -21,6 +21,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
         initComponents();
         refreshEquipmentList();
         refreshCategoryList();
+        refreshCustomerList();
 
         List<Category> categories = CategoryService.getAllCategories();
 
@@ -42,13 +43,31 @@ public class AdminDashBoard extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        CustomerPane = new javax.swing.JScrollPane();
+        CustomerTable = new javax.swing.JTable();
+        ucstomerNameLabel = new javax.swing.JLabel();
+        ucstomerNameLabel1 = new javax.swing.JLabel();
+        customerEmailLabel2 = new javax.swing.JLabel();
+        ucstomerNameLabel3 = new javax.swing.JLabel();
+        ucstomerNameLabel4 = new javax.swing.JLabel();
+        customercIDTextFeild = new javax.swing.JTextField();
+        customerEmailTextFeild = new javax.swing.JTextField();
+        customerUsernameTextFeild = new javax.swing.JTextField();
+        customerPhoneTextFeild = new javax.swing.JTextField();
+        customerAddressTextFeild = new javax.swing.JTextField();
+        ucstomerNameLabel2 = new javax.swing.JLabel();
+        customerNameTextFeild1 = new javax.swing.JTextField();
+        UpdateCustomerButton = new javax.swing.JButton();
+        UpdateCustomerButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         categoryNameTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        categorytTable = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        AddCategoryButton = new javax.swing.JButton();
+        categoriesPane = new javax.swing.JScrollPane();
+        categoryTable = new javax.swing.JTable();
+        refreshCategoryButton1 = new javax.swing.JButton();
         equipmentTab = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -99,22 +118,183 @@ public class AdminDashBoard extends javax.swing.JPanel {
         jTabbedPane1.setAutoscrolls(true);
         jTabbedPane1.setName("Customers"); // NOI18N
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(800, 425));
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
+        jPanel2.setForeground(new java.awt.Color(0, 102, 102));
         jPanel2.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
         jPanel2.setName("Customers"); // NOI18N
         jPanel2.setPreferredSize(new java.awt.Dimension(850, 325));
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel7.setText("All Customers");
+
+        CustomerPane.setBackground(new java.awt.Color(255, 255, 255));
+
+        CustomerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Customer ID", "Name", "Email", "Phone Number", "Username", "Address"
+            }
+        ));
+        CustomerTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CustomerTableMouseClicked(evt);
+            }
+        });
+        CustomerPane.setViewportView(CustomerTable);
+
+        ucstomerNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ucstomerNameLabel.setForeground(new java.awt.Color(0, 102, 102));
+        ucstomerNameLabel.setText("ID");
+
+        ucstomerNameLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ucstomerNameLabel1.setForeground(new java.awt.Color(0, 102, 102));
+        ucstomerNameLabel1.setText("Address");
+
+        customerEmailLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customerEmailLabel2.setForeground(new java.awt.Color(0, 102, 102));
+        customerEmailLabel2.setText("Email");
+
+        ucstomerNameLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ucstomerNameLabel3.setForeground(new java.awt.Color(0, 102, 102));
+        ucstomerNameLabel3.setText("Phone NUmber");
+
+        ucstomerNameLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ucstomerNameLabel4.setForeground(new java.awt.Color(0, 102, 102));
+        ucstomerNameLabel4.setText("Username");
+
+        customercIDTextFeild.setBackground(new java.awt.Color(255, 255, 255));
+        customercIDTextFeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customercIDTextFeild.setForeground(new java.awt.Color(0, 102, 102));
+
+        customerEmailTextFeild.setBackground(new java.awt.Color(255, 255, 255));
+        customerEmailTextFeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customerEmailTextFeild.setForeground(new java.awt.Color(0, 102, 102));
+
+        customerUsernameTextFeild.setBackground(new java.awt.Color(255, 255, 255));
+        customerUsernameTextFeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customerUsernameTextFeild.setForeground(new java.awt.Color(0, 102, 102));
+
+        customerPhoneTextFeild.setBackground(new java.awt.Color(255, 255, 255));
+        customerPhoneTextFeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customerPhoneTextFeild.setForeground(new java.awt.Color(0, 102, 102));
+
+        customerAddressTextFeild.setBackground(new java.awt.Color(255, 255, 255));
+        customerAddressTextFeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customerAddressTextFeild.setForeground(new java.awt.Color(0, 102, 102));
+
+        ucstomerNameLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ucstomerNameLabel2.setForeground(new java.awt.Color(0, 102, 102));
+        ucstomerNameLabel2.setText("Name");
+
+        customerNameTextFeild1.setBackground(new java.awt.Color(255, 255, 255));
+        customerNameTextFeild1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customerNameTextFeild1.setForeground(new java.awt.Color(0, 102, 102));
+
+        UpdateCustomerButton.setBackground(new java.awt.Color(0, 102, 102));
+        UpdateCustomerButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        UpdateCustomerButton.setText("Update");
+
+        UpdateCustomerButton1.setBackground(new java.awt.Color(0, 102, 102));
+        UpdateCustomerButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        UpdateCustomerButton1.setText("Refresh");
+        UpdateCustomerButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateCustomerButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(customerUsernameTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                            .addComponent(customerPhoneTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                            .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                        .addGap(12, 12, 12))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(customerNameTextFeild1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(ucstomerNameLabel3)
+                            .addComponent(ucstomerNameLabel4)
+                            .addComponent(ucstomerNameLabel1)
+                            .addComponent(customerEmailLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(customerEmailTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(customercIDTextFeild)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ucstomerNameLabel2)
+                            .addComponent(ucstomerNameLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CustomerPane, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(UpdateCustomerButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(UpdateCustomerButton1)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(CustomerPane, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ucstomerNameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customercIDTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ucstomerNameLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerNameTextFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerEmailLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerEmailTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ucstomerNameLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerPhoneTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ucstomerNameLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerUsernameTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ucstomerNameLabel1)
+                        .addGap(7, 7, 7)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UpdateCustomerButton)
+                    .addComponent(UpdateCustomerButton1))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Customers", jPanel2);
@@ -136,22 +316,17 @@ public class AdminDashBoard extends javax.swing.JPanel {
         categoryNameTextField1.setBackground(new java.awt.Color(255, 255, 255));
         categoryNameTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         categoryNameTextField1.setForeground(new java.awt.Color(0, 102, 102));
-        categoryNameTextField1.addActionListener(new java.awt.event.ActionListener() {
+
+        AddCategoryButton.setBackground(new java.awt.Color(0, 102, 102));
+        AddCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        AddCategoryButton.setText("Add");
+        AddCategoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryNameTextField1ActionPerformed(evt);
+                AddCategoryButtonActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        categoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -167,44 +342,53 @@ public class AdminDashBoard extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        categorytTable.setViewportView(jTable2);
+        categoriesPane.setViewportView(categoryTable);
+
+        refreshCategoryButton1.setBackground(new java.awt.Color(0, 102, 102));
+        refreshCategoryButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        refreshCategoryButton1.setText("Refresh");
+        refreshCategoryButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                refreshCategoryButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addComponent(jLabel5))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel6))
-                        .addGroup(jPanel4Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(categoryNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(65, 65, 65)
-                .addComponent(categorytTable, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(categoryNameTextField1)
+                    .addComponent(jLabel6)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel5))
+                    .addComponent(AddCategoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(refreshCategoryButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(categoriesPane, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(categoryNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(categorytTable, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                        .addComponent(categoryNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(AddCategoryButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(refreshCategoryButton1)
+                        .addGap(197, 197, 197))
+                    .addComponent(categoriesPane, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Category", jPanel4);
@@ -217,7 +401,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("Add Equipments");
 
-        equipmentsTable.setAutoCreateRowSorter(true);
         equipmentsTable.setBackground(new java.awt.Color(255, 255, 255));
         equipmentsTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
         equipmentsTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -243,6 +426,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        equipmentsTable.setToolTipText("");
         equipmentsTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         equipmentsTable.setPreferredSize(new java.awt.Dimension(300, 300));
         equipmentsTable.setRequestFocusEnabled(false);
@@ -430,7 +614,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshCategoryList() {
-        DefaultTableModel categoriesTableModel = (DefaultTableModel) categorytTable.getModel();
+        DefaultTableModel categoriesTableModel = (DefaultTableModel) categoryTable.getModel();
 
         List<Category> categories = CategoryService.getAllCategories();
         categoriesTableModel.setRowCount(0);
@@ -439,8 +623,22 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
         for (int i = 0; i < categories.size(); i++) {
             Category category = categories.get(i);
-            Object[] rowData = {category.name};
+            Object[] rowData = {category.id, category.name};
             categoriesTableModel.addRow(rowData);
+        }
+    }
+
+    private void refreshCustomerList() {
+        DefaultTableModel customersTableModel = (DefaultTableModel) CustomerTable.getModel();
+        List<Customer> customers = CustomerService.getAllCustomers();
+        customersTableModel.setRowCount(0);
+
+        System.out.println(customers.size());
+
+        for (int i = 0; i < customers.size(); i++) {
+            Customer customer = customers.get(i);
+            Object[] rowData = {customer.id, customer.name, customer.email, customer.phone_number, customer.username, customer.address};
+            customersTableModel.addRow(rowData);
         }
     }
 
@@ -465,10 +663,11 @@ public class AdminDashBoard extends javax.swing.JPanel {
         equipmentWeeklyFeeInputField.setText("");
         equipmentCategoryCombobox.setSelectedIndex(-1);
     }
-    
+
     private void clearCategoryForm() {
         categoryNameTextField1.setText("");
     }
+
 
     private void addEquipmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEquipmentBtnActionPerformed
         String name = equipmentNameInputField.getText();
@@ -550,17 +749,19 @@ public class AdminDashBoard extends javax.swing.JPanel {
         equipmentCategoryCombobox.setSelectedItem(equipmentsTable.getValueAt(i, 5).toString());
     }//GEN-LAST:event_equipmentsTableMouseClicked
 
-    private void categoryNameTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryNameTextField1ActionPerformed
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_categoryNameTextField1ActionPerformed
+        refreshCustomerList();
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void AddCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCategoryButtonActionPerformed
         // TODO add your handling code here:
         String name = categoryNameTextField1.getText();
-        
 
-        if (name.equals("") ){
-                
+        if (name.equals("")) {
+
             JOptionPane.showMessageDialog(null, "Please complete the form.");
         } else {
             CategoryService.addCategory(name);
@@ -568,17 +769,50 @@ public class AdminDashBoard extends javax.swing.JPanel {
             refreshCategoryList();
         }
 
+    }//GEN-LAST:event_AddCategoryButtonActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void refreshCategoryButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshCategoryButton1MouseClicked
+        // TODO add your handling code here:
+        refreshCategoryList();
+    }//GEN-LAST:event_refreshCategoryButton1MouseClicked
+
+    private void CustomerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerTableMouseClicked
+        // TODO add your handling code here:
+        int i = CustomerTable.getSelectedRow();
+
+        customercIDTextFeild.setText(CustomerTable.getValueAt(i, 0).toString());
+        customerNameTextFeild1.setText(CustomerTable.getValueAt(i, 1).toString());
+        customerEmailTextFeild.setText(CustomerTable.getValueAt(i, 2).toString());
+        customerPhoneTextFeild.setText(CustomerTable.getValueAt(i, 3).toString());
+        customerUsernameTextFeild.setText(CustomerTable.getValueAt(i, 4).toString());
+    }//GEN-LAST:event_CustomerTableMouseClicked
+
+    private void UpdateCustomerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerButton1ActionPerformed
+        // TODO add your handling code here:
+        refreshCustomerList();
+    }//GEN-LAST:event_UpdateCustomerButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddCategoryButton;
+    private javax.swing.JScrollPane CustomerPane;
+    private javax.swing.JTable CustomerTable;
     private javax.swing.JLabel EqupmentNameLabel1;
     private javax.swing.JLabel EqupmentNameLabel2;
     private javax.swing.JLabel EqupmentNameLabel3;
+    private javax.swing.JButton UpdateCustomerButton;
+    private javax.swing.JButton UpdateCustomerButton1;
     private javax.swing.JButton addEquipmentBtn;
+    private javax.swing.JScrollPane categoriesPane;
     private javax.swing.JTextField categoryNameTextField1;
-    private javax.swing.JScrollPane categorytTable;
+    private javax.swing.JTable categoryTable;
+    private javax.swing.JTextField customerAddressTextFeild;
+    private javax.swing.JLabel customerEmailLabel2;
+    private javax.swing.JTextField customerEmailTextFeild;
+    private javax.swing.JTextField customerNameTextFeild1;
+    private javax.swing.JTextField customerPhoneTextFeild;
+    private javax.swing.JTextField customerUsernameTextFeild;
+    private javax.swing.JTextField customercIDTextFeild;
     private javax.swing.JButton deleteCustomerButton1;
     private javax.swing.JComboBox<String> equipmentCategoryCombobox;
     private javax.swing.JTextField equipmentDailyFeeInputField;
@@ -587,20 +821,25 @@ public class AdminDashBoard extends javax.swing.JPanel {
     private javax.swing.JPanel equipmentTab;
     private javax.swing.JTextField equipmentWeeklyFeeInputField;
     private javax.swing.JTable equipmentsTable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JButton refreshButton;
+    private javax.swing.JButton refreshCategoryButton1;
+    private javax.swing.JLabel ucstomerNameLabel;
+    private javax.swing.JLabel ucstomerNameLabel1;
+    private javax.swing.JLabel ucstomerNameLabel2;
+    private javax.swing.JLabel ucstomerNameLabel3;
+    private javax.swing.JLabel ucstomerNameLabel4;
     private javax.swing.JButton updateEquipmentButton;
     // End of variables declaration//GEN-END:variables
 }
