@@ -17,8 +17,17 @@ import java.util.List;
  */
 public class CustomerService {
 
+    private static final String CUSTOMERS_TABLE = "customers";
+    private static final String ID_COLUMN = "id";
+    private static final String NAME_COLUMN = "name";
+    private static final String EMAIL_COLUMN = "email";
+    private static final String USERNAME_COLUMN = "username";
+    private static final String ADDRESS_COLUMN = "address";
+    private static final String PHONE_NUMBER_COLUMN = "phone_number";
+    private static final String PASSWORD_COLUMN = "password";
+
     public static Customer getByUsernameAndPassword(String username, String password) {
-        String selectQuery = "SELECT * FROM customers WHERE user_name = '" + username + "' AND password = '" + password + "' LIMIT 1;";
+        String selectQuery = "SELECT * FROM " + CUSTOMERS_TABLE + " WHERE " + USERNAME_COLUMN + " = '" + username + "' AND " + PASSWORD_COLUMN + " = '" + password + "' LIMIT 1;";
 
         Connection conn = AccessDatabaseConnector.connect();
         try {
@@ -31,16 +40,14 @@ public class CustomerService {
             // Process the results
             while (resultSet.next()) {
                 // Retrieve data from the result set
-                int id = resultSet.getInt("customer_id");
+                int id = resultSet.getInt(ID_COLUMN);
 
-                String customer_name = resultSet.getString("customer_name");
-                String email = resultSet.getString("email");
-                String phone_number = resultSet.getString("phone_number");
-                String user_name = resultSet.getString("user_name");
-                String customer_password = resultSet.getString("password");
-                String address = resultSet.getString("address");
+                String name = resultSet.getString(NAME_COLUMN);
+                String email = resultSet.getString(EMAIL_COLUMN);
+                String phone_number = resultSet.getString(PHONE_NUMBER_COLUMN);
+                String address = resultSet.getString(ADDRESS_COLUMN);
 
-                customer = new Customer(customer_name, email, phone_number, user_name, customer_password, address);
+                customer = new Customer(id, name, email, phone_number, username, password, address);
             }
 
             // Close the result set and statement
@@ -65,7 +72,7 @@ public class CustomerService {
             Statement statement = conn.createStatement();
 
             // Execute a SELECT query
-            String selectQuery = "SELECT * FROM customers";
+            String selectQuery = "SELECT * FROM " + CUSTOMERS_TABLE;
             ResultSet resultSet = statement.executeQuery(selectQuery);
 
             // Process the results
@@ -73,14 +80,14 @@ public class CustomerService {
                 // Retrieve data from the result set
                 int id = resultSet.getInt("customer_id");
 
-                String customer_name = resultSet.getString("customer_name");
-                String email = resultSet.getString("email");
-                String phone_number = resultSet.getString("phone_number");
-                String user_name = resultSet.getString("user_name");
-                String password = resultSet.getString("password");
-                String address = resultSet.getString("address");
+                String name = resultSet.getString(NAME_COLUMN);
+                String email = resultSet.getString(EMAIL_COLUMN);
+                String phone_number = resultSet.getString(PHONE_NUMBER_COLUMN);
+                String username = resultSet.getString(USERNAME_COLUMN);
+                String password = resultSet.getString(PASSWORD_COLUMN);
+                String address = resultSet.getString(ADDRESS_COLUMN);
 
-                Customer customers = new Customer(customer_name, email, phone_number, user_name, password, address);
+                Customer customers = new Customer(id, name, email, phone_number, username, password, address);
 
                 CustomersList.add(customers);
 
@@ -100,14 +107,14 @@ public class CustomerService {
         return null;
     }
 
-    public static void addCustomers(Customer customers) {
+    public static void addCustomer(String name, String email, String phone_number, String username, String password, String address) {
         Connection conn = AccessDatabaseConnector.connect();
         try {
 
             // Execute an INSERT query
             try (Statement statement = conn.createStatement()) {
                 // Execute an INSERT query
-                String insertQuery = "INSERT Into customers (customer_name, email, phone_number, user_name, password, address ) VALUES ('" + customers.customer_name + "', '" + customers.email + "', '" + customers.phone_number + "', '" + customers.user_name + "', '" + customers.password + "', '" + customers.address + "');";
+                String insertQuery = "INSERT INTO " + CUSTOMERS_TABLE + " (" + NAME_COLUMN + ", " +EMAIL_COLUMN + ", " + PHONE_NUMBER_COLUMN +", " + USERNAME_COLUMN +", " + PASSWORD_COLUMN +", " + ADDRESS_COLUMN +" ) VALUES ('" + name + "', '" + email + "', '" + phone_number + "', '" + username + "', '" + password + "', '" + address + "');";
                 System.out.println(insertQuery);
                 int rowsAffected = statement.executeUpdate(insertQuery);
                 // Check the number of rows affected

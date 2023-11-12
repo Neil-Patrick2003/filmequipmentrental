@@ -428,7 +428,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
         String name = (String) EquipmentTable.getValueAt(row, 1);
         String description = (String) EquipmentTable.getValueAt(row, 2);
 
-// Retrieve and parse updated fees from text fields
         String updatedDailyFeeText = equipmentDailyFeeInputField.getText();
         double updatedDailyFee = Double.parseDouble(updatedDailyFeeText);
 
@@ -452,7 +451,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
         equipmentDescriptionInputField.setText(EquipmentTable.getValueAt(i, 2).toString());
         equipmentDailyFeeInputField.setText(EquipmentTable.getValueAt(i, 3).toString());
         equipmentWeeklyFeeInputField.setText(EquipmentTable.getValueAt(i, 4).toString());
-
     }//GEN-LAST:event_EquipmentTableMouseClicked
 
 
