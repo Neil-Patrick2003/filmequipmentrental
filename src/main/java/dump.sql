@@ -32,12 +32,12 @@ CREATE TABLE `admins` (
   UNIQUE KEY `admins_username_unique` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `categories2`;
-CREATE TABLE `categories2` (
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `categories2_name_unique` (`name`)
+  UNIQUE KEY `categories_name_unique` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `customers`;
@@ -64,7 +64,7 @@ CREATE TABLE `equipments` (
   `category_id` bigint unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `equipments_category_id_foreign` (`category_id`),
-  CONSTRAINT `equipments_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories2` (`id`) ON DELETE CASCADE
+  CONSTRAINT `equipments_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `transaction_details`;
