@@ -17,7 +17,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class CustomerDashboardFrame extends javax.swing.JFrame {
 
-    List<Equipment> cart = new ArrayList();
+    Cart cart = new Cart();
 
     /**
      * Creates new form dashboardFrame
@@ -51,8 +51,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         SearchTextFeild = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        endDatePicker = new com.toedter.calendar.JDateChooser();
+        startDatePicker = new com.toedter.calendar.JDateChooser();
         myCartPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -212,11 +212,16 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(0, 102, 102));
         jLabel9.setText("End date");
 
-        jDateChooser1.setBackground(new java.awt.Color(255, 255, 255));
-        jDateChooser1.setForeground(new java.awt.Color(0, 0, 0));
+        endDatePicker.setBackground(new java.awt.Color(255, 255, 255));
+        endDatePicker.setForeground(new java.awt.Color(0, 0, 0));
 
-        jDateChooser2.setBackground(new java.awt.Color(255, 255, 255));
-        jDateChooser2.setForeground(new java.awt.Color(0, 0, 0));
+        startDatePicker.setBackground(new java.awt.Color(255, 255, 255));
+        startDatePicker.setForeground(new java.awt.Color(0, 0, 0));
+        startDatePicker.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                startDatePickerPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -238,11 +243,11 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(77, 77, 77)
                                 .addComponent(jLabel9)
                                 .addGap(3, 3, 3)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(35, 35, 35)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(53, Short.MAX_VALUE))
@@ -253,7 +258,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -267,8 +272,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 14, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(11, 11, 11)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(allEquipmentScroolPane, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -425,8 +430,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         DefaultTableModel cartTableModel = (DefaultTableModel) myCartTable.getModel();
         cartTableModel.setRowCount(0);
 
-        for (int i = 0; i < this.cart.size(); i++) {
-            Equipment equipment = this.cart.get(i);
+        for (int i = 0; i < this.cart.equipments.size(); i++) {
+            Equipment equipment = this.cart.equipments.get(i);
             Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
             cartTableModel.addRow(rowData);
         }
@@ -476,27 +481,22 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         int id = (int) EquipmentListTable.getValueAt(i, 0);
         Equipment equipment = EquipmentService.getEquipmentById(id);
 
-        if (!cart.contains(equipment)) {
+        if (!this.cart.equipments.contains(equipment)) {
             int response = JOptionPane.showConfirmDialog(this, "Do you want to add this?", "Select Option", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
-                this.cart.add(equipment);
-                System.out.println(this.cart.size());
+                this.cart.equipments.add(equipment);
                 refreshCartList();
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "Already in  cart. ");
             }
-
         }
-
-
     }//GEN-LAST:event_EquipmentListTableMouseClicked
 
     private void removeAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAllButtonActionPerformed
         // TODO add your handling code here:
         int response = JOptionPane.showConfirmDialog(this, "Do you want to remove this?", "Select Option", JOptionPane.YES_NO_OPTION);
         if (response == JOptionPane.YES_OPTION) {
-            cart.clear();
+            this.cart.clearItems();
             refreshCartList();
         }
     }//GEN-LAST:event_removeAllButtonActionPerformed
@@ -506,10 +506,14 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         int i = myCartTable.getSelectedRow();
         int response = JOptionPane.showConfirmDialog(this, "Do you want to remove this?", "Select Option", JOptionPane.YES_NO_OPTION);
         if (response == JOptionPane.YES_OPTION) {
-            cart.remove(i);
+            this.cart.removeItem(i);
             refreshCartList();
         }
     }//GEN-LAST:event_myCartTableMouseClicked
+
+    private void startDatePickerPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_startDatePickerPropertyChange
+        System.out.println(startDatePicker.getDate().toString());
+    }//GEN-LAST:event_startDatePickerPropertyChange
 
     /**
      * @param args the command line arguments
@@ -554,11 +558,10 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JPanel Right;
     private javax.swing.JTextField SearchTextFeild;
     private javax.swing.JScrollPane allEquipmentScroolPane;
+    private com.toedter.calendar.JDateChooser endDatePicker;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -574,5 +577,6 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JPanel myCartPanel;
     private javax.swing.JTable myCartTable;
     private javax.swing.JButton removeAllButton;
+    private com.toedter.calendar.JDateChooser startDatePicker;
     // End of variables declaration//GEN-END:variables
 }
