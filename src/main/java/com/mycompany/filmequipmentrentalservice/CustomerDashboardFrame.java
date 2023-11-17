@@ -439,21 +439,11 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void EquipmentListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EquipmentListTableMouseClicked
-        // TODO add your handling code here:
         int i = EquipmentListTable.getSelectedRow();
         int id =  (int) EquipmentListTable.getValueAt(i, 0);
-        String name = (String) EquipmentListTable.getValueAt(i, 1);
-        String description = (String) EquipmentListTable.getValueAt(i, 2);
-        double dailyFee = (Double) EquipmentListTable.getValueAt(i, 3);
-        double weeklyFee = (Double) EquipmentListTable.getValueAt(i, 4);
-        int category = (int) EquipmentListTable.getValueAt(i, 5);
-       
-        Equipment toCart = new Equipment(id,name,description,dailyFee,weeklyFee,category);
-        
-        cart.add(toCart); 
-        
+        Equipment equipment = EquipmentService.getEquipmentById(id);
 
-
+        cart.add(equipment); 
     }//GEN-LAST:event_EquipmentListTableMouseClicked
 
     /**
