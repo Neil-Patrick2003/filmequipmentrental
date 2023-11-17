@@ -5,6 +5,7 @@
 package com.mycompany.filmequipmentrentalservice;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -58,6 +59,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         myCartTable = new javax.swing.JTable();
         removeAllButton = new javax.swing.JButton();
+        cartDurationLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -214,6 +216,11 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         endDatePicker.setBackground(new java.awt.Color(255, 255, 255));
         endDatePicker.setForeground(new java.awt.Color(0, 0, 0));
+        endDatePicker.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                endDatePickerPropertyChange(evt);
+            }
+        });
 
         startDatePicker.setBackground(new java.awt.Color(255, 255, 255));
         startDatePicker.setForeground(new java.awt.Color(0, 0, 0));
@@ -325,22 +332,26 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             }
         });
 
+        cartDurationLabel.setText("   ");
+
         javax.swing.GroupLayout myCartPanelLayout = new javax.swing.GroupLayout(myCartPanel);
         myCartPanel.setLayout(myCartPanelLayout);
         myCartPanelLayout.setHorizontalGroup(
             myCartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(myCartPanelLayout.createSequentialGroup()
                 .addGroup(myCartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myCartPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(removeAllButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(myCartPanelLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(myCartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
                             .addGroup(myCartPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myCartPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(removeAllButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(myCartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cartDurationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         myCartPanelLayout.setVerticalGroup(
@@ -349,10 +360,12 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cartDurationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(removeAllButton)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab1", myCartPanel);
@@ -512,8 +525,30 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_myCartTableMouseClicked
 
     private void startDatePickerPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_startDatePickerPropertyChange
-        System.out.println(startDatePicker.getDate().toString());
+        Date startDate = startDatePicker.getDate();
+
+        if (startDate != null) {
+            this.cart.setStartDate(startDate);
+        }
+        
+        updateCartSummary();
     }//GEN-LAST:event_startDatePickerPropertyChange
+
+    private void endDatePickerPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_endDatePickerPropertyChange
+        Date endDate = endDatePicker.getDate();
+
+        if (endDate != null) {
+            this.cart.setEndDate(endDate);
+        }
+        
+        updateCartSummary();
+    }//GEN-LAST:event_endDatePickerPropertyChange
+
+    public void updateCartSummary() {
+        if (this.cart.startDate != null && this.cart.endDate != null) {
+            cartDurationLabel.setText(this.cart.startDate.toString() + " - " + this.cart.endDate.toString());
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -558,6 +593,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JPanel Right;
     private javax.swing.JTextField SearchTextFeild;
     private javax.swing.JScrollPane allEquipmentScroolPane;
+    private javax.swing.JLabel cartDurationLabel;
     private com.toedter.calendar.JDateChooser endDatePicker;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
