@@ -17,7 +17,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class CustomerDashboardFrame extends javax.swing.JFrame {
 
-    List<Equipment> cart = new ArrayList();
+    Cart cart = new Cart();
 
     /**
      * Creates new form dashboardFrame
@@ -425,8 +425,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         DefaultTableModel cartTableModel = (DefaultTableModel) myCartTable.getModel();
         cartTableModel.setRowCount(0);
 
-        for (int i = 0; i < this.cart.size(); i++) {
-            Equipment equipment = this.cart.get(i);
+        for (int i = 0; i < this.cart.equipments.size(); i++) {
+            Equipment equipment = this.cart.equipments.get(i);
             Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
             cartTableModel.addRow(rowData);
         }
@@ -476,27 +476,22 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         int id = (int) EquipmentListTable.getValueAt(i, 0);
         Equipment equipment = EquipmentService.getEquipmentById(id);
 
-        if (!cart.contains(equipment)) {
+        if (!this.cart.equipments.contains(equipment)) {
             int response = JOptionPane.showConfirmDialog(this, "Do you want to add this?", "Select Option", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
-                this.cart.add(equipment);
-                System.out.println(this.cart.size());
+                this.cart.equipments.add(equipment);
                 refreshCartList();
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "Already in  cart. ");
             }
-
         }
-
-
     }//GEN-LAST:event_EquipmentListTableMouseClicked
 
     private void removeAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAllButtonActionPerformed
         // TODO add your handling code here:
         int response = JOptionPane.showConfirmDialog(this, "Do you want to remove this?", "Select Option", JOptionPane.YES_NO_OPTION);
         if (response == JOptionPane.YES_OPTION) {
-            cart.clear();
+            this.cart.clearItems();
             refreshCartList();
         }
     }//GEN-LAST:event_removeAllButtonActionPerformed
@@ -506,7 +501,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         int i = myCartTable.getSelectedRow();
         int response = JOptionPane.showConfirmDialog(this, "Do you want to remove this?", "Select Option", JOptionPane.YES_NO_OPTION);
         if (response == JOptionPane.YES_OPTION) {
-            cart.remove(i);
+            this.cart.removeItem(i);
             refreshCartList();
         }
     }//GEN-LAST:event_myCartTableMouseClicked
