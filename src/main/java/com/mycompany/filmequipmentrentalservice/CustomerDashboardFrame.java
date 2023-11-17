@@ -18,7 +18,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class CustomerDashboardFrame extends javax.swing.JFrame {
 
-    Cart cart = new Cart();
+    Transaction cart = new Transaction();
 
     /**
      * Creates new form dashboardFrame
@@ -46,7 +46,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         allEquipmentScroolPane = new javax.swing.JScrollPane();
-        EquipmentListTable = new javax.swing.JTable();
+        equipmentsTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         SearchTextFeild = new javax.swing.JTextField();
@@ -60,6 +60,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         myCartTable = new javax.swing.JTable();
         removeAllButton = new javax.swing.JButton();
         cartDurationLabel = new javax.swing.JLabel();
+        cartTotalLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -154,7 +155,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         allEquipmentScroolPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        EquipmentListTable.setModel(new javax.swing.table.DefaultTableModel(
+        equipmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -170,20 +171,22 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        EquipmentListTable.setGridColor(new java.awt.Color(0, 102, 102));
-        EquipmentListTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        equipmentsTable.setGridColor(new java.awt.Color(0, 102, 102));
+        equipmentsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EquipmentListTableMouseClicked(evt);
+                equipmentsTableMouseClicked(evt);
             }
         });
-        allEquipmentScroolPane.setViewportView(EquipmentListTable);
-        if (EquipmentListTable.getColumnModel().getColumnCount() > 0) {
-            EquipmentListTable.getColumnModel().getColumn(0).setMinWidth(30);
-            EquipmentListTable.getColumnModel().getColumn(0).setPreferredWidth(30);
-            EquipmentListTable.getColumnModel().getColumn(0).setMaxWidth(30);
-            EquipmentListTable.getColumnModel().getColumn(2).setMinWidth(325);
-            EquipmentListTable.getColumnModel().getColumn(2).setPreferredWidth(325);
-            EquipmentListTable.getColumnModel().getColumn(2).setMaxWidth(325);
+        allEquipmentScroolPane.setViewportView(equipmentsTable);
+        if (equipmentsTable.getColumnModel().getColumnCount() > 0) {
+            equipmentsTable.getColumnModel().getColumn(0).setMinWidth(30);
+            equipmentsTable.getColumnModel().getColumn(0).setPreferredWidth(30);
+            equipmentsTable.getColumnModel().getColumn(0).setMaxWidth(30);
+            equipmentsTable.getColumnModel().getColumn(2).setMinWidth(325);
+            equipmentsTable.getColumnModel().getColumn(2).setPreferredWidth(325);
+            equipmentsTable.getColumnModel().getColumn(2).setMaxWidth(325);
+            equipmentsTable.getColumnModel().getColumn(2).setHeaderValue("Description");
+            equipmentsTable.getColumnModel().getColumn(3).setHeaderValue("Daily Fee");
         }
 
         jButton1.setText("Refresh");
@@ -300,11 +303,11 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Equipment Name", "Description", "Daily Fee", "Weekly Fee", "Category"
+                "ID", "Equipment Name", "Category", "Sub Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -334,6 +337,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         cartDurationLabel.setText("   ");
 
+        cartTotalLabel.setText("   ");
+
         javax.swing.GroupLayout myCartPanelLayout = new javax.swing.GroupLayout(myCartPanel);
         myCartPanel.setLayout(myCartPanelLayout);
         myCartPanelLayout.setHorizontalGroup(
@@ -350,7 +355,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                             .addGroup(myCartPanelLayout.createSequentialGroup()
                                 .addGroup(myCartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cartDurationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cartDurationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cartTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -362,10 +368,12 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cartDurationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cartTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(removeAllButton)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab1", myCartPanel);
@@ -422,7 +430,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshEquipmentList() {
-        DefaultTableModel equipmentsTableModel = (DefaultTableModel) EquipmentListTable.getModel();
+        DefaultTableModel equipmentsTableModel = (DefaultTableModel) equipmentsTable.getModel();
         List<Equipment> equipments = EquipmentService.getAllEquipments();
         equipmentsTableModel.setRowCount(0);
 
@@ -434,7 +442,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             equipmentsTableModel.addRow(rowData);
         }
 
-        EquipmentListTable.setRowSorter(null); // reset the table sort
+        equipmentsTable.setRowSorter(null); // reset the table sort
         SearchTextFeild.setText(""); // reset search text feild
 
     }
@@ -443,13 +451,13 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         DefaultTableModel cartTableModel = (DefaultTableModel) myCartTable.getModel();
         cartTableModel.setRowCount(0);
 
-        for (int i = 0; i < this.cart.equipments.size(); i++) {
-            Equipment equipment = this.cart.equipments.get(i);
-            Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
+        for (int i = 0; i < this.cart.items.size(); i++) {
+            TransactionItem item = this.cart.items.get(i);
+            Object[] rowData = {item.equipment.id, item.equipment.name, item.equipment.category.name, item.sub_total};
             cartTableModel.addRow(rowData);
         }
 
-        EquipmentListTable.setRowSorter(null); // reset the table sort
+        equipmentsTable.setRowSorter(null); // reset the table sort
         SearchTextFeild.setText(""); // reset search text feild
 
     }
@@ -477,9 +485,9 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
     private void SearchTextFeildKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchTextFeildKeyPressed
         // TODO add your handling code here:
-        DefaultTableModel obj = (DefaultTableModel) EquipmentListTable.getModel();
+        DefaultTableModel obj = (DefaultTableModel) equipmentsTable.getModel();
         TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
-        EquipmentListTable.setRowSorter(obj1);
+        equipmentsTable.setRowSorter(obj1);
         obj1.setRowFilter(RowFilter.regexFilter(SearchTextFeild.getText()));
 
     }//GEN-LAST:event_SearchTextFeildKeyPressed
@@ -489,21 +497,26 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         refreshEquipmentList();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void EquipmentListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EquipmentListTableMouseClicked
-        int i = EquipmentListTable.getSelectedRow();
-        int id = (int) EquipmentListTable.getValueAt(i, 0);
-        Equipment equipment = EquipmentService.getEquipmentById(id);
+    private void equipmentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_equipmentsTableMouseClicked
+        int i = equipmentsTable.getSelectedRow();
+        int id = (int) equipmentsTable.getValueAt(i, 0);
+        
+        if (this.cart.getNumberOfDays() <= 0) {
+           return;
+        }
 
-        if (!this.cart.equipments.contains(equipment)) {
+        if (!this.cart.isEquipmentAlreadyAdded(id)) {
             int response = JOptionPane.showConfirmDialog(this, "Do you want to add this?", "Select Option", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
-                this.cart.equipments.add(equipment);
+                Equipment equipment = EquipmentService.getEquipmentById(id);
+                TransactionItem item = new TransactionItem();
+                item.setEquipment(equipment);
+                item.setSubTotal(equipment.daily_fee * this.cart.getNumberOfDays());
+                this.cart.addItem(item);
                 refreshCartList();
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Already in  cart. ");
             }
         }
-    }//GEN-LAST:event_EquipmentListTableMouseClicked
+    }//GEN-LAST:event_equipmentsTableMouseClicked
 
     private void removeAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAllButtonActionPerformed
         // TODO add your handling code here:
@@ -530,7 +543,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         if (startDate != null) {
             this.cart.setStartDate(startDate);
         }
-        
+
         updateCartSummary();
     }//GEN-LAST:event_startDatePickerPropertyChange
 
@@ -540,7 +553,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         if (endDate != null) {
             this.cart.setEndDate(endDate);
         }
-        
+
         updateCartSummary();
     }//GEN-LAST:event_endDatePickerPropertyChange
 
@@ -548,6 +561,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         if (this.cart.startDate != null && this.cart.endDate != null) {
             cartDurationLabel.setText(this.cart.startDate.toString() + " - " + this.cart.endDate.toString());
         }
+        
+        cartTotalLabel.setText("Total: " + this.cart.total.toString());
     }
 
     /**
@@ -587,14 +602,15 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable EquipmentListTable;
     private javax.swing.JButton EquipmmentButton;
     private javax.swing.JButton HomeBUtton;
     private javax.swing.JPanel Right;
     private javax.swing.JTextField SearchTextFeild;
     private javax.swing.JScrollPane allEquipmentScroolPane;
     private javax.swing.JLabel cartDurationLabel;
+    private javax.swing.JLabel cartTotalLabel;
     private com.toedter.calendar.JDateChooser endDatePicker;
+    private javax.swing.JTable equipmentsTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

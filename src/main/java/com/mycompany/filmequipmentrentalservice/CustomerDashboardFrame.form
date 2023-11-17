@@ -274,7 +274,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="EquipmentListTable">
+                <Component class="javax.swing.JTable" name="equipmentsTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="6" rowCount="0">
@@ -299,12 +299,12 @@
                           <Renderer/>
                         </Column>
                         <Column maxWidth="325" minWidth="325" prefWidth="325" resizable="true">
-                          <Title/>
+                          <Title value="Description"/>
                           <Editor/>
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
+                          <Title value="Daily Fee"/>
                           <Editor/>
                           <Renderer/>
                         </Column>
@@ -328,7 +328,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="EquipmentListTableMouseClicked"/>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="equipmentsTableMouseClicked"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -449,6 +449,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel1" min="-2" pref="272" max="-2" attributes="0"/>
                                           <Component id="cartDurationLabel" min="-2" pref="721" max="-2" attributes="0"/>
+                                          <Component id="cartTotalLabel" min="-2" pref="721" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -466,11 +467,13 @@
                       <Component id="jLabel1" min="-2" pref="35" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cartDurationLabel" min="-2" pref="16" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <Component id="cartTotalLabel" min="-2" pref="16" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="518" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="removeAllButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="42" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -494,28 +497,16 @@
                 <Component class="javax.swing.JTable" name="myCartTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="0">
+                      <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="ID" type="java.lang.Object"/>
                         <Column editable="false" title="Equipment Name" type="java.lang.Object"/>
-                        <Column editable="false" title="Description" type="java.lang.Object"/>
-                        <Column editable="false" title="Daily Fee" type="java.lang.Object"/>
-                        <Column editable="false" title="Weekly Fee" type="java.lang.Object"/>
                         <Column editable="false" title="Category" type="java.lang.Object"/>
+                        <Column editable="false" title="Sub Total" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
                         <Column maxWidth="35" minWidth="35" prefWidth="35" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -562,6 +553,11 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="cartDurationLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="   "/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="cartTotalLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="   "/>
               </Properties>
