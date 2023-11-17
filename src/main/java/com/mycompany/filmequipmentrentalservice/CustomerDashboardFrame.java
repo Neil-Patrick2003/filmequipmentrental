@@ -61,6 +61,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         removeAllButton = new javax.swing.JButton();
         cartDurationLabel = new javax.swing.JLabel();
         cartTotalLabel = new javax.swing.JLabel();
+        checkOutButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -339,15 +340,21 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         cartTotalLabel.setText("   ");
 
+        checkOutButton1.setBackground(new java.awt.Color(0, 102, 102));
+        checkOutButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        checkOutButton1.setText("Check out");
+        checkOutButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkOutButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout myCartPanelLayout = new javax.swing.GroupLayout(myCartPanel);
         myCartPanel.setLayout(myCartPanelLayout);
         myCartPanelLayout.setHorizontalGroup(
             myCartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(myCartPanelLayout.createSequentialGroup()
                 .addGroup(myCartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myCartPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(removeAllButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(myCartPanelLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(myCartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,7 +364,12 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cartDurationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cartTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 2, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myCartPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(checkOutButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(removeAllButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         myCartPanelLayout.setVerticalGroup(
@@ -372,8 +384,10 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(removeAllButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(myCartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(removeAllButton)
+                    .addComponent(checkOutButton1))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab1", myCartPanel);
@@ -396,7 +410,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(177, 177, 177)
                 .addComponent(jLabel3)
-                .addContainerGap(535, Short.MAX_VALUE))
+                .addContainerGap(546, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab3", jPanel3);
@@ -419,7 +433,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(172, 172, 172)
                 .addComponent(jLabel4)
-                .addContainerGap(540, Short.MAX_VALUE))
+                .addContainerGap(551, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("tab4", jPanel4);
@@ -560,6 +574,10 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         updateCartSummary();
     }//GEN-LAST:event_endDatePickerPropertyChange
 
+    private void checkOutButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkOutButton1ActionPerformed
+
     public void updateCartSummary() {
         if (this.cart.startDate != null && this.cart.endDate != null) {
             cartDurationLabel.setText(this.cart.startDate.toString() + " - " + this.cart.endDate.toString());
@@ -612,6 +630,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane allEquipmentScroolPane;
     private javax.swing.JLabel cartDurationLabel;
     private javax.swing.JLabel cartTotalLabel;
+    private javax.swing.JButton checkOutButton1;
     private com.toedter.calendar.JDateChooser endDatePicker;
     private javax.swing.JTable equipmentsTable;
     private javax.swing.JButton jButton1;
