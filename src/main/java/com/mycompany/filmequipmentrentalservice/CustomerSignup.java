@@ -214,16 +214,15 @@ public class CustomerSignup extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        String customer_name = nameText.getText();
+        String name = nameText.getText();
         String email = emailText.getText();
         String phone_number = contactText.getText();
-        String user_name = usernameText.getText();
+        String username = usernameText.getText();
         String address = addressText.getText();
         char[] passwordChars = jPasswordField1.getPassword();
         String password = new String(passwordChars);
 
-        Customer newCustomers = new Customer(customer_name, email, phone_number, user_name, password, address);
-        CustomerService.addCustomers(newCustomers);
+        CustomerService.addCustomer(name, email, phone_number, username, password, address);
 
         if (nameText.getText().equals("") || emailText.getText().equals("") || contactText.getText().equals("") || usernameText.getText().equals("") || addressText.getText().equals("") || jPasswordField1.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Please Complete the form.");
@@ -231,18 +230,18 @@ public class CustomerSignup extends javax.swing.JPanel {
         }
 
         System.out.println("test");
-        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-//        this.setVisible(false);
-        mainFrame.remove(this);
-        CustomerDashboard pan = new CustomerDashboard();
-        mainFrame.add(pan);
-
-        mainFrame.revalidate();
-        mainFrame.repaint();
-
-        System.out.print(mainFrame);
+//        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+////        this.setVisible(false);
+//        mainFrame.remove(this);
+//        CustomerDashboard pan = new CustomerDashboard();
+//        mainFrame.add(pan);
 //
-////        pan.setVisible(true);
+//        mainFrame.revalidate();
+//        mainFrame.repaint();
+//
+//        System.out.print(mainFrame);
+////
+//////        pan.setVisible(true);
 //
 //
 

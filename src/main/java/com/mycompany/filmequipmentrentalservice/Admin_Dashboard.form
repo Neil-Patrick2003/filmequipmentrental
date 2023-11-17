@@ -50,7 +50,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jPanel2" pref="888" max="32767" attributes="0"/>
+                  <Component id="jPanel2" pref="894" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -58,7 +58,7 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jPanel2" pref="588" max="32767" attributes="0"/>
+                  <Component id="jPanel2" pref="594" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -79,10 +79,10 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jTabbedPane1" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane1" pref="888" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jPanel3" alignment="1" pref="888" max="32767" attributes="0"/>
+                  <Component id="jPanel3" alignment="1" pref="894" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -90,7 +90,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel3" min="-2" pref="68" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTabbedPane1" pref="496" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane1" pref="508" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -290,7 +290,6 @@
                                       <Component id="dailyFeeField" alignment="0" max="32767" attributes="0"/>
                                       <Component id="weeklyFeeField1" alignment="0" max="32767" attributes="0"/>
                                       <Component id="monthlyFeeField2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="EquipmentIDField1" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                               <Component id="jLabel6" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
@@ -300,17 +299,9 @@
                                               <Component id="jLabel8" alignment="0" min="-2" pref="118" max="-2" attributes="0"/>
                                               <Component id="jLabel7" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" attributes="0">
-                                                          <Component id="jLabel5" min="-2" pref="143" max="-2" attributes="0"/>
-                                                          <EmptySpace max="32767" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" alignment="1" attributes="0">
-                                                          <EmptySpace min="0" pref="115" max="32767" attributes="0"/>
-                                                          <Component id="jLabel4" min="-2" pref="112" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
+                                                  <EmptySpace min="0" pref="115" max="32767" attributes="0"/>
+                                                  <Component id="jLabel4" min="-2" pref="112" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                                   <Component id="AddEquipmentID" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                                               </Group>
@@ -322,7 +313,7 @@
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="categorytIDFeilds" min="-2" pref="54" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="addCustomerButton" min="-2" pref="89" max="-2" attributes="0"/>
+                                          <Component id="addEquipmentBtn" min="-2" pref="89" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -336,11 +327,7 @@
                                       <Component id="AddEquipmentID" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="EquipmentIDField1" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace pref="86" max="32767" attributes="0"/>
                                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                   <Component id="EquipmentNameField" min="-2" pref="25" max="-2" attributes="0"/>
@@ -364,7 +351,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                          <EmptySpace pref="16" max="32767" attributes="0"/>
                                           <Component id="monthlyFeeField2" min="-2" pref="26" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
@@ -376,11 +363,11 @@
                                                   <Component id="categorytIDFeilds" min="-2" pref="19" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="addCustomerButton" min="-2" pref="34" max="-2" attributes="0"/>
+                                          <Component id="addEquipmentBtn" min="-2" pref="34" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -398,17 +385,6 @@
                               <Color blue="0" green="0" red="0" type="rgb"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value=" "/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel5">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Segoe UI" size="14" style="0"/>
-                            </Property>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="0" green="0" red="0" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="Equipment ID"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -452,7 +428,7 @@
                         </Component>
                         <Component class="javax.swing.JTextField" name="dailyFeeField">
                         </Component>
-                        <Component class="javax.swing.JButton" name="addCustomerButton">
+                        <Component class="javax.swing.JButton" name="addEquipmentBtn">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="66" green="66" red="0" type="rgb"/>
@@ -463,7 +439,7 @@
                             <Property name="text" type="java.lang.String" value="Add"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addCustomerButtonActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addEquipmentBtnActionPerformed"/>
                           </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -507,8 +483,6 @@
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="categorytIDFeildsActionPerformed"/>
                           </Events>
-                        </Component>
-                        <Component class="javax.swing.JTextField" name="EquipmentIDField1">
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel11">
                           <Properties>

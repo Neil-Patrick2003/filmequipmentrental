@@ -4,31 +4,26 @@
  */
 package com.mycompany.filmequipmentrentalservice;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author Neil Patrick
  */
 public class Customer {
 
-    String customer_name;
+    int id;
+    String name;
     String email;
     String phone_number;
-    String user_name;
+    String username;
     String password;
     String address;
 
-    public Customer(String customer_name, String email, String phone_number, String user_name, String password, String address) {
-        this.customer_name = customer_name;
+    public Customer(int id, String name, String email, String phone_number, String username, String password, String address) {
+        this.id = id;
+        this.name = name;
         this.email = email;
         this.phone_number = phone_number;
-        this.user_name = user_name;
+        this.username = username;
         this.password = password;
         this.address = address;
     }

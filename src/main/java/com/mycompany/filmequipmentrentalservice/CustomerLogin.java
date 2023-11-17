@@ -4,6 +4,8 @@
  */
 package com.mycompany.filmequipmentrentalservice;
 
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -19,6 +21,7 @@ public class CustomerLogin extends javax.swing.JPanel {
      */
     public CustomerLogin() {
         initComponents();
+
     }
 
     /**
@@ -154,6 +157,12 @@ public class CustomerLogin extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+//    public void close() {
+//
+//        WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+//        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
+//    }
+
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
         String username = usernamerTextfeild.getText();
@@ -174,23 +183,24 @@ public class CustomerLogin extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Wrong username or password.", "Message", JOptionPane.ERROR_MESSAGE);
         } else {
             System.out.println("test");
-            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            //        this.setVisible(false);
-            mainFrame.remove(this);
-            CustomerDashboard pan = new CustomerDashboard();
-            mainFrame.add(pan);
 
-            mainFrame.revalidate();
-            mainFrame.repaint();
+            CustomerDashboardFrame CustomerDash = new CustomerDashboardFrame();
+            CustomerDash.setVisible(true);
+            CustomerDash.setLocationRelativeTo(null);
 
-            System.out.print(mainFrame);
-            
-            
-
-            
-
+//            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+//            this.setVisible(false);
+//            mainFrame.remove(this);
+//            CustomerDashboard pan = new CustomerDashboard();
+//            mainFrame.add(pan);
+//
+//            mainFrame.revalidate();
+//            mainFrame.repaint();
+//
+//            System.out.print(mainFrame);
         }
     }//GEN-LAST:event_loginButtonActionPerformed
+
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:

@@ -14,15 +14,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdminDashBoard extends javax.swing.JPanel {
 
-    List<Category> categories;
-
     /**
      * Creates new form NewJPanel
      */
     public AdminDashBoard() {
         initComponents();
         refreshEquipmentList();
+        refreshCategoryList();
+        refreshCustomerList();
 
+        List<Category> categories = CategoryService.getAllCategories();
+
+        for (int i = 0; i < categories.size(); i++) {
+            equipmentCategoryCombobox.addItem(categories.get(i).name);
+        }
     }
 
     /**
@@ -37,28 +42,50 @@ public class AdminDashBoard extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
         equipmentTab = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        EquipmentTable = new javax.swing.JTable();
-        EqupmentIDText = new javax.swing.JLabel();
-        EquipmeentIDTextField1 = new javax.swing.JTextField();
+        equipmentsTable = new javax.swing.JTable();
         EqupmentNameLabel1 = new javax.swing.JLabel();
         EqupmentNameLabel2 = new javax.swing.JLabel();
         EqupmentNameLabel3 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        DailyFeeTextField2 = new javax.swing.JTextField();
-        EquipmeentNameTextField3 = new javax.swing.JTextField();
-        DescriptionTextField4 = new javax.swing.JTextField();
-        WeeklyFeeTextField5 = new javax.swing.JTextField();
+        equipmentDailyFeeInputField = new javax.swing.JTextField();
+        equipmentNameInputField = new javax.swing.JTextField();
+        equipmentDescriptionInputField = new javax.swing.JTextField();
+        equipmentWeeklyFeeInputField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        CategoryIDTextField6 = new javax.swing.JTextField();
-        addCustomerButton = new javax.swing.JButton();
+        addEquipmentBtn = new javax.swing.JButton();
         deleteCustomerButton1 = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
         updateEquipmentButton = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        equipmentCategoryCombobox = new javax.swing.JComboBox<>();
+        CustomerTab = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        CustomerPane = new javax.swing.JScrollPane();
+        CustomerTable = new javax.swing.JTable();
+        ucstomerNameLabel = new javax.swing.JLabel();
+        ucstomerNameLabel1 = new javax.swing.JLabel();
+        customerEmailLabel2 = new javax.swing.JLabel();
+        ucstomerNameLabel3 = new javax.swing.JLabel();
+        ucstomerNameLabel4 = new javax.swing.JLabel();
+        customercIDTextFeild = new javax.swing.JTextField();
+        customerEmailTextFeild = new javax.swing.JTextField();
+        customerUsernameTextFeild = new javax.swing.JTextField();
+        customerPhoneTextFeild = new javax.swing.JTextField();
+        customerAddressTextFeild = new javax.swing.JTextField();
+        ucstomerNameLabel2 = new javax.swing.JLabel();
+        customerNameTextFeild1 = new javax.swing.JTextField();
+        UpdateCustomerButton = new javax.swing.JButton();
+        UpdateCustomerButton1 = new javax.swing.JButton();
+        CategoryTab = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        categoryNameTextField1 = new javax.swing.JTextField();
+        AddCategoryButton = new javax.swing.JButton();
+        categoriesPane = new javax.swing.JScrollPane();
+        categoryTable = new javax.swing.JTable();
+        refreshCategoryButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 102, 102));
         setPreferredSize(new java.awt.Dimension(800, 500));
@@ -91,25 +118,11 @@ public class AdminDashBoard extends javax.swing.JPanel {
         jTabbedPane1.setAutoscrolls(true);
         jTabbedPane1.setName("Customers"); // NOI18N
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(800, 425));
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel2.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
-        jPanel2.setName("Customers"); // NOI18N
-        jPanel2.setPreferredSize(new java.awt.Dimension(850, 325));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Customers", jPanel2);
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         equipmentTab.setBackground(new java.awt.Color(255, 255, 255));
         equipmentTab.setForeground(new java.awt.Color(0, 0, 0));
@@ -119,10 +132,9 @@ public class AdminDashBoard extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("Add Equipments");
 
-        EquipmentTable.setAutoCreateRowSorter(true);
-        EquipmentTable.setBackground(new java.awt.Color(255, 255, 255));
-        EquipmentTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
-        EquipmentTable.setModel(new javax.swing.table.DefaultTableModel(
+        equipmentsTable.setBackground(new java.awt.Color(255, 255, 255));
+        equipmentsTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
+        equipmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -145,30 +157,16 @@ public class AdminDashBoard extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        EquipmentTable.setMaximumSize(new java.awt.Dimension(90, 0));
-        EquipmentTable.setPreferredSize(new java.awt.Dimension(300, 65));
-        EquipmentTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        equipmentsTable.setToolTipText("");
+        equipmentsTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        equipmentsTable.setPreferredSize(new java.awt.Dimension(300, 300));
+        equipmentsTable.setRequestFocusEnabled(false);
+        equipmentsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                EquipmentTableMouseClicked(evt);
+                equipmentsTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(EquipmentTable);
-        if (EquipmentTable.getColumnModel().getColumnCount() > 0) {
-            EquipmentTable.getColumnModel().getColumn(0).setHeaderValue("Equipment ID");
-            EquipmentTable.getColumnModel().getColumn(1).setHeaderValue("Equipment Name");
-            EquipmentTable.getColumnModel().getColumn(2).setHeaderValue("Description");
-            EquipmentTable.getColumnModel().getColumn(3).setHeaderValue("Daily Fee");
-            EquipmentTable.getColumnModel().getColumn(4).setHeaderValue("Weekly Fee");
-            EquipmentTable.getColumnModel().getColumn(5).setHeaderValue("CAtegory ID");
-        }
-
-        EqupmentIDText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        EqupmentIDText.setForeground(new java.awt.Color(0, 102, 102));
-        EqupmentIDText.setText("Equipment ID");
-
-        EquipmeentIDTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        EquipmeentIDTextField1.setForeground(new java.awt.Color(0, 102, 102));
-        EquipmeentIDTextField1.setMinimumSize(new java.awt.Dimension(4, 19));
+        jScrollPane1.setViewportView(equipmentsTable);
 
         EqupmentNameLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         EqupmentNameLabel1.setForeground(new java.awt.Color(0, 102, 102));
@@ -186,34 +184,30 @@ public class AdminDashBoard extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(0, 102, 102));
         jLabel3.setText("Weekly Fee");
 
-        DailyFeeTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        DailyFeeTextField2.setForeground(new java.awt.Color(0, 102, 102));
-        DailyFeeTextField2.setMinimumSize(new java.awt.Dimension(4, 19));
+        equipmentDailyFeeInputField.setBackground(new java.awt.Color(255, 255, 255));
+        equipmentDailyFeeInputField.setForeground(new java.awt.Color(0, 102, 102));
+        equipmentDailyFeeInputField.setMinimumSize(new java.awt.Dimension(4, 19));
 
-        EquipmeentNameTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        EquipmeentNameTextField3.setForeground(new java.awt.Color(0, 102, 102));
-        EquipmeentNameTextField3.setMinimumSize(new java.awt.Dimension(4, 19));
+        equipmentNameInputField.setBackground(new java.awt.Color(255, 255, 255));
+        equipmentNameInputField.setForeground(new java.awt.Color(0, 102, 102));
+        equipmentNameInputField.setMinimumSize(new java.awt.Dimension(4, 19));
 
-        DescriptionTextField4.setBackground(new java.awt.Color(255, 255, 255));
-        DescriptionTextField4.setForeground(new java.awt.Color(0, 102, 102));
-        DescriptionTextField4.setMinimumSize(new java.awt.Dimension(4, 19));
+        equipmentDescriptionInputField.setBackground(new java.awt.Color(255, 255, 255));
+        equipmentDescriptionInputField.setForeground(new java.awt.Color(0, 102, 102));
+        equipmentDescriptionInputField.setMinimumSize(new java.awt.Dimension(4, 19));
 
-        WeeklyFeeTextField5.setBackground(new java.awt.Color(255, 255, 255));
-        WeeklyFeeTextField5.setForeground(new java.awt.Color(0, 102, 102));
-        WeeklyFeeTextField5.setMinimumSize(new java.awt.Dimension(4, 19));
+        equipmentWeeklyFeeInputField.setBackground(new java.awt.Color(255, 255, 255));
+        equipmentWeeklyFeeInputField.setForeground(new java.awt.Color(0, 102, 102));
+        equipmentWeeklyFeeInputField.setMinimumSize(new java.awt.Dimension(4, 19));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel4.setText("Category ID");
+        jLabel4.setText("Category");
 
-        CategoryIDTextField6.setBackground(new java.awt.Color(255, 255, 255));
-        CategoryIDTextField6.setForeground(new java.awt.Color(0, 102, 102));
-        CategoryIDTextField6.setMinimumSize(new java.awt.Dimension(4, 19));
-
-        addCustomerButton.setText("Add");
-        addCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+        addEquipmentBtn.setText("Add");
+        addEquipmentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCustomerButtonActionPerformed(evt);
+                addEquipmentBtnActionPerformed(evt);
             }
         });
 
@@ -243,106 +237,361 @@ public class AdminDashBoard extends javax.swing.JPanel {
         equipmentTabLayout.setHorizontalGroup(
             equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(equipmentTabLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EquipmeentIDTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(equipmentTabLayout.createSequentialGroup()
-                        .addComponent(EqupmentNameLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                        .addGap(102, 102, 102))
-                    .addComponent(EquipmeentNameTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DescriptionTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(DailyFeeTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(equipmentTabLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(EqupmentIDText)
-                            .addComponent(EqupmentNameLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(EqupmentNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(WeeklyFeeTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CategoryIDTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, equipmentTabLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(addCustomerButton)))
+                            .addGroup(equipmentTabLayout.createSequentialGroup()
+                                .addComponent(equipmentCategoryCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(202, 202, 202))
+                            .addGroup(equipmentTabLayout.createSequentialGroup()
+                                .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(equipmentTabLayout.createSequentialGroup()
+                                        .addComponent(EqupmentNameLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(102, 102, 102))
+                                    .addComponent(equipmentNameInputField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(equipmentDescriptionInputField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(equipmentDailyFeeInputField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(EqupmentNameLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(equipmentWeeklyFeeInputField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(equipmentTabLayout.createSequentialGroup()
+                                        .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3)
+                                            .addComponent(EqupmentNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(20, 20, 20))))
+                    .addGroup(equipmentTabLayout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(addEquipmentBtn)
+                        .addGap(72, 72, 72)))
                 .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                     .addGroup(equipmentTabLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
                         .addComponent(deleteCustomerButton1)
-                        .addGap(36, 36, 36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(refreshButton)
-                        .addGap(29, 29, 29)
-                        .addComponent(updateEquipmentButton)
-                        .addContainerGap(229, Short.MAX_VALUE))
-                    .addGroup(equipmentTabLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
+                        .addComponent(updateEquipmentButton)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         equipmentTabLayout.setVerticalGroup(
             equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(equipmentTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(EqupmentIDText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EquipmeentIDTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EqupmentNameLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EquipmeentNameTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EqupmentNameLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DescriptionTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EqupmentNameLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DailyFeeTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(WeeklyFeeTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CategoryIDTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addCustomerButton)
-                .addGap(213, 213, 213))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, equipmentTabLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteCustomerButton1)
-                    .addComponent(refreshButton)
-                    .addComponent(updateEquipmentButton))
-                .addGap(228, 228, 228))
+                .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(equipmentTabLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(12, 12, 12)
+                        .addComponent(EqupmentNameLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(equipmentNameInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EqupmentNameLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(equipmentDescriptionInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EqupmentNameLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(equipmentDailyFeeInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(equipmentWeeklyFeeInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, equipmentTabLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(refreshButton)
+                            .addComponent(updateEquipmentButton)
+                            .addComponent(deleteCustomerButton1))
+                        .addGap(368, 368, 368))
+                    .addGroup(equipmentTabLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(equipmentCategoryCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(addEquipmentBtn)
+                        .addContainerGap())))
         );
 
         jTabbedPane1.addTab("Equipments", equipmentTab);
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setForeground(new java.awt.Color(0, 0, 0));
-        jPanel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jPanel4.setName("Category"); // NOI18N
-        jPanel4.setPreferredSize(new java.awt.Dimension(780, 402));
+        CustomerTab.setBackground(new java.awt.Color(255, 255, 255));
+        CustomerTab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
+        CustomerTab.setForeground(new java.awt.Color(0, 102, 102));
+        CustomerTab.setFont(new java.awt.Font("Segoe UI Black", 0, 16)); // NOI18N
+        CustomerTab.setName("Customers"); // NOI18N
+        CustomerTab.setPreferredSize(new java.awt.Dimension(850, 325));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel7.setText("All Customers");
+
+        CustomerPane.setBackground(new java.awt.Color(255, 255, 255));
+        CustomerPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        CustomerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Customer ID", "Name", "Email", "Phone Number", "Username", "Address"
+            }
+        ));
+        CustomerTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CustomerTableMouseClicked(evt);
+            }
+        });
+        CustomerPane.setViewportView(CustomerTable);
+
+        ucstomerNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ucstomerNameLabel.setForeground(new java.awt.Color(0, 102, 102));
+        ucstomerNameLabel.setText("ID");
+
+        ucstomerNameLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ucstomerNameLabel1.setForeground(new java.awt.Color(0, 102, 102));
+        ucstomerNameLabel1.setText("Address");
+
+        customerEmailLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customerEmailLabel2.setForeground(new java.awt.Color(0, 102, 102));
+        customerEmailLabel2.setText("Email");
+
+        ucstomerNameLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ucstomerNameLabel3.setForeground(new java.awt.Color(0, 102, 102));
+        ucstomerNameLabel3.setText("Phone NUmber");
+
+        ucstomerNameLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ucstomerNameLabel4.setForeground(new java.awt.Color(0, 102, 102));
+        ucstomerNameLabel4.setText("Username");
+
+        customercIDTextFeild.setBackground(new java.awt.Color(255, 255, 255));
+        customercIDTextFeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customercIDTextFeild.setForeground(new java.awt.Color(0, 102, 102));
+
+        customerEmailTextFeild.setBackground(new java.awt.Color(255, 255, 255));
+        customerEmailTextFeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customerEmailTextFeild.setForeground(new java.awt.Color(0, 102, 102));
+
+        customerUsernameTextFeild.setBackground(new java.awt.Color(255, 255, 255));
+        customerUsernameTextFeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customerUsernameTextFeild.setForeground(new java.awt.Color(0, 102, 102));
+
+        customerPhoneTextFeild.setBackground(new java.awt.Color(255, 255, 255));
+        customerPhoneTextFeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customerPhoneTextFeild.setForeground(new java.awt.Color(0, 102, 102));
+
+        customerAddressTextFeild.setBackground(new java.awt.Color(255, 255, 255));
+        customerAddressTextFeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customerAddressTextFeild.setForeground(new java.awt.Color(0, 102, 102));
+
+        ucstomerNameLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ucstomerNameLabel2.setForeground(new java.awt.Color(0, 102, 102));
+        ucstomerNameLabel2.setText("Name");
+
+        customerNameTextFeild1.setBackground(new java.awt.Color(255, 255, 255));
+        customerNameTextFeild1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customerNameTextFeild1.setForeground(new java.awt.Color(0, 102, 102));
+
+        UpdateCustomerButton.setBackground(new java.awt.Color(0, 102, 102));
+        UpdateCustomerButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        UpdateCustomerButton.setText("Update");
+
+        UpdateCustomerButton1.setBackground(new java.awt.Color(0, 102, 102));
+        UpdateCustomerButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        UpdateCustomerButton1.setText("Refresh");
+        UpdateCustomerButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateCustomerButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CustomerTabLayout = new javax.swing.GroupLayout(CustomerTab);
+        CustomerTab.setLayout(CustomerTabLayout);
+        CustomerTabLayout.setHorizontalGroup(
+            CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CustomerTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CustomerTabLayout.createSequentialGroup()
+                        .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(customerUsernameTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                            .addComponent(customerPhoneTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                            .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                        .addGap(12, 12, 12))
+                    .addGroup(CustomerTabLayout.createSequentialGroup()
+                        .addComponent(customerNameTextFeild1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(CustomerTabLayout.createSequentialGroup()
+                        .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(ucstomerNameLabel3)
+                            .addComponent(ucstomerNameLabel4)
+                            .addComponent(ucstomerNameLabel1)
+                            .addComponent(customerEmailLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerTabLayout.createSequentialGroup()
+                        .addComponent(customerEmailTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(CustomerTabLayout.createSequentialGroup()
+                        .addComponent(customercIDTextFeild)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(CustomerTabLayout.createSequentialGroup()
+                        .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ucstomerNameLabel2)
+                            .addComponent(ucstomerNameLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CustomerPane, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(CustomerTabLayout.createSequentialGroup()
+                        .addComponent(UpdateCustomerButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(UpdateCustomerButton1)))
+                .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
+        CustomerTabLayout.setVerticalGroup(
+            CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CustomerTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(CustomerTabLayout.createSequentialGroup()
+                        .addComponent(CustomerPane, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(CustomerTabLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ucstomerNameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customercIDTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ucstomerNameLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerNameTextFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerEmailLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerEmailTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ucstomerNameLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerPhoneTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ucstomerNameLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(customerUsernameTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ucstomerNameLabel1)
+                        .addGap(7, 7, 7)))
+                .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UpdateCustomerButton)
+                    .addComponent(UpdateCustomerButton1))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Category", jPanel4);
+        jTabbedPane1.addTab("Customers", CustomerTab);
+
+        CategoryTab.setBackground(new java.awt.Color(255, 255, 255));
+        CategoryTab.setForeground(new java.awt.Color(0, 153, 153));
+        CategoryTab.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        CategoryTab.setName("Category"); // NOI18N
+        CategoryTab.setPreferredSize(new java.awt.Dimension(780, 402));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel5.setText("Add Category");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel6.setText(" Category Title");
+
+        categoryNameTextField1.setBackground(new java.awt.Color(255, 255, 255));
+        categoryNameTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        categoryNameTextField1.setForeground(new java.awt.Color(0, 102, 102));
+
+        AddCategoryButton.setBackground(new java.awt.Color(0, 102, 102));
+        AddCategoryButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        AddCategoryButton.setText("Add");
+        AddCategoryButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddCategoryButtonActionPerformed(evt);
+            }
+        });
+
+        categoriesPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        categoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Category ID", "Title"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        categoriesPane.setViewportView(categoryTable);
+
+        refreshCategoryButton1.setBackground(new java.awt.Color(0, 102, 102));
+        refreshCategoryButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        refreshCategoryButton1.setText("Refresh");
+        refreshCategoryButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                refreshCategoryButton1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CategoryTabLayout = new javax.swing.GroupLayout(CategoryTab);
+        CategoryTab.setLayout(CategoryTabLayout);
+        CategoryTabLayout.setHorizontalGroup(
+            CategoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CategoryTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CategoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(categoryNameTextField1)
+                    .addComponent(jLabel6)
+                    .addGroup(CategoryTabLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel5))
+                    .addComponent(AddCategoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(refreshCategoryButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(categoriesPane, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+        );
+        CategoryTabLayout.setVerticalGroup(
+            CategoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CategoryTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CategoryTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(CategoryTabLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(categoryNameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(AddCategoryButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(refreshCategoryButton1)
+                        .addGap(197, 197, 197))
+                    .addComponent(categoriesPane, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Category", CategoryTab);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -367,81 +616,99 @@ public class AdminDashBoard extends javax.swing.JPanel {
         jTabbedPane1.getAccessibleContext().setAccessibleName("Customers");
     }// </editor-fold>//GEN-END:initComponents
 
+    private void refreshCategoryList() {
+        DefaultTableModel categoriesTableModel = (DefaultTableModel) categoryTable.getModel();
+
+        List<Category> categories = CategoryService.getAllCategories();
+        categoriesTableModel.setRowCount(0);
+
+        System.out.println(categories.size());
+
+        for (int i = 0; i < categories.size(); i++) {
+            Category category = categories.get(i);
+            Object[] rowData = {category.id, category.name};
+            categoriesTableModel.addRow(rowData);
+        }
+    }
+
+    private void refreshCustomerList() {
+        DefaultTableModel customersTableModel = (DefaultTableModel) CustomerTable.getModel();
+        List<Customer> customers = CustomerService.getAllCustomers();
+        customersTableModel.setRowCount(0);
+
+        System.out.println(customers.size());
+
+        for (int i = 0; i < customers.size(); i++) {
+            Customer customer = customers.get(i);
+            Object[] rowData = {customer.id, customer.name, customer.email, customer.phone_number, customer.username, customer.address};
+            customersTableModel.addRow(rowData);
+        }
+    }
+
     private void refreshEquipmentList() {
-        DefaultTableModel customerTable = (DefaultTableModel) EquipmentTable.getModel();
+        DefaultTableModel equipmentsTableModel = (DefaultTableModel) equipmentsTable.getModel();
         List<Equipment> equipments = EquipmentService.getAllEquipments();
-        customerTable.setRowCount(0);
+        equipmentsTableModel.setRowCount(0);
+
+        System.out.println(equipments.size());
 
         for (int i = 0; i < equipments.size(); i++) {
-            System.out.println(i);
             Equipment equipment = equipments.get(i);
-            Object[] rowData = {equipment.equipment_id, equipment.equipment_name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category_id};
-            customerTable.addRow(rowData);
-            EquipmeentIDTextField1.setText("");
-            EquipmeentNameTextField3.setText("");
-            DescriptionTextField4.setText("");
-            DailyFeeTextField2.setText("");
-            WeeklyFeeTextField5.setText("");
-            CategoryIDTextField6.setText("");
+            Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
+            equipmentsTableModel.addRow(rowData);
         }
+    }
 
+    private void clearEquipmentForm() {
+        equipmentNameInputField.setText("");
+        equipmentDescriptionInputField.setText("");
+        equipmentDailyFeeInputField.setText("");
+        equipmentWeeklyFeeInputField.setText("");
+        equipmentCategoryCombobox.setSelectedIndex(-1);
+    }
+
+    private void clearCategoryForm() {
+        categoryNameTextField1.setText("");
     }
 
 
-    private void addCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerButtonActionPerformed
-        // TODO add your handling code here:
-        String equipmentText = EquipmeentIDTextField1.getText();
-        int equipmentId = Integer.parseInt(equipmentText);
+    private void addEquipmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEquipmentBtnActionPerformed
+        String name = equipmentNameInputField.getText();
 
-        String name = EquipmeentNameTextField3.getText();
-        String description = DescriptionTextField4.getText();
+        String description = equipmentDescriptionInputField.getText();
 
-        String dailyFeeText = DailyFeeTextField2.getText();
+        String dailyFeeText = equipmentDailyFeeInputField.getText();
         double dailyFee = Double.parseDouble(dailyFeeText);
 
-        String weeklFeeText = WeeklyFeeTextField5.getText();
+        String weeklFeeText = equipmentWeeklyFeeInputField.getText();
         double weeklyFee = Double.parseDouble(weeklFeeText);
 
-        String categoryIDText = CategoryIDTextField6.getText();
-        int categoryID = Integer.parseInt(categoryIDText);
+        Category category = null;
+
+        if (equipmentCategoryCombobox.getSelectedIndex() >= 0) {
+            category = CategoryService.getCategoryByName(equipmentCategoryCombobox.getSelectedItem().toString());
+        }
 
         if (name.equals("") || description.equals("") || dailyFeeText.equals("")
-                || weeklFeeText.equals("") || categoryIDText.equals("")) {
+                || weeklFeeText.equals("") || category == null) {
             JOptionPane.showMessageDialog(null, "Please complete the form.");
         } else {
-            Equipment equipment = new Equipment(equipmentId, name, description, dailyFee, weeklyFee, categoryID);
-
-            EquipmentService.addEquipments(equipment);
-
-            EquipmeentIDTextField1.setText("");
-            EquipmeentNameTextField3.setText("");
-            DescriptionTextField4.setText("");
-            DailyFeeTextField2.setText("");
-            WeeklyFeeTextField5.setText("");
-            CategoryIDTextField6.setText("");
+            EquipmentService.addEquipment(name, description, dailyFee, weeklyFee, category.id);
+            clearEquipmentForm();
             refreshEquipmentList();
-
         }
-    }//GEN-LAST:event_addCustomerButtonActionPerformed
+    }//GEN-LAST:event_addEquipmentBtnActionPerformed
 
     private void deleteCustomerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCustomerButton1ActionPerformed
         // TODO add your handling code here: 
-        
 
-
-        int row = EquipmentTable.getSelectedRow();
-        int equipmentId = (int) EquipmentTable.getValueAt(row, 0);
+        int row = equipmentsTable.getSelectedRow();
+        int equipmentId = (int) equipmentsTable.getValueAt(row, 0);
         System.out.println(equipmentId);
 
         EquipmentService.deleteEquipment(equipmentId);
-        EquipmeentIDTextField1.setText("");
-        EquipmeentNameTextField3.setText("");
-        DescriptionTextField4.setText("");
-        DailyFeeTextField2.setText("");
-        WeeklyFeeTextField5.setText("");
-        CategoryIDTextField6.setText("");
+        clearEquipmentForm();
         refreshEquipmentList();
-        
 
 
     }//GEN-LAST:event_deleteCustomerButton1ActionPerformed
@@ -454,76 +721,128 @@ public class AdminDashBoard extends javax.swing.JPanel {
     private void updateEquipmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEquipmentButtonActionPerformed
         // TODO add your handling code here:
 
-        int row = EquipmentTable.getSelectedRow();
-        int equipmentId = (int) EquipmentTable.getValueAt(row, 0);
+        int row = equipmentsTable.getSelectedRow();
+        int equipmentId = (int) equipmentsTable.getValueAt(row, 0);
 
-        String name = (String) EquipmentTable.getValueAt(row, 1);
-        String description = (String) EquipmentTable.getValueAt(row, 2);
+        String name = (String) equipmentsTable.getValueAt(row, 1);
+        String description = (String) equipmentsTable.getValueAt(row, 2);
 
-// Retrieve and parse updated fees from text fields
-        String updatedDailyFeeText = DailyFeeTextField2.getText();
+        String updatedDailyFeeText = equipmentDailyFeeInputField.getText();
         double updatedDailyFee = Double.parseDouble(updatedDailyFeeText);
 
-        String updatedWeeklyFeeText = WeeklyFeeTextField5.getText();
+        String updatedWeeklyFeeText = equipmentWeeklyFeeInputField.getText();
         double updatedWeeklyFee = Double.parseDouble(updatedWeeklyFeeText);
 
-        String categoryIDText = CategoryIDTextField6.getText();
-        int categoryID = (int) EquipmentTable.getValueAt(row, 4);
+        int categoryID = (int) equipmentsTable.getValueAt(row, 4);
 
-// Validation if necessary
-// Update the equipment object
-        Equipment equipment = new Equipment(equipmentId, name, description, updatedDailyFee, updatedWeeklyFee, categoryID);
-
-// Update the equipment in the service
-        EquipmentService.updateEquipment(equipmentId, equipment);
-
-// Clear the text fields
-        EquipmeentIDTextField1.setText("");
-        EquipmeentNameTextField3.setText("");
-        DescriptionTextField4.setText("");
-        DailyFeeTextField2.setText("");
-        WeeklyFeeTextField5.setText("");
-        CategoryIDTextField6.setText("");
+        EquipmentService.updateEquipment(equipmentId, name, description, updatedDailyFee, updatedWeeklyFee, categoryID);
+        System.out.println("Done");
+        clearEquipmentForm();
+        refreshEquipmentList();
     }//GEN-LAST:event_updateEquipmentButtonActionPerformed
 
-    private void EquipmentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EquipmentTableMouseClicked
+    private void equipmentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_equipmentsTableMouseClicked
         // TODO add your handling code here:
-        int i = EquipmentTable.getSelectedRow();
-        EquipmeentIDTextField1.setText(EquipmentTable.getValueAt(i, 0).toString());
-        EquipmeentNameTextField3.setText(EquipmentTable.getValueAt(i, 1).toString());
-        DescriptionTextField4.setText(EquipmentTable.getValueAt(i, 2).toString());
-        DailyFeeTextField2.setText(EquipmentTable.getValueAt(i, 3).toString());
-        WeeklyFeeTextField5.setText(EquipmentTable.getValueAt(i, 4).toString());
-        CategoryIDTextField6.setText(EquipmentTable.getValueAt(i, 4).toString());
+        int i = equipmentsTable.getSelectedRow();
+        equipmentNameInputField.setText(equipmentsTable.getValueAt(i, 1).toString());
+        equipmentDescriptionInputField.setText(equipmentsTable.getValueAt(i, 2).toString());
+        equipmentDailyFeeInputField.setText(equipmentsTable.getValueAt(i, 3).toString());
+        equipmentWeeklyFeeInputField.setText(equipmentsTable.getValueAt(i, 4).toString());
 
-    }//GEN-LAST:event_EquipmentTableMouseClicked
+        equipmentCategoryCombobox.setSelectedItem(equipmentsTable.getValueAt(i, 5).toString());
+    }//GEN-LAST:event_equipmentsTableMouseClicked
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+        refreshCustomerList();
+
+
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void AddCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCategoryButtonActionPerformed
+        // TODO add your handling code here:
+        String name = categoryNameTextField1.getText();
+
+        if (name.equals("")) {
+
+            JOptionPane.showMessageDialog(null, "Please complete the form.");
+        } else {
+            CategoryService.addCategory(name);
+            clearCategoryForm();
+            refreshCategoryList();
+        }
+
+    }//GEN-LAST:event_AddCategoryButtonActionPerformed
+
+    private void refreshCategoryButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshCategoryButton1MouseClicked
+        // TODO add your handling code here:
+        refreshCategoryList();
+    }//GEN-LAST:event_refreshCategoryButton1MouseClicked
+
+    private void CustomerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerTableMouseClicked
+        // TODO add your handling code here:
+        int i = CustomerTable.getSelectedRow();
+
+        customercIDTextFeild.setText(CustomerTable.getValueAt(i, 0).toString());
+        customerNameTextFeild1.setText(CustomerTable.getValueAt(i, 1).toString());
+        customerEmailTextFeild.setText(CustomerTable.getValueAt(i, 2).toString());
+        customerPhoneTextFeild.setText(CustomerTable.getValueAt(i, 3).toString());
+        customerUsernameTextFeild.setText(CustomerTable.getValueAt(i, 4).toString());
+    }//GEN-LAST:event_CustomerTableMouseClicked
+
+    private void UpdateCustomerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerButton1ActionPerformed
+        // TODO add your handling code here:
+        refreshCustomerList();  
+    }//GEN-LAST:event_UpdateCustomerButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CategoryIDTextField6;
-    private javax.swing.JTextField DailyFeeTextField2;
-    private javax.swing.JTextField DescriptionTextField4;
-    private javax.swing.JTextField EquipmeentIDTextField1;
-    private javax.swing.JTextField EquipmeentNameTextField3;
-    private javax.swing.JTable EquipmentTable;
-    private javax.swing.JLabel EqupmentIDText;
+    private javax.swing.JButton AddCategoryButton;
+    private javax.swing.JPanel CategoryTab;
+    private javax.swing.JScrollPane CustomerPane;
+    private javax.swing.JPanel CustomerTab;
+    private javax.swing.JTable CustomerTable;
     private javax.swing.JLabel EqupmentNameLabel1;
     private javax.swing.JLabel EqupmentNameLabel2;
     private javax.swing.JLabel EqupmentNameLabel3;
-    private javax.swing.JTextField WeeklyFeeTextField5;
-    private javax.swing.JButton addCustomerButton;
+    private javax.swing.JButton UpdateCustomerButton;
+    private javax.swing.JButton UpdateCustomerButton1;
+    private javax.swing.JButton addEquipmentBtn;
+    private javax.swing.JScrollPane categoriesPane;
+    private javax.swing.JTextField categoryNameTextField1;
+    private javax.swing.JTable categoryTable;
+    private javax.swing.JTextField customerAddressTextFeild;
+    private javax.swing.JLabel customerEmailLabel2;
+    private javax.swing.JTextField customerEmailTextFeild;
+    private javax.swing.JTextField customerNameTextFeild1;
+    private javax.swing.JTextField customerPhoneTextFeild;
+    private javax.swing.JTextField customerUsernameTextFeild;
+    private javax.swing.JTextField customercIDTextFeild;
     private javax.swing.JButton deleteCustomerButton1;
+    private javax.swing.JComboBox<String> equipmentCategoryCombobox;
+    private javax.swing.JTextField equipmentDailyFeeInputField;
+    private javax.swing.JTextField equipmentDescriptionInputField;
+    private javax.swing.JTextField equipmentNameInputField;
     private javax.swing.JPanel equipmentTab;
+    private javax.swing.JTextField equipmentWeeklyFeeInputField;
+    private javax.swing.JTable equipmentsTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton refreshButton;
+    private javax.swing.JButton refreshCategoryButton1;
+    private javax.swing.JLabel ucstomerNameLabel;
+    private javax.swing.JLabel ucstomerNameLabel1;
+    private javax.swing.JLabel ucstomerNameLabel2;
+    private javax.swing.JLabel ucstomerNameLabel3;
+    private javax.swing.JLabel ucstomerNameLabel4;
     private javax.swing.JButton updateEquipmentButton;
     // End of variables declaration//GEN-END:variables
 }

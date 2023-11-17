@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Neil Patrick
  */
 public class Admin_Dashboard extends javax.swing.JFrame {
-    
+
     List<Category> categories;
 
     /**
@@ -23,9 +23,9 @@ public class Admin_Dashboard extends javax.swing.JFrame {
     public Admin_Dashboard() {
         initComponents();
         refreshEquipmentList();
-        
+
         categories = CategoryService.getAllCategories();
-        
+
     }
 
     /**
@@ -48,7 +48,6 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         AddEquipmentID = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -56,14 +55,13 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         equipmentDescriptionlField = new javax.swing.JTextField();
         hourlyFeeField = new javax.swing.JTextField();
         dailyFeeField = new javax.swing.JTextField();
-        addCustomerButton = new javax.swing.JButton();
+        addEquipmentBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         weeklyFeeField1 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         monthlyFeeField2 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         categorytIDFeilds = new javax.swing.JTextField();
-        EquipmentIDField1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -150,10 +148,6 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         AddEquipmentID.setForeground(new java.awt.Color(0, 0, 0));
         AddEquipmentID.setText(" ");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel5.setText("Equipment ID");
-
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Descriptions");
@@ -166,12 +160,12 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setText("Daily Rental Fee");
 
-        addCustomerButton.setBackground(new java.awt.Color(0, 102, 102));
-        addCustomerButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        addCustomerButton.setText("Add");
-        addCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+        addEquipmentBtn.setBackground(new java.awt.Color(0, 102, 102));
+        addEquipmentBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        addEquipmentBtn.setText("Add");
+        addEquipmentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addCustomerButtonActionPerformed(evt);
+                addEquipmentBtnActionPerformed(evt);
             }
         });
 
@@ -214,7 +208,6 @@ public class Admin_Dashboard extends javax.swing.JFrame {
                     .addComponent(dailyFeeField)
                     .addComponent(weeklyFeeField1)
                     .addComponent(monthlyFeeField2)
-                    .addComponent(EquipmentIDField1)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,14 +217,9 @@ public class Admin_Dashboard extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                        .addGap(0, 115, Short.MAX_VALUE)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(40, 40, 40)))
+                                .addGap(0, 115, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
                                 .addComponent(AddEquipmentID)
                                 .addGap(68, 68, 68)))
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -240,7 +228,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(categorytIDFeilds, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(addEquipmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -249,11 +237,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddEquipmentID)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(EquipmentIDField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addGap(8, 8, 8)
                 .addComponent(EquipmentNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -277,7 +261,7 @@ public class Admin_Dashboard extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                         .addComponent(monthlyFeeField2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
@@ -286,10 +270,10 @@ public class Admin_Dashboard extends javax.swing.JFrame {
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addGap(5, 5, 5)
                                 .addComponent(categorytIDFeilds, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 10, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(addCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(addEquipmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -366,16 +350,16 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 894, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -386,13 +370,13 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 894, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -418,48 +402,44 @@ public class Admin_Dashboard extends javax.swing.JFrame {
         DefaultTableModel customerTable = (DefaultTableModel) Equipment_Table.getModel();
         List<Equipment> equipments = EquipmentService.getAllEquipments();
         customerTable.setRowCount(0);
-        
+
         for (int i = 0; i < equipments.size(); i++) {
             System.out.println(i);
             Equipment equipment = equipments.get(i);
-            Object[] rowData = {equipment.equipment_id, equipment.equipment_name, equipment.description,  equipment.daily_fee, equipment.weekly_fee,  equipment.category_id};
+            Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category_id};
             customerTable.addRow(rowData);
         }
-        
+
     }
 
-    private void addCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerButtonActionPerformed
-        // TODO add your handling code here:
-        String equipmentText = EquipmentIDField1.getText();
-        int equipmentId = Integer.parseInt(equipmentText);
-        
+    private void addEquipmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEquipmentBtnActionPerformed
         String name = EquipmentNameField.getText();
         String description = equipmentDescriptionlField.getText();
+        
         String hourlyFeeText = hourlyFeeField.getText();
         double hourlyFee = Double.parseDouble(hourlyFeeText);
-        
+
         String dailyFeeText = dailyFeeField.getText();
         double dailyFee = Double.parseDouble(dailyFeeText);
-        
+
         String weeklFeeText = weeklyFeeField1.getText();
         double weeklyFee = Double.parseDouble(weeklFeeText);
-        
+
         String monthlyFeeText = monthlyFeeField2.getText();
         double monthlyFee = Double.parseDouble(monthlyFeeText);
-        
+
         String categoryIDText = categorytIDFeilds.getText();
         int categoryID = Integer.parseInt(categoryIDText);
-        
+
         if (name.equals("") || description.equals("") || hourlyFeeText.equals("") || dailyFeeText.equals("")
                 || weeklyFeeField1.equals("") || monthlyFeeText.equals("") || categoryIDText.equals("")) {
             JOptionPane.showMessageDialog(null, "Please complete the form.");
         } else {
-            Equipment equipment = new Equipment( equipmentId, name, description, dailyFee, weeklyFee, categoryID);
-            
-            EquipmentService.addEquipments(equipment);
-            
+
+            EquipmentService.addEquipment(name, description, dailyFee, weeklyFee, categoryID);
+
             refreshEquipmentList();
-            
+
             EquipmentNameField.setText("");
             equipmentDescriptionlField.setText("");
             hourlyFeeField.setText("");
@@ -467,11 +447,11 @@ public class Admin_Dashboard extends javax.swing.JFrame {
             weeklyFeeField1.setText("");
             monthlyFeeField2.setText("");
             categorytIDFeilds.setText("");
-            
+
         }
 
 //        Customer customer = CustomerService.addCustomers(customers);
-    }//GEN-LAST:event_addCustomerButtonActionPerformed
+    }//GEN-LAST:event_addEquipmentBtnActionPerformed
 
     private void categorytIDFeildsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categorytIDFeildsActionPerformed
         // TODO add your handling code here:
@@ -525,10 +505,9 @@ public class Admin_Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel AddEquipmentID;
     private javax.swing.JButton DelEquipment1;
     private javax.swing.JButton DelEquipment3;
-    private javax.swing.JTextField EquipmentIDField1;
     private javax.swing.JTextField EquipmentNameField;
     private javax.swing.JTable Equipment_Table;
-    private javax.swing.JButton addCustomerButton;
+    private javax.swing.JButton addEquipmentBtn;
     private javax.swing.JTextField categorytIDFeilds;
     private javax.swing.JTextField dailyFeeField;
     private javax.swing.JTextField equipmentDescriptionlField;
@@ -539,7 +518,6 @@ public class Admin_Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
