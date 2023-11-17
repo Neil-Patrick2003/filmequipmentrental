@@ -230,18 +230,18 @@ public class CustomerSignup extends javax.swing.JPanel {
         }
 
         System.out.println("test");
-        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-//        this.setVisible(false);
-        mainFrame.remove(this);
-        CustomerDashboard pan = new CustomerDashboard();
-        mainFrame.add(pan);
-
-        mainFrame.revalidate();
-        mainFrame.repaint();
-
-        System.out.print(mainFrame);
+//        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+////        this.setVisible(false);
+//        mainFrame.remove(this);
+//        CustomerDashboard pan = new CustomerDashboard();
+//        mainFrame.add(pan);
 //
-////        pan.setVisible(true);
+//        mainFrame.revalidate();
+//        mainFrame.repaint();
+//
+//        System.out.print(mainFrame);
+////
+//////        pan.setVisible(true);
 //
 //
 

@@ -20,6 +20,7 @@ public class FilmEquipmentRentalService {
         frame.pack(); // Resize the frame to fit the components
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+        
 
 //        System.out.println("Add new category");
 //        CategoryService.addCategory(RandomStringUtils.randomAlphanumeric(24));
