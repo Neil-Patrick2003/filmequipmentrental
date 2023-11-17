@@ -4,6 +4,7 @@
  */
 package com.mycompany.filmequipmentrentalservice;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +16,7 @@ import javax.swing.table.TableRowSorter;
  */
 public class CustomerDashboardFrame extends javax.swing.JFrame {
 
-    List<Equipment> cart;
+    List<Equipment> cart = new ArrayList();
 
     /**
      * Creates new form dashboardFrame
@@ -52,10 +53,10 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jDateChooser4 = new com.toedter.calendar.JDateChooser();
         jButton2 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        myCartPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        MyCartTable = new javax.swing.JTable();
+        myCartTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -227,7 +228,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(allEquipmentScroolPane, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
+                        .addComponent(allEquipmentScroolPane, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
@@ -258,7 +259,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -282,13 +283,13 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("tab2", jPanel2);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        myCartPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("My Cart");
 
-        MyCartTable.setModel(new javax.swing.table.DefaultTableModel(
+        myCartTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -304,37 +305,37 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(MyCartTable);
-        if (MyCartTable.getColumnModel().getColumnCount() > 0) {
-            MyCartTable.getColumnModel().getColumn(0).setMinWidth(35);
-            MyCartTable.getColumnModel().getColumn(0).setPreferredWidth(35);
-            MyCartTable.getColumnModel().getColumn(0).setMaxWidth(35);
+        jScrollPane1.setViewportView(myCartTable);
+        if (myCartTable.getColumnModel().getColumnCount() > 0) {
+            myCartTable.getColumnModel().getColumn(0).setMinWidth(35);
+            myCartTable.getColumnModel().getColumn(0).setPreferredWidth(35);
+            myCartTable.getColumnModel().getColumn(0).setMaxWidth(35);
         }
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout myCartPanelLayout = new javax.swing.GroupLayout(myCartPanel);
+        myCartPanel.setLayout(myCartPanelLayout);
+        myCartPanelLayout.setHorizontalGroup(
+            myCartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(myCartPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(myCartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
+                    .addGroup(myCartPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        myCartPanelLayout.setVerticalGroup(
+            myCartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(myCartPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("tab1", jPanel1);
+        jTabbedPane2.addTab("tab1", myCartPanel);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -404,6 +405,23 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         SearchTextFeild.setText(""); // reset search text feild
 
     }
+    
+     private void refreshCartList() {
+        DefaultTableModel cartTableModel = (DefaultTableModel) myCartTable.getModel();
+        cartTableModel.setRowCount(0);
+
+        for (int i = 0; i < this.cart.size(); i++) {
+            Equipment equipment = this.cart.get(i);
+            Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
+            cartTableModel.addRow(rowData);
+        }
+
+        EquipmentListTable.setRowSorter(null); // reset the table sort
+        SearchTextFeild.setText(""); // reset search text feild
+
+    }
+    
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         jTabbedPane2.setSelectedIndex(3);
@@ -443,7 +461,9 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         int id =  (int) EquipmentListTable.getValueAt(i, 0);
         Equipment equipment = EquipmentService.getEquipmentById(id);
 
-        cart.add(equipment); 
+        this.cart.add(equipment); 
+        System.out.println(this.cart.size());
+        refreshCartList();
     }//GEN-LAST:event_EquipmentListTableMouseClicked
 
     /**
@@ -486,7 +506,6 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JTable EquipmentListTable;
     private javax.swing.JButton EquipmmentButton;
     private javax.swing.JButton HomeBUtton;
-    private javax.swing.JTable MyCartTable;
     private javax.swing.JPanel Right;
     private javax.swing.JTextField SearchTextFeild;
     private javax.swing.JScrollPane allEquipmentScroolPane;
@@ -503,11 +522,12 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JPanel myCartPanel;
+    private javax.swing.JTable myCartTable;
     // End of variables declaration//GEN-END:variables
 }
