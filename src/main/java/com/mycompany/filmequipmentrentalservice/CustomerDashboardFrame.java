@@ -16,7 +16,7 @@ import javax.swing.table.TableRowSorter;
 public class CustomerDashboardFrame extends javax.swing.JFrame {
 
     List<Equipment> cart;
-    
+
     /**
      * Creates new form dashboardFrame
      */
@@ -82,7 +82,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         EquipmmentButton.setBackground(new java.awt.Color(255, 255, 255));
         EquipmmentButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         EquipmmentButton.setForeground(new java.awt.Color(0, 102, 102));
-        EquipmmentButton.setText("To Rent");
+        EquipmmentButton.setText("My Cart");
         EquipmmentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EquipmmentButtonActionPerformed(evt);
@@ -165,6 +165,11 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             }
         });
         EquipmentListTable.setGridColor(new java.awt.Color(0, 102, 102));
+        EquipmentListTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EquipmentListTableMouseClicked(evt);
+            }
+        });
         allEquipmentScroolPane.setViewportView(EquipmentListTable);
         if (EquipmentListTable.getColumnModel().getColumnCount() > 0) {
             EquipmentListTable.getColumnModel().getColumn(0).setMinWidth(30);
@@ -210,7 +215,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jDateChooser4.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton2.setBackground(new java.awt.Color(0, 102, 102));
-        jButton2.setText("Add to Rent");
+        jButton2.setText("Add to Cart");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -363,10 +368,10 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
             equipmentsTableModel.addRow(rowData);
         }
-        
+
         EquipmentListTable.setRowSorter(null); // reset the table sort
         SearchTextFeild.setText(""); // reset search text feild
-        
+
     }
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -390,8 +395,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
     private void SearchTextFeildKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchTextFeildKeyPressed
         // TODO add your handling code here:
-        DefaultTableModel obj=(DefaultTableModel) EquipmentListTable.getModel();
-        TableRowSorter<DefaultTableModel> obj1=new  TableRowSorter<>(obj);
+        DefaultTableModel obj = (DefaultTableModel) EquipmentListTable.getModel();
+        TableRowSorter<DefaultTableModel> obj1 = new TableRowSorter<>(obj);
         EquipmentListTable.setRowSorter(obj1);
         obj1.setRowFilter(RowFilter.regexFilter(SearchTextFeild.getText()));
 
@@ -401,6 +406,24 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         refreshEquipmentList();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void EquipmentListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EquipmentListTableMouseClicked
+        // TODO add your handling code here:
+        int i = EquipmentListTable.getSelectedRow();
+        int id =  (int) EquipmentListTable.getValueAt(i, 0);
+        String name = (String) EquipmentListTable.getValueAt(i, 1);
+        String description = (String) EquipmentListTable.getValueAt(i, 2);
+        double dailyFee = (Double) EquipmentListTable.getValueAt(i, 3);
+        double weeklyFee = (Double) EquipmentListTable.getValueAt(i, 4);
+        int category = (int) EquipmentListTable.getValueAt(i, 5);
+       
+        Equipment toCart = new Equipment(id,name,description,dailyFee,weeklyFee,category);
+        
+        cart.add(toCart); 
+        
+
+
+    }//GEN-LAST:event_EquipmentListTableMouseClicked
 
     /**
      * @param args the command line arguments
