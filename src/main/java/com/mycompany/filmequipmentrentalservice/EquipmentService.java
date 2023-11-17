@@ -67,6 +67,45 @@ public class EquipmentService {
         return null;
     }
 
+    public static Equipment getEquipmentById(int id) {
+        Equipment equipment = null;
+
+        Connection conn = AccessDatabaseConnector.connect();
+        try {
+            Statement statement = conn.createStatement();
+
+            // Execute a SELECT query
+            String selectQuery = "SELECT " + EQUIPMENTS_TABLE + ".*, " + CategoryService.CATEGORIES_TABLE + ".name as category_name from " + EQUIPMENTS_TABLE + " left join " + CategoryService.CATEGORIES_TABLE + " ON " + EQUIPMENTS_TABLE + "." + CATEGORY_ID_COLUMN + "  = " + CategoryService.CATEGORIES_TABLE + "." + CategoryService.ID_COLUMN + " WHERE "  + EQUIPMENTS_TABLE + "." + ID_COLUMN + "  = " + id;
+            ResultSet resultSet = statement.executeQuery(selectQuery);
+
+            // Process the results
+            while (resultSet.next()) {
+                String name = resultSet.getString(NAME_COLUMN);
+                String description = resultSet.getString(DESCRIPTION_COLUMN);
+                Double daily_fee = resultSet.getDouble(DAILY_RENTAL_FEE_COLUMN);
+                Double weekly_fee = resultSet.getDouble(WEEKLY_RENTAL_FEE_COLUMN);
+                int category_id = resultSet.getInt(CATEGORY_ID_COLUMN);
+
+                equipment = new Equipment(id, name, description, daily_fee, weekly_fee, category_id);
+                Category category = new Category(category_id, resultSet.getString("category_name"));
+                equipment.setCategory(category);
+
+            }
+
+            // Close the result set and statement
+            resultSet.close();
+            statement.close();
+
+            return equipment;
+        } catch (Exception e) {
+            System.out.print(e);
+        } finally {
+            AccessDatabaseConnector.closeConnection(conn);
+        }
+
+        return null;
+    }
+    
     public static void addEquipment(String name, String description, Double daily_rental_fee, Double weekly_rental_fee, int category_id) {
         Connection conn = AccessDatabaseConnector.connect();
         try {
