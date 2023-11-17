@@ -514,6 +514,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 item.setSubTotal(equipment.daily_fee * this.cart.getNumberOfDays());
                 this.cart.addItem(item);
                 refreshCartList();
+                updateCartSummary();
             }
         }
     }//GEN-LAST:event_equipmentsTableMouseClicked
@@ -524,6 +525,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         if (response == JOptionPane.YES_OPTION) {
             this.cart.clearItems();
             refreshCartList();
+            updateCartSummary();
         }
     }//GEN-LAST:event_removeAllButtonActionPerformed
 
@@ -534,6 +536,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         if (response == JOptionPane.YES_OPTION) {
             this.cart.removeItem(i);
             refreshCartList();
+            updateCartSummary();
         }
     }//GEN-LAST:event_myCartTableMouseClicked
 
