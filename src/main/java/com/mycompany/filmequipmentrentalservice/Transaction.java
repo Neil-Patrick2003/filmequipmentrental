@@ -6,9 +6,9 @@ package com.mycompany.filmequipmentrentalservice;
 
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class Transaction {
 
+    UUID id;
     Date startDate;
     Date endDate;
     int customer_id;
@@ -23,9 +24,14 @@ public class Transaction {
     Double total;
     List<TransactionItem> items;
 
-    public Transaction() {
-        this.total = 0.0;
-        this.items = new ArrayList<TransactionItem>();
+    public Transaction(UUID id, Date startDate, Date endDate, int customer_id, String status, Double total, List<TransactionItem> items) {
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.customer_id = customer_id;
+        this.status = status;
+        this.total = total;
+        this.items = items;
     }
 
     public void setStartDate(Date startDate) {
