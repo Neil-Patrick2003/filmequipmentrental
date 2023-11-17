@@ -60,6 +60,9 @@ public class TransactionService {
                 String status = resultSet.getString(STATUS_COLUMN);
 
                 Transaction transaction = new Transaction(id, startDate, endDate, customerId, status, total, new ArrayList<TransactionItem>());
+                Customer customer = new Customer(customerId, resultSet.getString("customer_name"), resultSet.getString("customer_name"), resultSet.getString("customer_phone_number"), resultSet.getString("customer_username"), "", resultSet.getString("customer_address"));
+                transaction.setCustomer(customer);
+
                 transactions.add(transaction);
             }
 

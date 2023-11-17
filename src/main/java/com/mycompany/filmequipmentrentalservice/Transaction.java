@@ -23,6 +23,7 @@ public class Transaction {
     String status;
     Double total;
     List<TransactionItem> items;
+    Customer customer;
 
     public Transaction(UUID id, Date startDate, Date endDate, int customer_id, String status, Double total, List<TransactionItem> items) {
         this.id = id;
@@ -32,6 +33,10 @@ public class Transaction {
         this.status = status;
         this.total = total;
         this.items = items;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public void setStartDate(Date startDate) {
