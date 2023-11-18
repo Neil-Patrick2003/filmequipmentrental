@@ -5,6 +5,7 @@
 package com.mycompany.filmequipmentrentalservice;
 
 import java.util.List;
+import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +23,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
         refreshEquipmentList();
         refreshCategoryList();
         refreshCustomerList();
+        refreshTransactionList();
 
         List<Category> categories = CategoryService.getAllCategories();
 
@@ -86,6 +88,10 @@ public class AdminDashBoard extends javax.swing.JPanel {
         categoriesPane = new javax.swing.JScrollPane();
         categoryTable = new javax.swing.JTable();
         refreshCategoryButton1 = new javax.swing.JButton();
+        transactionTab = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        transactionListTable = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 102, 102));
         setPreferredSize(new java.awt.Dimension(800, 500));
@@ -492,7 +498,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
                     .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(UpdateCustomerButton)
                     .addComponent(UpdateCustomerButton1))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Customers", CustomerTab);
@@ -593,6 +599,48 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Category", CategoryTab);
 
+        transactionTab.setBackground(new java.awt.Color(255, 255, 255));
+        transactionTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                transactionTabMouseClicked(evt);
+            }
+        });
+        transactionTab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        transactionListTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Start Date", "End Date", "Customer Name", "Status", "Total", "Items"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        transactionListTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                transactionListTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(transactionListTable);
+
+        transactionTab.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 746, 338));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel8.setText("TRANSACTIONS");
+        transactionTab.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, -1, -1));
+
+        jTabbedPane1.addTab("Transactions", transactionTab);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -628,6 +676,19 @@ public class AdminDashBoard extends javax.swing.JPanel {
             Category category = categories.get(i);
             Object[] rowData = {category.id, category.name};
             categoriesTableModel.addRow(rowData);
+        }
+    }
+
+    private void refreshTransactionList() {
+        DefaultTableModel transactionListTableModel = (DefaultTableModel) transactionListTable.getModel();
+        List<Transaction> transactions = TransactionService.getAllTransactions();
+        transactionListTableModel.setRowCount(0);
+
+        for (int i = 0; i < transactions.size(); i++) {
+            Transaction transaction = transactions.get(i);
+
+            Object[] rowdata = {transaction.id, transaction.startDate, transaction.endDate, transaction.customer.name, transaction.status, transaction.total, transaction.items};
+            transactionListTableModel.addRow(rowdata);
         }
     }
 
@@ -792,8 +853,33 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
     private void UpdateCustomerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerButton1ActionPerformed
         // TODO add your handling code here:
-        refreshCustomerList();  
+        refreshCustomerList();
     }//GEN-LAST:event_UpdateCustomerButton1ActionPerformed
+
+    private void transactionTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionTabMouseClicked
+        // TODO add your handling code here:
+        refreshTransactionList();
+
+    }//GEN-LAST:event_transactionTabMouseClicked
+
+    private void transactionListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionListTableMouseClicked
+        // TODO add your handling code here:
+        int i = transactionListTable.getSelectedRow();
+        UUID transactionId = (UUID) transactionListTable.getValueAt(i, 0);
+
+        List<TransactionItem> items = TransactionItemService.getTransactionItemsByTransactionId(transactionId);
+        System.out.println(transactionId);
+        System.out.println("");
+
+        for (int j = 0; j < items.size(); j++) {
+            TransactionItem item = items.get(j);
+
+            String message = "Equipment Name: " + item.equipment.name + "\nSubtotal: " + item.sub_total.toString();
+            JOptionPane.showMessageDialog(CustomerPane, message);
+
+        }
+
+    }//GEN-LAST:event_transactionListTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -833,11 +919,15 @@ public class AdminDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton refreshCategoryButton1;
+    private javax.swing.JTable transactionListTable;
+    private javax.swing.JPanel transactionTab;
     private javax.swing.JLabel ucstomerNameLabel;
     private javax.swing.JLabel ucstomerNameLabel1;
     private javax.swing.JLabel ucstomerNameLabel2;
