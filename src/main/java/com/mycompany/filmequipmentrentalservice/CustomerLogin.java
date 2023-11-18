@@ -185,6 +185,7 @@ public class CustomerLogin extends javax.swing.JPanel {
             System.out.println("test");
 
             CustomerDashboardFrame CustomerDash = new CustomerDashboardFrame();
+            CustomerDash.setAuthCustomer(customer);
             CustomerDash.setVisible(true);
             CustomerDash.setLocationRelativeTo(null);
 

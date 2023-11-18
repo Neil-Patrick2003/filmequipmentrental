@@ -3,16 +3,14 @@
  */
 package com.mycompany.filmequipmentrentalservice;
 
-import java.util.List;
 import javax.swing.*;
-import org.apache.commons.lang.RandomStringUtils;
 
 /**
  *
  * @author Neil Patrick
  */
 public class FilmEquipmentRentalService {
-    
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Film Equipment Rental Service");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -20,7 +18,20 @@ public class FilmEquipmentRentalService {
         frame.pack(); // Resize the frame to fit the components
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
-        
+
+//      System.out.println("Add new category");
+//        List<Transaction> transactions = TransactionService.getAllTransactions();
+//        for (int i = 0; i < transactions.size(); i++) {
+//            System.out.println(transactions.get(i).id.toString());
+//            System.out.println(transactions.get(i).customer.name);
+//
+//            List<TransactionItem> items = TransactionItemService.getTransactionItemsByTransactionId(transactions.get(i).id);
+//
+//            for (int j = 0; j < items.size(); j++) {
+//                System.out.println(items.get(j).equipment.name);
+//                System.out.println(items.get(j).sub_total.toString());
+//            }
+//        }
 
 //        System.out.println("Add new category");
 //        CategoryService.addCategory(RandomStringUtils.randomAlphanumeric(24));

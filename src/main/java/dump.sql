@@ -67,30 +67,31 @@ CREATE TABLE `equipments` (
   CONSTRAINT `equipments_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-DROP TABLE IF EXISTS `transaction_details`;
-CREATE TABLE `transaction_details` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `transaction_items`;
+CREATE TABLE `transaction_items` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `sub_total` double(8,2) NOT NULL,
-  `transaction_id` bigint unsigned NOT NULL,
+  `transaction_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `equipment_id` bigint unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `transaction_details_equipment_id_foreign` (`equipment_id`),
-  KEY `transaction_details_transaction_id_foreign` (`transaction_id`),
-  CONSTRAINT `transaction_details_equipment_id_foreign` FOREIGN KEY (`equipment_id`) REFERENCES `equipments` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `transaction_details_transaction_id_foreign` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `transaction_items_equipment_id_foreign` (`equipment_id`),
+  KEY `transaction_items_transaction_id_foreign` (`transaction_id`),
+  CONSTRAINT `transaction_items_equipment_id_foreign` FOREIGN KEY (`equipment_id`) REFERENCES `equipments` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `transaction_items_transaction_id_foreign` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
 
 DROP TABLE IF EXISTS `transactions`;
 CREATE TABLE `transactions` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `start_date` datetime NOT NULL,
-  `end_date` datetime NOT NULL,
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `customer_id` bigint unsigned NOT NULL,
+  `total` decimal(8,2) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `transactions_customer_id_foreign` (`customer_id`),
   CONSTRAINT `transactions_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
 
 
 
