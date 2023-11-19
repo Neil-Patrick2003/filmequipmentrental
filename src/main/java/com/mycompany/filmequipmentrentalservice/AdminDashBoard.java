@@ -4,6 +4,7 @@
  */
 package com.mycompany.filmequipmentrentalservice;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JOptionPane;
@@ -498,7 +499,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
                     .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(UpdateCustomerButton)
                     .addComponent(UpdateCustomerButton1))
-                .addContainerGap(309, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Customers", CustomerTab);
@@ -614,11 +615,11 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Start Date", "End Date", "Customer Name", "Status", "Total", "Items"
+                "ID", "Start Date", "End Date", "Customer Name", "Status", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -683,11 +684,13 @@ public class AdminDashBoard extends javax.swing.JPanel {
         DefaultTableModel transactionListTableModel = (DefaultTableModel) transactionListTable.getModel();
         List<Transaction> transactions = TransactionService.getAllTransactions();
         transactionListTableModel.setRowCount(0);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
         for (int i = 0; i < transactions.size(); i++) {
             Transaction transaction = transactions.get(i);
+            String total = "₱ " + transaction.total.toString();
 
-            Object[] rowdata = {transaction.id, transaction.startDate, transaction.endDate, transaction.customer.name, transaction.status, transaction.total, transaction.items};
+            Object[] rowdata = {transaction.id, dateFormatter.format(transaction.startDate), dateFormatter.format(transaction.endDate), transaction.customer.name, transaction.status, total};
             transactionListTableModel.addRow(rowdata);
         }
     }
@@ -865,19 +868,25 @@ public class AdminDashBoard extends javax.swing.JPanel {
     private void transactionListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionListTableMouseClicked
         // TODO add your handling code here:
         int i = transactionListTable.getSelectedRow();
+        UUID specificTransactionId = (UUID) transactionListTable.getValueAt(i, 0); // Replace "..." with the actual UUID
+
+// Call the method to retrieve items for the specific transaction ID
+        List<TransactionItem> itemsForSpecificTransaction = TransactionItemService.getTransactionItemsByTransactionId(specificTransactionId);
+
+
+
         UUID transactionId = (UUID) transactionListTable.getValueAt(i, 0);
 
         List<TransactionItem> items = TransactionItemService.getTransactionItemsByTransactionId(transactionId);
         System.out.println(transactionId);
-        System.out.println("");
+        System.out.println("DONE");
 
         for (int j = 0; j < items.size(); j++) {
-            TransactionItem item = items.get(j);
-
-            String message = "Equipment Name: " + item.equipment.name + "\nSubtotal: " + item.sub_total.toString();
-            JOptionPane.showMessageDialog(CustomerPane, message);
-
+            System.out.println(items.get(j).equipment.name);
+            System.out.println(items.get(j).sub_total.toString());
+            System.out.println("hskjhdfs");
         }
+
 
     }//GEN-LAST:event_transactionListTableMouseClicked
 
