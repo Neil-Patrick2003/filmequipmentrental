@@ -4,6 +4,8 @@
  */
 package com.mycompany.filmequipmentrentalservice;
 
+
+import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -211,6 +213,8 @@ public class CustomerSignup extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
@@ -227,9 +231,21 @@ public class CustomerSignup extends javax.swing.JPanel {
         if (nameText.getText().equals("") || emailText.getText().equals("") || contactText.getText().equals("") || usernameText.getText().equals("") || addressText.getText().equals("") || jPasswordField1.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Please Complete the form.");
 
+        }else{
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            this.setVisible(false);
+            mainFrame.remove(this);
+            mainFrame.dispose();
+            
+            CustomerDashboardFrame CustomerDash = new CustomerDashboardFrame();
+            
+            CustomerDash.setVisible(true);
+            CustomerDash.setLocationRelativeTo(null);
+            
+            ;
         }
 
-        System.out.println("test");
+        
 //        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 ////        this.setVisible(false);
 //        mainFrame.remove(this);

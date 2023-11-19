@@ -49,7 +49,7 @@ public class TransactionService {
 
             SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
-            // Process the results
+            // Process the results 
             while (resultSet.next()) {
 
                 UUID id = UUID.fromString(resultSet.getString(ID_COLUMN));
@@ -79,6 +79,61 @@ public class TransactionService {
 
         return null;
     }
+    
+    public static List getTransactionsByCustomerId(int customerId) {
+        List<Transaction> transactions = new ArrayList<>();
+
+        Connection conn = AccessDatabaseConnector.connect();
+        try {
+            Statement statement = conn.createStatement();
+
+            String selectQuery = "SELECT "
+                    + "*, "
+                    + "customers.name AS customer_name, "
+                    + "customers.email AS customer_email, "
+                    + "customers.username AS customer_username, "
+                    + "customers.address AS customer_address, "
+                    + "customers.phone_number AS customer_phone_number "
+                    + "FROM transactions "
+                    + "LEFT JOIN customers ON transactions.customer_id = customers.id "
+                    + "WHERE transactions.customer_id = '" + customerId + "'";
+            
+
+            ResultSet resultSet = statement.executeQuery(selectQuery);
+
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Process the results 
+            while (resultSet.next()) {
+
+                UUID id = UUID.fromString(resultSet.getString(ID_COLUMN));
+                Date startDate = dateFormatter.parse(resultSet.getString(START_DATE_COLUMN));
+                Date endDate = dateFormatter.parse(resultSet.getString(END_DATE_COLUMN));
+                Double total = resultSet.getDouble(TOTAL_COLUMN);
+                String status = resultSet.getString(STATUS_COLUMN);
+
+                Transaction transaction = new Transaction(id, startDate, endDate, customerId, status, total, new ArrayList<TransactionItem>());
+                Customer customer = new Customer(customerId, resultSet.getString("customer_name"), resultSet.getString("customer_name"), resultSet.getString("customer_phone_number"), resultSet.getString("customer_username"), "", resultSet.getString("customer_address"));
+                transaction.setCustomer(customer);
+
+                transactions.add(transaction);
+            }
+
+            // Close the result set and statement
+            resultSet.close();
+            statement.close();
+
+            return transactions;
+        } catch (Exception e) {
+            System.out.print(e);
+        } finally {
+            AccessDatabaseConnector.closeConnection(conn);
+        }
+
+        return null;
+    }
+    
+    
 
     public static void saveTransaction(Transaction transaction) {
         Connection conn = AccessDatabaseConnector.connect();

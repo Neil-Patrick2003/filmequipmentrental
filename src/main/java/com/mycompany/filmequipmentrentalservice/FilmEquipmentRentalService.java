@@ -3,6 +3,7 @@
  */
 package com.mycompany.filmequipmentrentalservice;
 
+import java.util.List;
 import javax.swing.*;
 
 /**
@@ -15,7 +16,7 @@ public class FilmEquipmentRentalService {
         JFrame frame = new JFrame("Film Equipment Rental Service");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(new StartingPage()); // Add the Login panel to the frame
-        frame.pack(); // Resize the frame to fit the components
+        frame.pack(); // Resize the frame to fit the component
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
 
@@ -24,7 +25,7 @@ public class FilmEquipmentRentalService {
 //        for (int i = 0; i < transactions.size(); i++) {
 //            System.out.println(transactions.get(i).id.toString());
 //            System.out.println(transactions.get(i).customer.name);
-//
+//  
 //            List<TransactionItem> items = TransactionItemService.getTransactionItemsByTransactionId(transactions.get(i).id);
 //
 //            for (int j = 0; j < items.size(); j++) {

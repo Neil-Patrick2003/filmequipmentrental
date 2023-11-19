@@ -21,7 +21,7 @@ public class TransactionItem {
         this.id = id;
         this.transaction_id = transaction_id;
         this.equipment_id = equipment_id;
-        this.sub_total = sub_total;
+        this.sub_total = sub_total;  
     }
 
     public void setSubTotal(Double sub_total) {

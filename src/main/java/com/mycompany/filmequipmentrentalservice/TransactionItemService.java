@@ -4,6 +4,8 @@
  */
 package com.mycompany.filmequipmentrentalservice;
 
+import static com.mycompany.filmequipmentrentalservice.CategoryService.CATEGORIES_TABLE;
+import static com.mycompany.filmequipmentrentalservice.CategoryService.NAME_COLUMN;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -94,19 +96,36 @@ public class TransactionItemService {
 
             insertQuery = i == transactionItems.size() - 1 ? insertQuery + ";" : ",";
         }
+        System.out.println("HAHAHAHAH");
+        System.out.println(transactionItems.size());
+        System.out.println(insertQuery);
+
+        try {
+            // Execute an INSERT query
+            try (Statement statement = conn.createStatement()) {
+                statement.executeUpdate(insertQuery);
+            }
+            System.err.println("");
+        } catch (SQLException e) {
+            System.out.print(e);
+        } finally {
+            AccessDatabaseConnector.closeConnection(conn);
+        }
+    }
+
+    public static void saveTransactionItem(TransactionItem item) {
+        Connection conn = AccessDatabaseConnector.connect();
+
+        String insertQuery = "INSERT INTO " + TRANSACTION_ITEMS_TABLE + "(" + ID_COLUMN + ", " + TRANSACTION_ID_COLUMN + ", " + EQUIPMENT_ID_COLUMN + ", " + SUB_TOTAL_COLUMN + ") VALUES ";
+
+        insertQuery = insertQuery + "('" + item.id.toString() + "', '" + item.transaction_id.toString() + "', '" + item.equipment_id + "', '" + item.sub_total.toString() + "');";
 
         System.out.println(insertQuery);
 
         try {
             // Execute an INSERT query
             try (Statement statement = conn.createStatement()) {
-                int rowsAffected = statement.executeUpdate(insertQuery);
-                // Check the number of rows affected
-                if (rowsAffected > 0) {
-                    System.out.println("Insertion successful. Rows affected: " + rowsAffected);
-                } else {
-                    System.out.println("Insertion failed.");
-                }
+                statement.executeUpdate(insertQuery);
             }
             System.err.println("");
         } catch (SQLException e) {
