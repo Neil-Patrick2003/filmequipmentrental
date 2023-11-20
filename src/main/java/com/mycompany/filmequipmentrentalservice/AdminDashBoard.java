@@ -882,6 +882,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
         System.out.println("DONE");
 
         for (int j = 0; j < items.size(); j++) {
+            
             System.out.println(items.get(j).equipment.name);
             System.out.println(items.get(j).sub_total.toString());
             System.out.println("hskjhdfs");

@@ -647,9 +647,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             TransactionItemService.saveTransactionItem(item);
         }
         JOptionPane.showMessageDialog(null, "Succesful!");
-        
-       // JOptionPane.showConfirmDialog(this, "Success! ", "Select Option ", JOptionPane.OK_OPTION);
 
+        // JOptionPane.showConfirmDialog(this, "Success! ", "Select Option ", JOptionPane.OK_OPTION);
         this.cart.clearItems();
         refreshCartList();
         updateCartSummary();
@@ -660,16 +659,24 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private void customerTransactionLIstTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTransactionLIstTableMouseClicked
         // TODO add your handling code here:
         int i = customerTransactionLIstTable.getSelectedRow();
-        UUID transactionId = (UUID) customerTransactionLIstTable.getValueAt(i, 0);
+    UUID transactionId = (UUID) customerTransactionLIstTable.getValueAt(i, 0);
+    String total = "₱ " + (String) customerTransactionLIstTable.getValueAt(i, 5);
 
-        List<TransactionItem> items = TransactionItemService.getTransactionItemsByTransactionId(transactionId);
-        System.out.println("Transaction ID: " + transactionId);
-        System.out.println(items.size());
+    List<TransactionItem> items = TransactionItemService.getTransactionItemsByTransactionId(transactionId);
 
-        for (int j = 0; j < items.size(); j++) {
-            System.out.println(items.get(j).equipment.name);
-            System.out.println(items.get(j).sub_total.toString());
-        }
+    StringBuilder message = new StringBuilder();
+    message.append("Transaction ID: ").append(transactionId).append("\n\n");
+
+    for (TransactionItem item : items) {
+        message.append("Equipment Name: ").append(item.equipment.name).append("\n");
+        message.append("Subtotal: ").append(item.sub_total).append("\n\n");
+        
+    }
+    message.append("Total: ").append(total);
+
+    JOptionPane.showMessageDialog(null, message.toString(), "Transaction Items", JOptionPane.INFORMATION_MESSAGE);
+
+
     }//GEN-LAST:event_customerTransactionLIstTableMouseClicked
 
     public void updateCartSummary() {
