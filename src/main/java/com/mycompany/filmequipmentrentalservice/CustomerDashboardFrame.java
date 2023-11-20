@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -22,6 +24,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
     Transaction cart;
     Customer authCustomer;
+    int categoryIdFilter;
 
     /**
      * Creates new form dashboardFrame
@@ -30,12 +33,23 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         initComponents();
         refreshEquipmentList();
         refreshTransactionList();
+
+        List<Category> categories = CategoryService.getAllCategories();
+        
+        categoryFilterComboBox.addItem("All categories");
+
+        for (int i = 0; i < categories.size(); i++) {
+            categoryFilterComboBox.addItem(categories.get(i).name);
+        }
     }
 
 //    UUID id, Date startDate, Date endDate, int customer_id, String status, Double total, List<TransactionItem> items
     public void setAuthCustomer(Customer authCustomer) {
         this.authCustomer = authCustomer;
-        this.cart = new Transaction(UUID.randomUUID(), null, null, this.authCustomer.id, "pending", 0.0, new ArrayList<TransactionItem>());
+        if (authCustomer != null) {
+            this.cart = new Transaction(UUID.randomUUID(), null, null, this.authCustomer.id, "pending", 0.0, new ArrayList<TransactionItem>());
+        }
+
     }
 
     /**
@@ -64,6 +78,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         endDatePicker = new com.toedter.calendar.JDateChooser();
         startDatePicker = new com.toedter.calendar.JDateChooser();
+        categoryFilterComboBox = new javax.swing.JComboBox<>();
+        warningLabel = new javax.swing.JLabel();
         myCartPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -122,7 +138,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 102, 102));
-        jButton4.setText("Button");
+        jButton4.setText("Log out");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -151,9 +167,9 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 .addComponent(EquipmmentButton)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 264, Short.MAX_VALUE)
                 .addComponent(jButton4)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addGap(119, 119, 119))
         );
 
         getContentPane().add(Right, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -246,6 +262,16 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             }
         });
 
+        categoryFilterComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                categoryFilterComboBoxItemStateChanged(evt);
+            }
+        });
+
+        warningLabel.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
+        warningLabel.setForeground(new java.awt.Color(255, 51, 51));
+        warningLabel.setText("Please select date first.");
+
         javax.swing.GroupLayout startDateLayout = new javax.swing.GroupLayout(startDate);
         startDate.setLayout(startDateLayout);
         startDateLayout.setHorizontalGroup(
@@ -256,6 +282,9 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                     .addGroup(startDateLayout.createSequentialGroup()
                         .addComponent(allEquipmentScroolPane, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
                         .addContainerGap())
+                    .addGroup(startDateLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(startDateLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(startDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,13 +299,17 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                                 .addGap(77, 77, 77)
                                 .addComponent(jLabel9)
                                 .addGap(3, 3, 3)
-                                .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(53, Short.MAX_VALUE))
-                    .addGroup(startDateLayout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(startDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(startDateLayout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(53, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, startDateLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(categoryFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26))))))
         );
         startDateLayout.setVerticalGroup(
             startDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,12 +326,15 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, startDateLayout.createSequentialGroup()
-                        .addGap(0, 14, Short.MAX_VALUE)
+                        .addGap(0, 9, Short.MAX_VALUE)
                         .addGroup(startDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(categoryFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(11, 11, 11)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(warningLabel)
+                .addGap(4, 4, 4)
                 .addComponent(allEquipmentScroolPane, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -513,12 +549,24 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         List<Equipment> equipments = EquipmentService.getAllEquipments();
         equipmentsTableModel.setRowCount(0);
 
-        System.out.println(equipments.size());
+        Category category = null;
+
+        if (categoryFilterComboBox.getSelectedIndex() >= 1) {
+            category = CategoryService.getCategoryByName(categoryFilterComboBox.getSelectedItem().toString());
+        }
 
         for (int i = 0; i < equipments.size(); i++) {
             Equipment equipment = equipments.get(i);
-            Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
-            equipmentsTableModel.addRow(rowData);
+
+            if (category == null) {
+                Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
+                equipmentsTableModel.addRow(rowData);
+            } else {
+                if (category.id == equipment.category_id) {
+                    Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
+                    equipmentsTableModel.addRow(rowData);
+                }
+            }
         }
 
         equipmentsTable.setRowSorter(null); // reset the table sort
@@ -544,7 +592,15 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        jTabbedPane2.setSelectedIndex(3);
+        this.setAuthCustomer(null);
+        this.dispose();
+
+        JFrame frame = new JFrame("Film Equipment Rental Service");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(new CustomerLogin()); // Add the Login panel to the frame
+        frame.pack(); // Resize the frame to fit the component
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void HomeBUttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeBUttonActionPerformed
@@ -626,6 +682,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         if (startDate != null) {
             this.cart.setStartDate(startDate);
+            warningLabel.setText("Please Select End Date. ");
         }
 
         updateCartSummary();
@@ -636,6 +693,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         if (endDate != null) {
             this.cart.setEndDate(endDate);
+            warningLabel.setText("");
         }
 
         updateCartSummary();
@@ -659,25 +717,33 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private void customerTransactionLIstTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTransactionLIstTableMouseClicked
         // TODO add your handling code here:
         int i = customerTransactionLIstTable.getSelectedRow();
-    UUID transactionId = (UUID) customerTransactionLIstTable.getValueAt(i, 0);
-    String total = "₱ " + (String) customerTransactionLIstTable.getValueAt(i, 5);
+        UUID transactionId = (UUID) customerTransactionLIstTable.getValueAt(i, 0);
+        String total = (String) customerTransactionLIstTable.getValueAt(i, 5);
+        String startDate = "Start Date: " + ( String) customerTransactionLIstTable.getValueAt(i, 1);
+        String endDate = "   End Date: " + (String) customerTransactionLIstTable.getValueAt(i, 2);
+        String status = "   Status: " + (String) customerTransactionLIstTable.getValueAt(i, 4);
 
-    List<TransactionItem> items = TransactionItemService.getTransactionItemsByTransactionId(transactionId);
+        List<TransactionItem> items = TransactionItemService.getTransactionItemsByTransactionId(transactionId);
 
-    StringBuilder message = new StringBuilder();
-    message.append("Transaction ID: ").append(transactionId).append("\n\n");
+        StringBuilder message = new StringBuilder();
+        message.append("Transaction ID: ").append(transactionId).append("\n");
+        message.append(startDate).append(endDate).append(status).append("\n\n");
 
-    for (TransactionItem item : items) {
-        message.append("Equipment Name: ").append(item.equipment.name).append("\n");
-        message.append("Subtotal: ").append(item.sub_total).append("\n\n");
-        
-    }
-    message.append("Total: ").append(total);
+        for (TransactionItem item : items) {
+            message.append("Equipment Name: ").append(item.equipment.name).append("\n");
+            message.append("Subtotal: ₱ ").append(item.sub_total).append("\n\n");
 
-    JOptionPane.showMessageDialog(null, message.toString(), "Transaction Items", JOptionPane.INFORMATION_MESSAGE);
+        }
+        message.append("Total: ").append(total);
+
+        JOptionPane.showMessageDialog(null, message.toString(), "Transaction Items", JOptionPane.INFORMATION_MESSAGE);
 
 
     }//GEN-LAST:event_customerTransactionLIstTableMouseClicked
+
+    private void categoryFilterComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_categoryFilterComboBoxItemStateChanged
+        refreshEquipmentList();
+    }//GEN-LAST:event_categoryFilterComboBoxItemStateChanged
 
     public void updateCartSummary() {
         if (this.cart == null) {
@@ -735,6 +801,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane allEquipmentScroolPane;
     private javax.swing.JLabel cartDurationLabel;
     private javax.swing.JLabel cartTotalLabel;
+    private javax.swing.JComboBox<String> categoryFilterComboBox;
     private javax.swing.JButton checkOutButton1;
     private javax.swing.JTable customerTransactionLIstTable;
     private com.toedter.calendar.JDateChooser endDatePicker;
@@ -759,5 +826,6 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JButton removeAllButton;
     private javax.swing.JPanel startDate;
     private com.toedter.calendar.JDateChooser startDatePicker;
+    private javax.swing.JLabel warningLabel;
     // End of variables declaration//GEN-END:variables
 }
