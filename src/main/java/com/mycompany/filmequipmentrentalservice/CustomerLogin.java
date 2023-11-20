@@ -22,6 +22,9 @@ public class CustomerLogin extends javax.swing.JPanel {
     public CustomerLogin() {
         initComponents();
 
+        loginAsCustomerRadioBtn.setSelected(true);
+        loginAsButtonGroup.add(loginAsAdminRadioBtn);
+        loginAsButtonGroup.add(loginAsCustomerRadioBtn);
     }
 
     /**
@@ -33,6 +36,7 @@ public class CustomerLogin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        loginAsButtonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
@@ -41,6 +45,8 @@ public class CustomerLogin extends javax.swing.JPanel {
         loginButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
+        loginAsCustomerRadioBtn = new javax.swing.JRadioButton();
+        loginAsAdminRadioBtn = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(800, 500));
@@ -99,6 +105,15 @@ public class CustomerLogin extends javax.swing.JPanel {
         jPasswordField1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jPasswordField1.setForeground(new java.awt.Color(0, 102, 102));
 
+        loginAsCustomerRadioBtn.setText("Login as customer");
+        loginAsCustomerRadioBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginAsCustomerRadioBtnActionPerformed(evt);
+            }
+        });
+
+        loginAsAdminRadioBtn.setText("Login as admin");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,8 +145,13 @@ public class CustomerLogin extends javax.swing.JPanel {
                                 .addComponent(jButton2))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(41, 41, 41)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(47, Short.MAX_VALUE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(loginAsCustomerRadioBtn)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(loginAsAdminRadioBtn))
+                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(46, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +173,11 @@ public class CustomerLogin extends javax.swing.JPanel {
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(loginButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginAsCustomerRadioBtn)
+                    .addComponent(loginAsAdminRadioBtn))
+                .addGap(59, 59, 59))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -164,46 +188,42 @@ public class CustomerLogin extends javax.swing.JPanel {
 //    }
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
+        Boolean isCustomer = loginAsCustomerRadioBtn.isSelected();
+
         String username = usernamerTextfeild.getText();
         char[] passwordChars = jPasswordField1.getPassword();
         String password = new String(passwordChars);
 
-        //        if( IN_username.getText().equals("") || ){
-        //            JOptionPane.showMessageDialog(null, "Please fill out username.");
-        //        }
-        //        if(IN_password.getText().equals("")){
-        //            JOptionPane.showMessageDialog(null, "Please fill out password.");
-        //        }
-        //        else{
-        //            JOptionPane.showMessageDialog(null, "Wrong username or password.", "Message", JOptionPane.ERROR_MESSAGE);
-        //        }
-        Customer customer = CustomerService.getByUsernameAndPassword(username, password);
-        if (customer == null) {
-            JOptionPane.showMessageDialog(null, "Wrong username or password.", "Message", JOptionPane.ERROR_MESSAGE);
+        if (isCustomer) {
+            Customer customer = CustomerService.getByUsernameAndPassword(username, password);
+            if (customer == null) {
+                JOptionPane.showMessageDialog(null, "Wrong username or password.", "Message", JOptionPane.ERROR_MESSAGE);
+            } else {
+                System.out.println("test");
+
+                JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                this.setVisible(false);
+                mainFrame.remove(this);
+                mainFrame.dispose();
+
+                CustomerDashboardFrame CustomerDash = new CustomerDashboardFrame();
+                CustomerDash.setAuthCustomer(customer);
+                CustomerDash.setVisible(true);
+                CustomerDash.setLocationRelativeTo(null);
+            }
         } else {
-            System.out.println("test");
+            Admin admin = AdminService.getByUsernameAndPassword(username, password);
+            if (admin == null) {
+                JOptionPane.showMessageDialog(null, "Wrong username or password.", "Message", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                mainFrame.remove(this);
+                AdminDashBoard pan = new AdminDashBoard();
+                mainFrame.add(pan);
 
-            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            this.setVisible(false);
-            mainFrame.remove(this);
-            mainFrame.dispose();
-            
-            CustomerDashboardFrame CustomerDash = new CustomerDashboardFrame();
-            CustomerDash.setAuthCustomer(customer);
-            CustomerDash.setVisible(true);
-            CustomerDash.setLocationRelativeTo(null);
-
-//            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-//            this.setVisible(false);
-//            mainFrame.remove(this);
-//            CustomerDashboard pan = new CustomerDashboard();
-//            mainFrame.add(pan);
-//
-//            mainFrame.revalidate();
-//            mainFrame.repaint();
-//
-//            System.out.print(mainFrame);
+                mainFrame.revalidate();
+                mainFrame.repaint();
+            }
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -222,12 +242,19 @@ public class CustomerLogin extends javax.swing.JPanel {
         System.out.print(mainFrame);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void loginAsCustomerRadioBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginAsCustomerRadioBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginAsCustomerRadioBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JRadioButton loginAsAdminRadioBtn;
+    private javax.swing.ButtonGroup loginAsButtonGroup;
+    private javax.swing.JRadioButton loginAsCustomerRadioBtn;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel usernameLabel;

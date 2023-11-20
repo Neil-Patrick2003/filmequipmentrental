@@ -210,20 +210,18 @@ public class AdminLogin extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Wrong username or password.", "Message", JOptionPane.ERROR_MESSAGE);
         } else {
             System.out.println("test");
-        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 //        this.setVisible(false);
-        mainFrame.remove(this);
-        AdminDashBoard pan = new AdminDashBoard();
-        mainFrame.add(pan);
+            mainFrame.remove(this);
+            AdminDashBoard pan = new AdminDashBoard();
+            mainFrame.add(pan);
 
-        mainFrame.revalidate();
-        mainFrame.repaint();
+            mainFrame.revalidate();
+            mainFrame.repaint();
 
-        System.out.print(mainFrame);
+            System.out.print(mainFrame);
 
 //        pan.setVisible(true);
-
-
         }
 
 
