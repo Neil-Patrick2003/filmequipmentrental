@@ -16,6 +16,7 @@ public class Equipment {
     Double weekly_fee;
     int category_id;
     Category category;
+    boolean is_available;
 
     public Equipment(int id, String name, String description, Double daily_fee, Double weekly_fee, int category_id) {
         this.id = id;
@@ -24,9 +25,24 @@ public class Equipment {
         this.daily_fee = daily_fee;
         this.weekly_fee = weekly_fee;
         this.category_id = category_id;
+        this.is_available = true;
     }
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+    
+
+    public void setIsAvailable(boolean is_available) {
+        this.is_available = is_available;
+    }
+    
+    public String getIsAvailableText(){
+        if(is_available){
+            return "Available";
+        }
+        else{
+            return "Not Available";
+        }
     }
 }

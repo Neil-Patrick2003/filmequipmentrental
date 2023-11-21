@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,15 +27,36 @@ public class EquipmentService {
     private static final String WEEKLY_RENTAL_FEE_COLUMN = "weekly_rental_fee";
     private static final String CATEGORY_ID_COLUMN = "category_id";
 
-    public static List getAllEquipments() {
+    public static List getAllEquipments(Date startDate, Date endDate) {
         List<Equipment> FilmEquipments = new ArrayList<>();
 
         Connection conn = AccessDatabaseConnector.connect();
         try {
             Statement statement = conn.createStatement();
+            
+                    SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+            String selectQuery = "SELECT "
+                    + "equipments.*, "
+                    + "categories.name AS category_name, "
+                    + "( "
+                    + "SELECT NOT EXISTS "
+                    + "( "
+                    + "SELECT * from transactions where "
+                    + "( transactions.start_date BETWEEN '" + dateFormatter.format(startDate) + "' and '" + dateFormatter.format(endDate) + "' OR "
+                    + "transactions.end_date BETWEEN '" + dateFormatter.format(startDate) + "' and '" + dateFormatter.format(endDate) + "') "
+                    + "AND "
+                    + "transactions.id in ( SELECT transaction_items.transaction_id from transaction_items WHERE transaction_items.equipment_id = equipments.id) "
+                    + ") "
+                    + " ) as is_available "
+                    + "FROM equipments LEFT JOIN categories ON equipments.category_id = categories.id ";
+                    
+            
+            
+            System.out.println(selectQuery);
 
             // Execute a SELECT query
-            String selectQuery = "SELECT " + EQUIPMENTS_TABLE + ".*, " + CategoryService.CATEGORIES_TABLE + ".name as category_name from " + EQUIPMENTS_TABLE + " left join " + CategoryService.CATEGORIES_TABLE + " ON " + EQUIPMENTS_TABLE + "." + CATEGORY_ID_COLUMN + "  = " + CategoryService.CATEGORIES_TABLE + "." + CategoryService.ID_COLUMN;
+//            String selectQuery = "SELECT " + EQUIPMENTS_TABLE + ".*, " + CategoryService.CATEGORIES_TABLE + ".name as category_name from " + EQUIPMENTS_TABLE + " left join " + CategoryService.CATEGORIES_TABLE + " ON " + EQUIPMENTS_TABLE + "." + CATEGORY_ID_COLUMN + "  = " + CategoryService.CATEGORIES_TABLE + "." + CategoryService.ID_COLUMN;
             ResultSet resultSet = statement.executeQuery(selectQuery);
 
             // Process the results
@@ -45,10 +68,12 @@ public class EquipmentService {
                 Double daily_fee = resultSet.getDouble(DAILY_RENTAL_FEE_COLUMN);
                 Double weekly_fee = resultSet.getDouble(WEEKLY_RENTAL_FEE_COLUMN);
                 int category_id = resultSet.getInt(CATEGORY_ID_COLUMN);
+                boolean is_available = resultSet.getBoolean("is_available");
 
                 Equipment equipment = new Equipment(id, name, description, daily_fee, weekly_fee, category_id);
                 Category category = new Category(category_id, resultSet.getString("category_name"));
                 equipment.setCategory(category);
+                equipment.setIsAvailable(is_available);
 
                 FilmEquipments.add(equipment);
             }
@@ -75,7 +100,7 @@ public class EquipmentService {
             Statement statement = conn.createStatement();
 
             // Execute a SELECT query
-            String selectQuery = "SELECT " + EQUIPMENTS_TABLE + ".*, " + CategoryService.CATEGORIES_TABLE + ".name as category_name from " + EQUIPMENTS_TABLE + " left join " + CategoryService.CATEGORIES_TABLE + " ON " + EQUIPMENTS_TABLE + "." + CATEGORY_ID_COLUMN + "  = " + CategoryService.CATEGORIES_TABLE + "." + CategoryService.ID_COLUMN + " WHERE "  + EQUIPMENTS_TABLE + "." + ID_COLUMN + "  = " + id;
+            String selectQuery = "SELECT " + EQUIPMENTS_TABLE + ".*, " + CategoryService.CATEGORIES_TABLE + ".name as category_name from " + EQUIPMENTS_TABLE + " left join " + CategoryService.CATEGORIES_TABLE + " ON " + EQUIPMENTS_TABLE + "." + CATEGORY_ID_COLUMN + "  = " + CategoryService.CATEGORIES_TABLE + "." + CategoryService.ID_COLUMN + " WHERE " + EQUIPMENTS_TABLE + "." + ID_COLUMN + "  = " + id;
             ResultSet resultSet = statement.executeQuery(selectQuery);
 
             // Process the results
@@ -105,7 +130,7 @@ public class EquipmentService {
 
         return null;
     }
-    
+
     public static void addEquipment(String name, String description, Double daily_rental_fee, Double weekly_rental_fee, int category_id) {
         Connection conn = AccessDatabaseConnector.connect();
         try {

@@ -4,6 +4,7 @@
  */
 package com.mycompany.filmequipmentrentalservice;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +13,6 @@ import java.util.UUID;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -35,7 +35,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         refreshTransactionList();
 
         List<Category> categories = CategoryService.getAllCategories();
-        
+
         categoryFilterComboBox.addItem("All categories");
 
         for (int i = 0; i < categories.size(); i++) {
@@ -189,11 +189,11 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Description", "Daily Fee", "Weekly Fee", "Category"
+                "ID", "Name", "Description", "Daily Fee", "Weekly Fee", "Category", "Is Available"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -214,8 +214,6 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             equipmentsTable.getColumnModel().getColumn(2).setMinWidth(325);
             equipmentsTable.getColumnModel().getColumn(2).setPreferredWidth(325);
             equipmentsTable.getColumnModel().getColumn(2).setMaxWidth(325);
-            equipmentsTable.getColumnModel().getColumn(2).setHeaderValue("Description");
-            equipmentsTable.getColumnModel().getColumn(3).setHeaderValue("Daily Fee");
         }
 
         jButton1.setText("Refresh");
@@ -546,7 +544,24 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
     private void refreshEquipmentList() {
         DefaultTableModel equipmentsTableModel = (DefaultTableModel) equipmentsTable.getModel();
-        List<Equipment> equipments = EquipmentService.getAllEquipments();
+        Date startDate = null;
+        Date endDate = null;
+
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        
+        try {
+            startDate = dateFormatter.parse("2023-11-20");
+            endDate = dateFormatter.parse("2023-11-20");
+        } catch (Exception e) {
+        }
+
+        if (this.cart != null && this.cart.startDate != null && this.cart.endDate != null) {
+            startDate = this.cart.startDate;
+            endDate = this.cart.endDate;
+        }
+
+        List<Equipment> equipments = EquipmentService.getAllEquipments(startDate, endDate);
+
         equipmentsTableModel.setRowCount(0);
 
         Category category = null;
@@ -559,11 +574,11 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             Equipment equipment = equipments.get(i);
 
             if (category == null) {
-                Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
+                Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name, equipment.getIsAvailableText()};
                 equipmentsTableModel.addRow(rowData);
             } else {
                 if (category.id == equipment.category_id) {
-                    Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
+                    Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name, equipment.getIsAvailableText()};
                     equipmentsTableModel.addRow(rowData);
                 }
             }
@@ -638,8 +653,13 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private void equipmentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_equipmentsTableMouseClicked
         int i = equipmentsTable.getSelectedRow();
         int id = (int) equipmentsTable.getValueAt(i, 0);
+        String is_available = (String) equipmentsTable.getValueAt(i, 6);
 
         if (this.cart.getNumberOfDays() <= 0) {
+            return;
+        }
+        if ("Not Available".equals(is_available)) {
+            JOptionPane.showMessageDialog(myRentPanel, "This equipment is not available on your selected Date.");
             return;
         }
 
@@ -685,6 +705,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             warningLabel.setText("Please Select End Date. ");
         }
 
+        refreshEquipmentList();
         updateCartSummary();
     }//GEN-LAST:event_startDatePickerPropertyChange
 
@@ -696,6 +717,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             warningLabel.setText("");
         }
 
+        refreshEquipmentList();
         updateCartSummary();
     }//GEN-LAST:event_endDatePickerPropertyChange
 
@@ -719,7 +741,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         int i = customerTransactionLIstTable.getSelectedRow();
         UUID transactionId = (UUID) customerTransactionLIstTable.getValueAt(i, 0);
         String total = (String) customerTransactionLIstTable.getValueAt(i, 5);
-        String startDate = "Start Date: " + ( String) customerTransactionLIstTable.getValueAt(i, 1);
+        String startDate = "Start Date: " + (String) customerTransactionLIstTable.getValueAt(i, 1);
         String endDate = "   End Date: " + (String) customerTransactionLIstTable.getValueAt(i, 2);
         String status = "   Status: " + (String) customerTransactionLIstTable.getValueAt(i, 4);
 

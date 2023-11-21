@@ -5,6 +5,7 @@
 package com.mycompany.filmequipmentrentalservice;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.swing.JOptionPane;
@@ -30,6 +31,12 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
         for (int i = 0; i < categories.size(); i++) {
             equipmentCategoryCombobox.addItem(categories.get(i).name);
+        }
+
+        filterComboBox.addItem("All categories");
+
+        for (int i = 0; i < categories.size(); i++) {
+            filterComboBox.addItem(categories.get(i).name);
         }
     }
 
@@ -59,10 +66,10 @@ public class AdminDashBoard extends javax.swing.JPanel {
         equipmentWeeklyFeeInputField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         addEquipmentBtn = new javax.swing.JButton();
-        deleteCustomerButton1 = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
         updateEquipmentButton = new javax.swing.JButton();
         equipmentCategoryCombobox = new javax.swing.JComboBox<>();
+        filterComboBox = new javax.swing.JComboBox<>();
         CustomerTab = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         CustomerPane = new javax.swing.JScrollPane();
@@ -146,14 +153,14 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Equipment ID", "Equipment Name", "Description", "Daily Fee", "Weekly Fee", "CAtegory ID"
+                "Equipment ID", "Equipment Name", "Description", "Daily Fee", "Weekly Fee", "Category ", "Is Available Today"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -218,13 +225,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
             }
         });
 
-        deleteCustomerButton1.setText("Delete");
-        deleteCustomerButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteCustomerButton1ActionPerformed(evt);
-            }
-        });
-
         refreshButton.setText("Refresh");
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,6 +236,23 @@ public class AdminDashBoard extends javax.swing.JPanel {
         updateEquipmentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateEquipmentButtonActionPerformed(evt);
+            }
+        });
+
+        equipmentCategoryCombobox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                equipmentCategoryComboboxActionPerformed(evt);
+            }
+        });
+
+        filterComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                filterComboBoxItemStateChanged(evt);
+            }
+        });
+        filterComboBox.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                filterComboBoxPropertyChange(evt);
             }
         });
 
@@ -268,28 +285,32 @@ public class AdminDashBoard extends javax.swing.JPanel {
                                             .addComponent(EqupmentNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel4))
                                         .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(20, 20, 20))))
+                                .addGap(19, 19, 19))))
                     .addGroup(equipmentTabLayout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addComponent(addEquipmentBtn)
-                        .addGap(72, 72, 72)))
+                        .addGap(71, 71, 71)))
                 .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
                     .addGroup(equipmentTabLayout.createSequentialGroup()
-                        .addComponent(deleteCustomerButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(refreshButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(updateEquipmentButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+                            .addGroup(equipmentTabLayout.createSequentialGroup()
+                                .addComponent(refreshButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(updateEquipmentButton)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, equipmentTabLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(filterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28))))
         );
         equipmentTabLayout.setVerticalGroup(
             equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(equipmentTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(equipmentTabLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel2)
                         .addGap(12, 12, 12)
                         .addComponent(EqupmentNameLabel1)
@@ -306,24 +327,26 @@ public class AdminDashBoard extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(equipmentWeeklyFeeInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, equipmentTabLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(refreshButton)
-                            .addComponent(updateEquipmentButton)
-                            .addComponent(deleteCustomerButton1))
-                        .addGap(368, 368, 368))
-                    .addGroup(equipmentTabLayout.createSequentialGroup()
+                        .addComponent(equipmentWeeklyFeeInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(equipmentCategoryCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(equipmentCategoryCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(equipmentTabLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(filterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(equipmentTabLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(addEquipmentBtn)
-                        .addContainerGap())))
+                        .addComponent(addEquipmentBtn))
+                    .addGroup(equipmentTabLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(refreshButton)
+                            .addComponent(updateEquipmentButton))))
+                .addGap(311, 311, 311))
         );
 
         jTabbedPane1.addTab("Equipments", equipmentTab);
@@ -711,15 +734,39 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
     private void refreshEquipmentList() {
         DefaultTableModel equipmentsTableModel = (DefaultTableModel) equipmentsTable.getModel();
-        List<Equipment> equipments = EquipmentService.getAllEquipments();
+        Date startDate = null;
+        Date endDate = null;
+
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            startDate = dateFormatter.parse("2023-11-20");
+            endDate = dateFormatter.parse("2023-11-20");
+        } catch (Exception e) {
+        }
+
+        List<Equipment> equipments = EquipmentService.getAllEquipments(startDate, endDate);
         equipmentsTableModel.setRowCount(0);
 
-        System.out.println(equipments.size());
+        Category category = null;
+
+        if (filterComboBox.getSelectedIndex() >= 1) {
+            category = CategoryService.getCategoryByName(filterComboBox.getSelectedItem().toString());
+        }
 
         for (int i = 0; i < equipments.size(); i++) {
             Equipment equipment = equipments.get(i);
-            Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name};
-            equipmentsTableModel.addRow(rowData);
+            if (category == null) {
+                Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name, equipment.getIsAvailableText()};
+                equipmentsTableModel.addRow(rowData);
+
+            } else {
+                if (category.id == equipment.category_id) {
+                    Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name, equipment.getIsAvailableText()};
+                    equipmentsTableModel.addRow(rowData);
+                }
+            }
+
         }
     }
 
@@ -762,20 +809,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
             refreshEquipmentList();
         }
     }//GEN-LAST:event_addEquipmentBtnActionPerformed
-
-    private void deleteCustomerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCustomerButton1ActionPerformed
-        // TODO add your handling code here: 
-
-        int row = equipmentsTable.getSelectedRow();
-        int equipmentId = (int) equipmentsTable.getValueAt(row, 0);
-        System.out.println(equipmentId);
-
-        EquipmentService.deleteEquipment(equipmentId);
-        clearEquipmentForm();
-        refreshEquipmentList();
-
-
-    }//GEN-LAST:event_deleteCustomerButton1ActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         // TODO add your handling code here:
@@ -868,28 +901,46 @@ public class AdminDashBoard extends javax.swing.JPanel {
     private void transactionListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionListTableMouseClicked
         // TODO add your handling code here:
         int i = transactionListTable.getSelectedRow();
-        UUID specificTransactionId = (UUID) transactionListTable.getValueAt(i, 0); // Replace "..." with the actual UUID
-
-// Call the method to retrieve items for the specific transaction ID
-        List<TransactionItem> itemsForSpecificTransaction = TransactionItemService.getTransactionItemsByTransactionId(specificTransactionId);
-
-
-
         UUID transactionId = (UUID) transactionListTable.getValueAt(i, 0);
+        String total = (String) transactionListTable.getValueAt(i, 5);
+        String name = (String) transactionListTable.getValueAt(i, 3);
+        String startDate = "Start Date: " + (String) transactionListTable.getValueAt(i, 1);
+        String endDate = "   End Date: " + (String) transactionListTable.getValueAt(i, 2);
+        String status = "   Status: " + (String) transactionListTable.getValueAt(i, 4);
 
         List<TransactionItem> items = TransactionItemService.getTransactionItemsByTransactionId(transactionId);
-        System.out.println(transactionId);
-        System.out.println("DONE");
 
-        for (int j = 0; j < items.size(); j++) {
-            
-            System.out.println(items.get(j).equipment.name);
-            System.out.println(items.get(j).sub_total.toString());
-            System.out.println("hskjhdfs");
+        StringBuilder message = new StringBuilder();
+        message.append("Transaction ID: ").append(transactionId).append("\n");
+        message.append(startDate).append(endDate).append(status).append("\n\n");
+        message.append("Customer Name: ").append(name).append("\n");
+
+        for (TransactionItem item : items) {
+            message.append("Equipment Name: ").append(item.equipment.name).append("\n");
+            message.append("Subtotal: ₱ ").append(item.sub_total).append("\n\n");
+
         }
+        message.append("Total: ").append(total);
+
+        JOptionPane.showMessageDialog(null, message.toString(), "Transaction Items", JOptionPane.INFORMATION_MESSAGE);
 
 
     }//GEN-LAST:event_transactionListTableMouseClicked
+
+    private void equipmentCategoryComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipmentCategoryComboboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_equipmentCategoryComboboxActionPerformed
+
+    private void filterComboBoxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_filterComboBoxPropertyChange
+        // TODO add your handling code here:
+        refreshEquipmentList();
+        
+    }//GEN-LAST:event_filterComboBoxPropertyChange
+
+    private void filterComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filterComboBoxItemStateChanged
+        // TODO add your handling code here:
+        refreshEquipmentList();
+    }//GEN-LAST:event_filterComboBoxItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -914,7 +965,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
     private javax.swing.JTextField customerPhoneTextFeild;
     private javax.swing.JTextField customerUsernameTextFeild;
     private javax.swing.JTextField customercIDTextFeild;
-    private javax.swing.JButton deleteCustomerButton1;
     private javax.swing.JComboBox<String> equipmentCategoryCombobox;
     private javax.swing.JTextField equipmentDailyFeeInputField;
     private javax.swing.JTextField equipmentDescriptionInputField;
@@ -922,6 +972,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
     private javax.swing.JPanel equipmentTab;
     private javax.swing.JTextField equipmentWeeklyFeeInputField;
     private javax.swing.JTable equipmentsTable;
+    private javax.swing.JComboBox<String> filterComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
