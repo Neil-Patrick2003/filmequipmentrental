@@ -40,7 +40,8 @@ public class TransactionItemService {
                     + "equipments.description as equipment_description, "
                     + "equipments.category_id as equipment_category_id, "
                     + "equipments.daily_rental_fee as equipment_daily_rental_fee, "
-                    + "equipments.weekly_rental_fee as equipment_weekly_rental_fee "
+                    + "equipments.weekly_rental_fee as equipment_weekly_rental_fee, "
+                    + "equipments.status as equipment_status "
                     + "FROM "
                     + "transaction_items "
                     + "LEFT JOIN equipments ON transaction_items.equipment_id = equipments.id "
@@ -63,9 +64,10 @@ public class TransactionItemService {
                 Double equipmentDailyRental = resultSet.getDouble("equipment_daily_rental_fee");
                 Double equipmentWeeklyRental = resultSet.getDouble("equipment_daily_rental_fee");
                 int equipmentCategoryId = resultSet.getInt("equipment_category_id");
+                String status = resultSet.getString("equipment_status");
 
                 TransactionItem item = new TransactionItem(id, transactionId, equipmentId, subTotal);
-                Equipment equipment = new Equipment(equipmentId, equipmentName, equipmentDescription, equipmentDailyRental, equipmentWeeklyRental, equipmentCategoryId);
+                Equipment equipment = new Equipment(equipmentId, equipmentName, equipmentDescription, equipmentDailyRental, equipmentWeeklyRental, equipmentCategoryId, status);
                 item.setEquipment(equipment);
 
                 items.add(item);

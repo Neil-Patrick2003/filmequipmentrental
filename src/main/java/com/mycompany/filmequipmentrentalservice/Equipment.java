@@ -17,8 +17,9 @@ public class Equipment {
     int category_id;
     Category category;
     boolean is_available;
+    String status;
 
-    public Equipment(int id, String name, String description, Double daily_fee, Double weekly_fee, int category_id) {
+    public Equipment(int id, String name, String description, Double daily_fee, Double weekly_fee, int category_id, String status) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -26,6 +27,7 @@ public class Equipment {
         this.weekly_fee = weekly_fee;
         this.category_id = category_id;
         this.is_available = true;
+        this.status = status;
     }
 
     public void setCategory(Category category) {

@@ -23,6 +23,7 @@ public class EquipmentService {
     private static final String ID_COLUMN = "id";
     private static final String NAME_COLUMN = "name";
     private static final String DESCRIPTION_COLUMN = "description";
+    private static final String STATUS_COLUMN = "status";
     private static final String DAILY_RENTAL_FEE_COLUMN = "daily_rental_fee";
     private static final String WEEKLY_RENTAL_FEE_COLUMN = "weekly_rental_fee";
     private static final String CATEGORY_ID_COLUMN = "category_id";
@@ -33,8 +34,8 @@ public class EquipmentService {
         Connection conn = AccessDatabaseConnector.connect();
         try {
             Statement statement = conn.createStatement();
-            
-                    SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
             String selectQuery = "SELECT "
                     + "equipments.*, "
@@ -50,9 +51,7 @@ public class EquipmentService {
                     + ") "
                     + " ) as is_available "
                     + "FROM equipments LEFT JOIN categories ON equipments.category_id = categories.id ";
-                    
-            
-            
+
             System.out.println(selectQuery);
 
             // Execute a SELECT query
@@ -69,8 +68,9 @@ public class EquipmentService {
                 Double weekly_fee = resultSet.getDouble(WEEKLY_RENTAL_FEE_COLUMN);
                 int category_id = resultSet.getInt(CATEGORY_ID_COLUMN);
                 boolean is_available = resultSet.getBoolean("is_available");
+                String status = resultSet.getString(STATUS_COLUMN);
 
-                Equipment equipment = new Equipment(id, name, description, daily_fee, weekly_fee, category_id);
+                Equipment equipment = new Equipment(id, name, description, daily_fee, weekly_fee, category_id, status);
                 Category category = new Category(category_id, resultSet.getString("category_name"));
                 equipment.setCategory(category);
                 equipment.setIsAvailable(is_available);
@@ -110,8 +110,9 @@ public class EquipmentService {
                 Double daily_fee = resultSet.getDouble(DAILY_RENTAL_FEE_COLUMN);
                 Double weekly_fee = resultSet.getDouble(WEEKLY_RENTAL_FEE_COLUMN);
                 int category_id = resultSet.getInt(CATEGORY_ID_COLUMN);
+                String status = resultSet.getString(STATUS_COLUMN);
 
-                equipment = new Equipment(id, name, description, daily_fee, weekly_fee, category_id);
+                equipment = new Equipment(id, name, description, daily_fee, weekly_fee, category_id, status);
                 Category category = new Category(category_id, resultSet.getString("category_name"));
                 equipment.setCategory(category);
 
