@@ -947,15 +947,18 @@ public class AdminDashBoard extends javax.swing.JPanel {
         }
         message.append("Total: ").append(total);
 
-        Object[] options = {"Customer pick-up the equipments.", "Close"};
+        
 
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
+        Object[] options = {"Customer pick-up the equipments.", "Close"};
         if (((String) transactionListTable.getValueAt(i, 4)).equals("pending") && ((String) transactionListTable.getValueAt(i, 1)).equals(dateFormatter.format(new Date()))) {
             int choice = JOptionPane.showOptionDialog(null, message.toString(), "Transaction Details", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
             
             if (choice == 0) {
-                TransactionService.updateTransactionStatus("Ongoing", transactionId);
+                TransactionService.updateTransactionStatus("ongoing", transactionId);
+                refreshTransactionList();
+                
             }
         } else {
             JOptionPane.showMessageDialog(null, message.toString(), "Transaction Details", JOptionPane.INFORMATION_MESSAGE);

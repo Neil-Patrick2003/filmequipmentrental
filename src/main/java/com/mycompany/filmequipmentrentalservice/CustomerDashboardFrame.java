@@ -547,7 +547,6 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         Date startDate = new Date();
         Date endDate = new Date();
 
-
         if (this.cart != null && this.cart.startDate != null && this.cart.endDate != null) {
             startDate = this.cart.startDate;
             endDate = this.cart.endDate;
@@ -603,12 +602,11 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        
 
         int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Select Option", JOptionPane.YES_NO_OPTION);
         if (response == JOptionPane.YES_OPTION) {
             this.setAuthCustomer(null);
-        this.dispose();
+            this.dispose();
             JFrame frame = new JFrame("Film Equipment Rental Service");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.add(new CustomerLogin()); // Add the Login panel to the frame
@@ -757,12 +755,21 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         }
         message.append("Total: ").append(total);
-        
-        
-        
 
-        JOptionPane.showMessageDialog(null, message.toString(), "Transaction Items", JOptionPane.INFORMATION_MESSAGE);
+        Object[] options = {"Return equipments.", "Close"};
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
+        if (((String) customerTransactionLIstTable.getValueAt(i, 4)).equals("ongoing") && ((String) customerTransactionLIstTable.getValueAt(i, 1)).equals(dateFormatter.format(new Date()))) {
+            int choice = JOptionPane.showOptionDialog(null, message.toString(), "Transaction Details", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+            if (choice == 0) {
+                TransactionService.updateTransactionStatus("Completed", transactionId);
+                refreshTransactionList();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, message.toString(), "Transaction Details", JOptionPane.INFORMATION_MESSAGE);
+
+        }
 
     }//GEN-LAST:event_customerTransactionLIstTableMouseClicked
 
