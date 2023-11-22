@@ -132,4 +132,18 @@ public class CustomerService {
             AccessDatabaseConnector.closeConnection(conn);
         }
     }
+
+    public static void updateCustomer(int id, String name, String email, String phone_number, String username, String address) {
+        Connection conn = AccessDatabaseConnector.connect();
+        try (Statement statement = conn.createStatement()) {
+            String updateQuery = "Update " + CUSTOMERS_TABLE + " SET " + NAME_COLUMN + " = '" + name + "', " + EMAIL_COLUMN + " = '" + email + "', " + PHONE_NUMBER_COLUMN + " = '" + phone_number + "', " + USERNAME_COLUMN + " = '" + username + "', " + ADDRESS_COLUMN + " = '" + address  +  "' WHERE " + ID_COLUMN + " = " + id + ";";
+            System.out.println(updateQuery);
+            statement.executeUpdate(updateQuery);
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle SQL exceptions
+        } finally {
+            AccessDatabaseConnector.closeConnection(conn);
+        }
+    }
 }

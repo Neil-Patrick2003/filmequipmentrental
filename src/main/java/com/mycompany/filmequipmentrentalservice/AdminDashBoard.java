@@ -27,8 +27,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdminDashBoard extends javax.swing.JPanel {
 
-    
-
     /**
      * Creates new form NewJPanel
      */
@@ -38,6 +36,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
         refreshCategoryList();
         refreshCustomerList();
         refreshTransactionList();
+        clearCustomerForm();
 
         List<Category> categories = CategoryService.getAllCategories();
 
@@ -89,12 +88,10 @@ public class AdminDashBoard extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         CustomerPane = new javax.swing.JScrollPane();
         CustomerTable = new javax.swing.JTable();
-        ucstomerNameLabel = new javax.swing.JLabel();
         ucstomerNameLabel1 = new javax.swing.JLabel();
         customerEmailLabel2 = new javax.swing.JLabel();
         ucstomerNameLabel3 = new javax.swing.JLabel();
         ucstomerNameLabel4 = new javax.swing.JLabel();
-        customercIDTextFeild = new javax.swing.JTextField();
         customerEmailTextFeild = new javax.swing.JTextField();
         customerUsernameTextFeild = new javax.swing.JTextField();
         customerPhoneTextFeild = new javax.swing.JTextField();
@@ -102,7 +99,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
         ucstomerNameLabel2 = new javax.swing.JLabel();
         customerNameTextFeild1 = new javax.swing.JTextField();
         UpdateCustomerButton = new javax.swing.JButton();
-        UpdateCustomerButton1 = new javax.swing.JButton();
+        refreshCustomerButton1 = new javax.swing.JButton();
         CategoryTab = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -415,10 +412,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
         });
         CustomerPane.setViewportView(CustomerTable);
 
-        ucstomerNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        ucstomerNameLabel.setForeground(new java.awt.Color(0, 102, 102));
-        ucstomerNameLabel.setText("ID");
-
         ucstomerNameLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ucstomerNameLabel1.setForeground(new java.awt.Color(0, 102, 102));
         ucstomerNameLabel1.setText("Address");
@@ -429,15 +422,11 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
         ucstomerNameLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ucstomerNameLabel3.setForeground(new java.awt.Color(0, 102, 102));
-        ucstomerNameLabel3.setText("Phone NUmber");
+        ucstomerNameLabel3.setText("Phone Number");
 
         ucstomerNameLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ucstomerNameLabel4.setForeground(new java.awt.Color(0, 102, 102));
         ucstomerNameLabel4.setText("Username");
-
-        customercIDTextFeild.setBackground(new java.awt.Color(255, 255, 255));
-        customercIDTextFeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        customercIDTextFeild.setForeground(new java.awt.Color(0, 102, 102));
 
         customerEmailTextFeild.setBackground(new java.awt.Color(255, 255, 255));
         customerEmailTextFeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -466,13 +455,18 @@ public class AdminDashBoard extends javax.swing.JPanel {
         UpdateCustomerButton.setBackground(new java.awt.Color(0, 102, 102));
         UpdateCustomerButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         UpdateCustomerButton.setText("Update");
-
-        UpdateCustomerButton1.setBackground(new java.awt.Color(0, 102, 102));
-        UpdateCustomerButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        UpdateCustomerButton1.setText("Refresh");
-        UpdateCustomerButton1.addActionListener(new java.awt.event.ActionListener() {
+        UpdateCustomerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateCustomerButton1ActionPerformed(evt);
+                UpdateCustomerButtonActionPerformed(evt);
+            }
+        });
+
+        refreshCustomerButton1.setBackground(new java.awt.Color(0, 102, 102));
+        refreshCustomerButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        refreshCustomerButton1.setText("Refresh");
+        refreshCustomerButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshCustomerButton1ActionPerformed(evt);
             }
         });
 
@@ -484,10 +478,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CustomerTabLayout.createSequentialGroup()
-                        .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(customerUsernameTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                            .addComponent(customerPhoneTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                            .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                        .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                         .addGap(12, 12, 12))
                     .addGroup(CustomerTabLayout.createSequentialGroup()
                         .addComponent(customerNameTextFeild1)
@@ -500,40 +491,40 @@ public class AdminDashBoard extends javax.swing.JPanel {
                             .addComponent(ucstomerNameLabel1)
                             .addComponent(customerEmailLabel2))
                         .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(CustomerTabLayout.createSequentialGroup()
+                        .addComponent(ucstomerNameLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerTabLayout.createSequentialGroup()
                         .addComponent(customerEmailTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerTabLayout.createSequentialGroup()
+                        .addComponent(customerPhoneTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(CustomerTabLayout.createSequentialGroup()
-                        .addComponent(customercIDTextFeild)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(CustomerTabLayout.createSequentialGroup()
-                        .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ucstomerNameLabel2)
-                            .addComponent(ucstomerNameLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(customerUsernameTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CustomerPane, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(CustomerTabLayout.createSequentialGroup()
                         .addComponent(UpdateCustomerButton)
                         .addGap(18, 18, 18)
-                        .addComponent(UpdateCustomerButton1)))
+                        .addComponent(refreshCustomerButton1)))
                 .addContainerGap())
         );
         CustomerTabLayout.setVerticalGroup(
             CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CustomerTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CustomerTabLayout.createSequentialGroup()
                         .addComponent(CustomerPane, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
+                        .addGap(18, 18, 18)
+                        .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(UpdateCustomerButton)
+                            .addComponent(refreshCustomerButton1)))
                     .addGroup(CustomerTabLayout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ucstomerNameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(customercIDTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(ucstomerNameLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(customerNameTextFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -545,18 +536,15 @@ public class AdminDashBoard extends javax.swing.JPanel {
                         .addComponent(ucstomerNameLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(customerPhoneTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ucstomerNameLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(customerUsernameTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ucstomerNameLabel1)
-                        .addGap(7, 7, 7)))
-                .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UpdateCustomerButton)
-                    .addComponent(UpdateCustomerButton1))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addGap(7, 7, 7)
+                        .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Customers", CustomerTab);
@@ -811,13 +799,21 @@ public class AdminDashBoard extends javax.swing.JPanel {
         equipmentDailyFeeInputField.setText("");
         equipmentWeeklyFeeInputField.setText("");
         equipmentCategoryCombobox.setSelectedIndex(-1);
-        
+
         equipmentFormTitle.setText("Add Equipment");
-        
+
     }
 
     private void clearCategoryForm() {
         categoryNameTextField1.setText("");
+    }
+
+    private void clearCustomerForm() {
+        customerNameTextFeild1.setText("");
+        customerEmailTextFeild.setText("");
+        customerPhoneTextFeild.setText("");
+        customerUsernameTextFeild.setText("");
+        customerAddressTextFeild.setText("");
     }
 
 
@@ -827,11 +823,9 @@ public class AdminDashBoard extends javax.swing.JPanel {
         String description = equipmentDescriptionInputField.getText();
 
         String dailyFeeText = equipmentDailyFeeInputField.getText();
-        
 
         String weeklFeeText = equipmentWeeklyFeeInputField.getText();
-        
-        
+
         System.out.println("Good");
 
         Category category = null;
@@ -839,14 +833,11 @@ public class AdminDashBoard extends javax.swing.JPanel {
         if (equipmentCategoryCombobox.getSelectedIndex() >= 0) {
             category = CategoryService.getCategoryByName(equipmentCategoryCombobox.getSelectedItem().toString());
         }
-        
-        
 
         if (name.isEmpty() || description.isEmpty() || dailyFeeText.isEmpty()
                 || weeklFeeText.isEmpty() || category == null) {
             JOptionPane.showMessageDialog(null, "Please complete the form.");
-       } else 
-        {
+        } else {
             double dailyFee = Double.parseDouble(dailyFeeText);
             double weeklyFee = Double.parseDouble(weeklFeeText);
             EquipmentService.addEquipment(name, description, dailyFee, weeklyFee, category.id);
@@ -868,7 +859,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
         int row = equipmentsTable.getSelectedRow();
         int equipmentId = (int) equipmentsTable.getValueAt(row, 0);
 
-        String name = (String)equipmentNameInputField.getText();
+        String name = (String) equipmentNameInputField.getText();
         String description = (String) equipmentDescriptionInputField.getText();
 
         String updatedDailyFeeText = equipmentDailyFeeInputField.getText();
@@ -878,9 +869,8 @@ public class AdminDashBoard extends javax.swing.JPanel {
         double updatedWeeklyFee = Double.parseDouble(updatedWeeklyFeeText);
         Category category = CategoryService.getCategoryByName(equipmentCategoryCombobox.getSelectedItem().toString());
         String status = statusComboBox.getSelectedItem().toString();
-   
-        System.out.println(category.name);
-        EquipmentService.updateEquipment(equipmentId, name, description, updatedDailyFee, updatedWeeklyFee, category.id, status );
+
+        EquipmentService.updateEquipment(equipmentId, name, description, updatedDailyFee, updatedWeeklyFee, category.id, status);
         clearEquipmentForm();
         refreshEquipmentList();
     }//GEN-LAST:event_updateEquipmentButtonActionPerformed
@@ -926,22 +916,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
         refreshCategoryList();
         clearEquipmentForm();
     }//GEN-LAST:event_refreshCategoryButton1MouseClicked
-
-    private void CustomerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerTableMouseClicked
-        // TODO add your handling code here:
-        int i = CustomerTable.getSelectedRow();
-
-        customercIDTextFeild.setText(CustomerTable.getValueAt(i, 0).toString());
-        customerNameTextFeild1.setText(CustomerTable.getValueAt(i, 1).toString());
-        customerEmailTextFeild.setText(CustomerTable.getValueAt(i, 2).toString());
-        customerPhoneTextFeild.setText(CustomerTable.getValueAt(i, 3).toString());
-        customerUsernameTextFeild.setText(CustomerTable.getValueAt(i, 4).toString());
-    }//GEN-LAST:event_CustomerTableMouseClicked
-
-    private void UpdateCustomerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerButton1ActionPerformed
-        // TODO add your handling code here:
-        refreshCustomerList();
-    }//GEN-LAST:event_UpdateCustomerButton1ActionPerformed
 
     private void transactionTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionTabMouseClicked
         // TODO add your handling code here:
@@ -1007,6 +981,40 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
     }//GEN-LAST:event_log_outButtonActionPerformed
 
+    private void refreshCustomerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshCustomerButton1ActionPerformed
+        // TODO add your handling code here:
+        refreshCustomerList();
+    }//GEN-LAST:event_refreshCustomerButton1ActionPerformed
+
+    private void UpdateCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerButtonActionPerformed
+        // TODO add your handling code here:
+        int row = CustomerTable.getSelectedRow();
+        int id = (int) CustomerTable.getValueAt(row, 0);
+
+        String name = (String) customerNameTextFeild1.getText();
+        String email = (String) customerEmailTextFeild.getText();
+        String phone_number = (String) customerPhoneTextFeild.getText();
+        String username = (String) customerUsernameTextFeild.getText();
+        String address = (String) customerAddressTextFeild.getText();
+
+        CustomerService.updateCustomer(id, name, email, phone_number, username, address);
+        refreshCustomerList();
+        clearCustomerForm();
+
+
+    }//GEN-LAST:event_UpdateCustomerButtonActionPerformed
+
+    private void CustomerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerTableMouseClicked
+        // TODO add your handling code here:
+        int i = CustomerTable.getSelectedRow();
+
+        customerNameTextFeild1.setText(CustomerTable.getValueAt(i, 1).toString());
+        customerEmailTextFeild.setText(CustomerTable.getValueAt(i, 2).toString());
+        customerPhoneTextFeild.setText(CustomerTable.getValueAt(i, 3).toString());
+        customerUsernameTextFeild.setText(CustomerTable.getValueAt(i, 4).toString());
+        customerAddressTextFeild.setText(CustomerTable.getValueAt(i, 5).toString());
+    }//GEN-LAST:event_CustomerTableMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCategoryButton;
@@ -1018,7 +1026,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel EqupmentNameLabel2;
     private javax.swing.JLabel EqupmentNameLabel3;
     private javax.swing.JButton UpdateCustomerButton;
-    private javax.swing.JButton UpdateCustomerButton1;
     private javax.swing.JButton addEquipmentBtn;
     private javax.swing.JScrollPane categoriesPane;
     private javax.swing.JTextField categoryNameTextField1;
@@ -1029,7 +1036,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
     private javax.swing.JTextField customerNameTextFeild1;
     private javax.swing.JTextField customerPhoneTextFeild;
     private javax.swing.JTextField customerUsernameTextFeild;
-    private javax.swing.JTextField customercIDTextFeild;
     private javax.swing.JComboBox<String> equipmentCategoryCombobox;
     private javax.swing.JTextField equipmentDailyFeeInputField;
     private javax.swing.JTextField equipmentDescriptionInputField;
@@ -1054,10 +1060,10 @@ public class AdminDashBoard extends javax.swing.JPanel {
     private javax.swing.JButton log_outButton;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton refreshCategoryButton1;
+    private javax.swing.JButton refreshCustomerButton1;
     private javax.swing.JComboBox<String> statusComboBox;
     private javax.swing.JTable transactionListTable;
     private javax.swing.JPanel transactionTab;
-    private javax.swing.JLabel ucstomerNameLabel;
     private javax.swing.JLabel ucstomerNameLabel1;
     private javax.swing.JLabel ucstomerNameLabel2;
     private javax.swing.JLabel ucstomerNameLabel3;
