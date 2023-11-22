@@ -947,7 +947,20 @@ public class AdminDashBoard extends javax.swing.JPanel {
         }
         message.append("Total: ").append(total);
 
-        JOptionPane.showMessageDialog(null, message.toString(), "Transaction Items", JOptionPane.INFORMATION_MESSAGE);
+        Object[] options = {"Customer pick-up the equipments.", "Close"};
+
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        if (((String) transactionListTable.getValueAt(i, 4)).equals("pending") && ((String) transactionListTable.getValueAt(i, 1)).equals(dateFormatter.format(new Date()))) {
+            int choice = JOptionPane.showOptionDialog(null, message.toString(), "Transaction Details", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            
+            if (choice == 0) {
+                TransactionService.updateTransactionStatus("Ongoing", transactionId);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, message.toString(), "Transaction Details", JOptionPane.INFORMATION_MESSAGE);
+
+        }
 
 
     }//GEN-LAST:event_transactionListTableMouseClicked
@@ -1000,8 +1013,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
         CustomerService.updateCustomer(id, name, email, phone_number, username, address);
         refreshCustomerList();
         clearCustomerForm();
-
-
     }//GEN-LAST:event_UpdateCustomerButtonActionPerformed
 
     private void CustomerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerTableMouseClicked

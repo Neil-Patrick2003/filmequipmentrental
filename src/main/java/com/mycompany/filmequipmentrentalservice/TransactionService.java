@@ -27,6 +27,10 @@ public class TransactionService {
     private static final String CUSTOMER_ID_COLUMN = "customer_id";
     private static final String STATUS_COLUMN = "status";
     private static final String TOTAL_COLUMN = "total";
+    
+    // pending
+    // ongoing
+    // completed
 
     public static List getAllTransactions() {
         List<Transaction> transactions = new ArrayList<>();
@@ -79,7 +83,7 @@ public class TransactionService {
 
         return null;
     }
-    
+
     public static List getTransactionsByCustomerId(int customerId) {
         List<Transaction> transactions = new ArrayList<>();
 
@@ -97,7 +101,6 @@ public class TransactionService {
                     + "FROM transactions "
                     + "LEFT JOIN customers ON transactions.customer_id = customers.id "
                     + "WHERE transactions.customer_id = '" + customerId + "'";
-            
 
             ResultSet resultSet = statement.executeQuery(selectQuery);
 
@@ -132,8 +135,6 @@ public class TransactionService {
 
         return null;
     }
-    
-    
 
     public static void saveTransaction(Transaction transaction) {
         Connection conn = AccessDatabaseConnector.connect();
@@ -157,6 +158,20 @@ public class TransactionService {
             System.err.println("");
         } catch (SQLException e) {
             System.out.print(e);
+        } finally {
+            AccessDatabaseConnector.closeConnection(conn);
+        }
+    }
+
+    public static void updateTransactionStatus(String status, UUID id) {
+        Connection conn = AccessDatabaseConnector.connect();
+        try (Statement statement = conn.createStatement()) {
+            String updateQuery = "Update " + TRANSACTIONS_TABLE + " SET " + STATUS_COLUMN + " = '" + status + "' WHERE " + ID_COLUMN + " = '" + id.toString() + "';";
+            System.out.println(updateQuery);
+            statement.executeUpdate(updateQuery);
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle SQL exceptions
         } finally {
             AccessDatabaseConnector.closeConnection(conn);
         }

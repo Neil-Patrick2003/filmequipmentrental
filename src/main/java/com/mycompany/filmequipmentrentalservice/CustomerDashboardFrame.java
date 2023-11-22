@@ -544,16 +544,9 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
     private void refreshEquipmentList() {
         DefaultTableModel equipmentsTableModel = (DefaultTableModel) equipmentsTable.getModel();
-        Date startDate = null;
-        Date endDate = null;
+        Date startDate = new Date();
+        Date endDate = new Date();
 
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-
-        try {
-            startDate = dateFormatter.parse("2023-11-20");
-            endDate = dateFormatter.parse("2023-11-20");
-        } catch (Exception e) {
-        }
 
         if (this.cart != null && this.cart.startDate != null && this.cart.endDate != null) {
             startDate = this.cart.startDate;
@@ -764,6 +757,9 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         }
         message.append("Total: ").append(total);
+        
+        
+        
 
         JOptionPane.showMessageDialog(null, message.toString(), "Transaction Items", JOptionPane.INFORMATION_MESSAGE);
 
