@@ -548,7 +548,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         Date endDate = null;
 
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-        
+
         try {
             startDate = dateFormatter.parse("2023-11-20");
             endDate = dateFormatter.parse("2023-11-20");
@@ -572,16 +572,19 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         for (int i = 0; i < equipments.size(); i++) {
             Equipment equipment = equipments.get(i);
-
-            if (category == null) {
-                Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name, equipment.getIsAvailableText()};
-                equipmentsTableModel.addRow(rowData);
-            } else {
-                if (category.id == equipment.category_id) {
+            if ("Active".equals(equipment.status)) {
+                if (category == null) {
                     Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name, equipment.getIsAvailableText()};
                     equipmentsTableModel.addRow(rowData);
+                } else {
+                    if (category.id == equipment.category_id) {
+                        Object[] rowData = {equipment.id, equipment.name, equipment.description, equipment.daily_fee, equipment.weekly_fee, equipment.category.name, equipment.getIsAvailableText()};
+                        equipmentsTableModel.addRow(rowData);
+                    }
                 }
+
             }
+
         }
 
         equipmentsTable.setRowSorter(null); // reset the table sort
@@ -607,15 +610,19 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        this.setAuthCustomer(null);
-        this.dispose();
+        
 
-        JFrame frame = new JFrame("Film Equipment Rental Service");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new CustomerLogin()); // Add the Login panel to the frame
-        frame.pack(); // Resize the frame to fit the component
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
+        int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Select Option", JOptionPane.YES_NO_OPTION);
+        if (response == JOptionPane.YES_OPTION) {
+            this.setAuthCustomer(null);
+        this.dispose();
+            JFrame frame = new JFrame("Film Equipment Rental Service");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add(new CustomerLogin()); // Add the Login panel to the frame
+            frame.pack(); // Resize the frame to fit the component
+            frame.setVisible(true);
+            frame.setLocationRelativeTo(null);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void HomeBUttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HomeBUttonActionPerformed

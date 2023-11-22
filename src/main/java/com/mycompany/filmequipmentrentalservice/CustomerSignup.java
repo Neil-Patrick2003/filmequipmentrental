@@ -4,7 +4,6 @@
  */
 package com.mycompany.filmequipmentrentalservice;
 
-
 import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -48,6 +47,7 @@ public class CustomerSignup extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(800, 500));
@@ -137,12 +137,25 @@ public class CustomerSignup extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 102, 102));
+        jButton2.setText("Back");
+        jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(323, 323, 323)
+                .addGap(20, 20, 20)
+                .addComponent(jButton2)
+                .addGap(230, 230, 230)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -177,8 +190,13 @@ public class CustomerSignup extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2)))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -213,8 +231,7 @@ public class CustomerSignup extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
@@ -231,21 +248,19 @@ public class CustomerSignup extends javax.swing.JPanel {
         if (nameText.getText().equals("") || emailText.getText().equals("") || contactText.getText().equals("") || usernameText.getText().equals("") || addressText.getText().equals("") || jPasswordField1.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Please Complete the form.");
 
-        }else{
+        } else {
             JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
             this.setVisible(false);
             mainFrame.remove(this);
             mainFrame.dispose();
-            
+
             CustomerDashboardFrame CustomerDash = new CustomerDashboardFrame();
-            
+
             CustomerDash.setVisible(true);
             CustomerDash.setLocationRelativeTo(null);
-            
             ;
         }
 
-        
 //        JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 ////        this.setVisible(false);
 //        mainFrame.remove(this);
@@ -263,12 +278,23 @@ public class CustomerSignup extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        JFrame frame = new JFrame("Film Equipment Rental Service");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(new CustomerLogin()); // Add the Login panel to the frame
+        frame.pack(); // Resize the frame to fit the component
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField addressText;
     private javax.swing.JTextField contactText;
     private javax.swing.JTextField emailText;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

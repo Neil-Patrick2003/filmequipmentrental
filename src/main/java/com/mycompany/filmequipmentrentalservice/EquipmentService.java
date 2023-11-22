@@ -171,11 +171,13 @@ public class EquipmentService {
         }
     }
 
-    public static void updateEquipment(int equipmentId, String name, String description, Double daily_rental_fee, Double weekly_rental_fee, int category_id) {
+    public static void updateEquipment(int equipmentId, String name, String description, Double daily_rental_fee, Double weekly_rental_fee, int category_id, String status) {
         Connection conn = AccessDatabaseConnector.connect();
         try (Statement statement = conn.createStatement()) {
-            String updateQuery = "Update " + EQUIPMENTS_TABLE + " SET " + NAME_COLUMN + " = '" + name + "', " + DESCRIPTION_COLUMN + " = '" + description + "', " + DAILY_RENTAL_FEE_COLUMN + " = '" + daily_rental_fee + "', " + WEEKLY_RENTAL_FEE_COLUMN + " = '" + weekly_rental_fee + "', " + CATEGORY_ID_COLUMN + " = '" + category_id + "' WHERE '" + ID_COLUMN + "' = " + "'" + equipmentId + "';";
+            String updateQuery = "Update " + EQUIPMENTS_TABLE + " SET " + NAME_COLUMN + " = '" + name + "', " + DESCRIPTION_COLUMN + " = '" + description + "', " + DAILY_RENTAL_FEE_COLUMN + " = '" + daily_rental_fee + "', " + WEEKLY_RENTAL_FEE_COLUMN + " = '" + weekly_rental_fee + "', " + CATEGORY_ID_COLUMN + " = '" + category_id + "', " + STATUS_COLUMN + " = '" + status + "' WHERE " + ID_COLUMN + " = " + equipmentId + ";";
+            System.out.println(updateQuery);
             statement.executeUpdate(updateQuery);
+            
         } catch (SQLException e) {
             e.printStackTrace(); // Handle SQL exceptions
         } finally {

@@ -33,5 +33,12 @@
         <maven.compiler.target>20</maven.compiler.target>
         <exec.mainClass>com.mycompany.filmequipmentrentalservice.FilmEquipmentRentalService</exec.mainClass>
     </properties>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+            </resource>
+        </resources>
+    </build>
 </project>
 
