@@ -67,10 +67,13 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         tab1 = new javax.swing.JPanel();
         Home = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         tab2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         tab3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -112,6 +115,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         Right.setBackground(new java.awt.Color(0, 102, 102));
         Right.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
+        Right.setForeground(new java.awt.Color(255, 255, 255));
         Right.setPreferredSize(new java.awt.Dimension(250, 680));
 
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
@@ -134,12 +138,16 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         Home.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         Home.setText("Home");
 
+        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Neil Patrick\\Downloads\\home (2).png")); // NOI18N
+
         javax.swing.GroupLayout tab1Layout = new javax.swing.GroupLayout(tab1);
         tab1.setLayout(tab1Layout);
         tab1Layout.setHorizontalGroup(
             tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tab1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(22, 22, 22)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Home, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -147,7 +155,9 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tab1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Home)
+                .addGroup(tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Home))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -161,21 +171,27 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel7.setText("My cart");
 
+        jLabel12.setIcon(new javax.swing.ImageIcon("C:\\Users\\Neil Patrick\\Downloads\\shopping-cart (1).png")); // NOI18N
+
         javax.swing.GroupLayout tab2Layout = new javax.swing.GroupLayout(tab2);
         tab2.setLayout(tab2Layout);
         tab2Layout.setHorizontalGroup(
             tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tab2Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tab2Layout.setVerticalGroup(
             tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tab2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(tab2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         tab3.setBackground(new java.awt.Color(0, 128, 128));
@@ -188,19 +204,26 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel10.setText("My Transaction");
 
+        jLabel13.setIcon(new javax.swing.ImageIcon("C:\\Users\\Neil Patrick\\Downloads\\transaction (1).png")); // NOI18N
+
         javax.swing.GroupLayout tab3Layout = new javax.swing.GroupLayout(tab3);
         tab3.setLayout(tab3Layout);
         tab3Layout.setHorizontalGroup(
             tab3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
         tab3Layout.setVerticalGroup(
             tab3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tab3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
+                .addGroup(tab3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -228,7 +251,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                             .addGroup(RightLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel3)))
-                        .addGap(0, 13, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         RightLayout.setVerticalGroup(
@@ -255,8 +278,12 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         HomeTab.setBackground(new java.awt.Color(255, 255, 255));
 
+        allEquipmentScroolPane.setBackground(new java.awt.Color(255, 255, 255));
+        allEquipmentScroolPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         allEquipmentScroolPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        equipmentsTable.setBackground(new java.awt.Color(255, 255, 255));
+        equipmentsTable.setForeground(new java.awt.Color(0, 102, 102));
         equipmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -273,7 +300,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        equipmentsTable.setGridColor(new java.awt.Color(0, 102, 102));
+        equipmentsTable.setGridColor(new java.awt.Color(255, 255, 255));
         equipmentsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 equipmentsTableMouseClicked(evt);
@@ -983,6 +1010,9 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
