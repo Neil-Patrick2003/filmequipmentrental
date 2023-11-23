@@ -58,22 +58,20 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="128" max="32767" attributes="0"/>
-                  <Component id="log_outButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="141" max="32767" attributes="0"/>
+                  <Component id="log_outButton" min="-2" pref="64" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="log_outButton" alignment="3" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="log_outButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -102,6 +100,13 @@
               <Color blue="4b" green="4b" red="0" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Log out"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder>
+                  <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
+                </LineBorder>
+              </Border>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="log_outButtonActionPerformed"/>
@@ -629,16 +634,6 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="customerNameTextFeild1" max="32767" attributes="0"/>
-                                  <Component id="customerUsernameTextFeild" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="customerAddressTextFeild" alignment="1" pref="221" max="32767" attributes="0"/>
-                                  <Component id="customerEmailTextFeild" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="customerPhoneTextFeild" alignment="1" pref="221" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                   <Component id="ucstomerNameLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="ucstomerNameLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -649,10 +644,15 @@
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="UpdateCustomerButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="refreshCustomerButton1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="refreshCustomerButton1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="customerNameTextFeild1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="customerUsernameTextFeild" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="customerAddressTextFeild" alignment="1" pref="221" max="32767" attributes="0"/>
+                                  <Component id="customerEmailTextFeild" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="customerPhoneTextFeild" alignment="1" pref="221" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="CustomerPane" min="-2" pref="511" max="-2" attributes="0"/>
@@ -689,10 +689,7 @@
                               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                               <Component id="customerAddressTextFeild" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="50" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="UpdateCustomerButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="refreshCustomerButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="refreshCustomerButton1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -900,20 +897,6 @@
                   <Color blue="66" green="66" red="0" type="rgb"/>
                 </Property>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="UpdateCustomerButton">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="66" green="66" red="0" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="16" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Update"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateCustomerButtonActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="refreshCustomerButton1">
               <Properties>

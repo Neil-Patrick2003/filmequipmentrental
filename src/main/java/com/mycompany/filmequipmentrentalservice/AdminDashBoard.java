@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -99,7 +100,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
         customerAddressTextFeild = new javax.swing.JTextField();
         ucstomerNameLabel2 = new javax.swing.JLabel();
         customerNameTextFeild1 = new javax.swing.JTextField();
-        UpdateCustomerButton = new javax.swing.JButton();
         refreshCustomerButton1 = new javax.swing.JButton();
         transactionTab = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -128,6 +128,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
         log_outButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         log_outButton.setForeground(new java.awt.Color(0, 75, 75));
         log_outButton.setText("Log out");
+        log_outButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         log_outButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 log_outButtonActionPerformed(evt);
@@ -141,19 +142,17 @@ public class AdminDashBoard extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-                .addComponent(log_outButton)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addComponent(log_outButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(log_outButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(log_outButton)
-                .addContainerGap())
         );
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
@@ -464,15 +463,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
         customerNameTextFeild1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         customerNameTextFeild1.setForeground(new java.awt.Color(0, 102, 102));
 
-        UpdateCustomerButton.setBackground(new java.awt.Color(0, 102, 102));
-        UpdateCustomerButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        UpdateCustomerButton.setText("Update");
-        UpdateCustomerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateCustomerButtonActionPerformed(evt);
-            }
-        });
-
         refreshCustomerButton1.setBackground(new java.awt.Color(0, 102, 102));
         refreshCustomerButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         refreshCustomerButton1.setText("Refresh");
@@ -491,14 +481,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
                 .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CustomerTabLayout.createSequentialGroup()
                         .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(customerNameTextFeild1)
-                            .addComponent(customerUsernameTextFeild)
-                            .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                            .addComponent(customerEmailTextFeild)
-                            .addComponent(customerPhoneTextFeild, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
-                        .addGap(12, 12, 12))
-                    .addGroup(CustomerTabLayout.createSequentialGroup()
-                        .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(ucstomerNameLabel3)
                             .addComponent(ucstomerNameLabel4)
@@ -507,10 +489,14 @@ public class AdminDashBoard extends javax.swing.JPanel {
                             .addComponent(ucstomerNameLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomerTabLayout.createSequentialGroup()
-                        .addComponent(UpdateCustomerButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(refreshCustomerButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(refreshCustomerButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(customerNameTextFeild1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(customerUsernameTextFeild, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                            .addComponent(customerEmailTextFeild, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(customerPhoneTextFeild, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)))
                 .addComponent(CustomerPane, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -543,9 +529,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
                         .addGap(7, 7, 7)
                         .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                        .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(UpdateCustomerButton)
-                            .addComponent(refreshCustomerButton1))))
+                        .addComponent(refreshCustomerButton1)))
                 .addContainerGap())
         );
 
@@ -1003,33 +987,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
         refreshCustomerList();
     }//GEN-LAST:event_refreshCustomerButton1ActionPerformed
 
-    private void UpdateCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerButtonActionPerformed
-        // TODO add your handling code here:
-        int row = CustomerTable.getSelectedRow();
-        if (row < 0) {
-            JOptionPane.showMessageDialog(CustomerPane, "Please Select row to update.");
-            return;
-        }
-        int id = (int) CustomerTable.getValueAt(row, 0);
-
-        String name = (String) customerNameTextFeild1.getText();
-        String email = (String) customerEmailTextFeild.getText();
-        String phone_number = (String) customerPhoneTextFeild.getText();
-        String username = (String) customerUsernameTextFeild.getText();
-        String address = (String) customerAddressTextFeild.getText();
-
-        if (name.isEmpty() || email.isEmpty() || phone_number.isEmpty()
-                || username.isEmpty() || address.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please customer to update.");
-        } else {
-            CustomerService.updateCustomer(id, name, email, phone_number, username, address);
-            refreshCustomerList();
-            clearCustomerForm();
-            JOptionPane.showMessageDialog(CustomerPane, "Updated successfully. ");
-        }
-
-    }//GEN-LAST:event_UpdateCustomerButtonActionPerformed
-
     private void CustomerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerTableMouseClicked
         // TODO add your handling code here:
         int i = CustomerTable.getSelectedRow();
@@ -1046,12 +1003,16 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
         int response = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Select Option", JOptionPane.YES_NO_OPTION);
         if (response == JOptionPane.YES_OPTION) {
-            JFrame frame = new JFrame("Film Equipment Rental Service");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.add(new CustomerLogin()); // Add the Login panel to the frame
-            frame.pack(); // Resize the frame to fit the component
-            frame.setVisible(true);
-            frame.setLocationRelativeTo(null);
+            JFrame mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            this.setVisible(false);
+            mainFrame.remove(this);
+            mainFrame.add(new CustomerLogin()); // Add the Login panel to the frame
+            mainFrame.pack(); // Resize the frame to fit the component
+            mainFrame.setVisible(true);
+            mainFrame.setLocationRelativeTo(null);
+
+            mainFrame.revalidate();
+            mainFrame.repaint();
         }
 
     }//GEN-LAST:event_log_outButtonActionPerformed
@@ -1066,7 +1027,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel EqupmentNameLabel1;
     private javax.swing.JLabel EqupmentNameLabel2;
     private javax.swing.JLabel EqupmentNameLabel3;
-    private javax.swing.JButton UpdateCustomerButton;
     private javax.swing.JButton addEquipmentBtn;
     private javax.swing.JScrollPane categoriesPane;
     private javax.swing.JTextField categoryNameTextField1;
