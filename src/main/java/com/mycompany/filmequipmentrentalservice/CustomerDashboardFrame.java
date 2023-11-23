@@ -49,7 +49,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     public void setAuthCustomer(Customer authCustomer) {
         this.authCustomer = authCustomer;
         if (authCustomer != null) {
-            this.cart = new Transaction(UUID.randomUUID(), null, null, this.authCustomer.id, "pending", 0.0, new ArrayList<TransactionItem>());
+            this.cart = new Transaction(UUID.randomUUID(), null, null, this.authCustomer.id, "Pending", 0.0, new ArrayList<TransactionItem>());
         }
 
     }
@@ -138,6 +138,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         });
 
         Home.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
+        Home.setForeground(new java.awt.Color(255, 255, 255));
         Home.setText("Home");
 
         jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Neil Patrick\\Downloads\\home (2).png")); // NOI18N
@@ -171,6 +172,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("My cart");
 
         jLabel12.setIcon(new javax.swing.ImageIcon("C:\\Users\\Neil Patrick\\Downloads\\shopping-cart (1).png")); // NOI18N
@@ -204,6 +206,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("My Transaction");
 
         jLabel13.setIcon(new javax.swing.ImageIcon("C:\\Users\\Neil Patrick\\Downloads\\transaction (1).png")); // NOI18N
@@ -229,8 +232,9 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setBackground(new java.awt.Color(0, 204, 204));
         jLabel3.setFont(new java.awt.Font("Calisto MT", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Film Equipments");
 
         jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
@@ -374,7 +378,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 139, 139));
         jPanel2.setPreferredSize(new java.awt.Dimension(755, 125));
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Rent Equipment ");
 
@@ -382,21 +386,17 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 755, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(296, 296, 296)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(232, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(401, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 126, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(9, 9, 9)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(71, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout HomeTabLayout = new javax.swing.GroupLayout(HomeTab);
@@ -535,17 +535,17 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         myCartHeader.setLayout(myCartHeaderLayout);
         myCartHeaderLayout.setHorizontalGroup(
             myCartHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myCartHeaderLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(myCartHeaderLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(193, 193, 193))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         myCartHeaderLayout.setVerticalGroup(
             myCartHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myCartHeaderLayout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addContainerGap(79, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout myCartTabLayout = new javax.swing.GroupLayout(myCartTab);
@@ -634,16 +634,16 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(169, 169, 169)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(339, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
+                .addContainerGap(70, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addGap(22, 22, 22))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout myTransactionTabLayout = new javax.swing.GroupLayout(myTransactionTab);
@@ -722,7 +722,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         for (int i = 0; i < transactions.size(); i++) {
             Transaction transaction = transactions.get(i);
 
-            String total = "₱ " + transaction.total.toString();
+            String total = "₱ " + String.format("%.2f", Double.valueOf(transaction.total.toString()));
             Object[] rowdata = {transaction.id, dateFormatter.format(transaction.startDate), dateFormatter.format(transaction.endDate), transaction.customer.name, transaction.status, total, transaction.items};
             transactionListTableModel.addRow(rowdata);
         }
@@ -846,18 +846,17 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
     private void removeAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAllButtonActionPerformed
         // TODO add your handling code here:
-        if(this.cart.items.isEmpty()){
+        if (this.cart.items.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Cart is Empty.");
-        }
-        else{
+        } else {
             int response = JOptionPane.showConfirmDialog(this, "Do you want to remove this?", "Select Option", JOptionPane.YES_NO_OPTION);
-        if (response == JOptionPane.YES_OPTION) {
-            this.cart.clearItems();
-            refreshCartList();
-            updateCartSummary();
+            if (response == JOptionPane.YES_OPTION) {
+                this.cart.clearItems();
+                refreshCartList();
+                updateCartSummary();
+            }
         }
-        }
-        
+
     }//GEN-LAST:event_removeAllButtonActionPerformed
 
     private void myCartTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myCartTableMouseClicked
@@ -922,27 +921,35 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         int i = customerTransactionLIstTable.getSelectedRow();
         UUID transactionId = (UUID) customerTransactionLIstTable.getValueAt(i, 0);
         String total = (String) customerTransactionLIstTable.getValueAt(i, 5);
-        String startDate = "Start Date: " + (String) customerTransactionLIstTable.getValueAt(i, 1);
-        String endDate = "   End Date: " + (String) customerTransactionLIstTable.getValueAt(i, 2);
-        String status = "   Status: " + (String) customerTransactionLIstTable.getValueAt(i, 4);
+        String startDate = "From : " + (String) customerTransactionLIstTable.getValueAt(i, 1);
+        String endDate = "   To : " + (String) customerTransactionLIstTable.getValueAt(i, 2);
+        String status = "Status: " + (String) customerTransactionLIstTable.getValueAt(i, 4);
+        
 
         List<TransactionItem> items = TransactionItemService.getTransactionItemsByTransactionId(transactionId);
+        Transaction transaction = TransactionService.getTransactionsByTransactionId(transactionId);
 
         StringBuilder message = new StringBuilder();
         message.append("Transaction ID: ").append(transactionId).append("\n");
-        message.append(startDate).append(endDate).append(status).append("\n\n");
+        message.append(startDate).append(endDate).append("   Total days:  ").append(transaction.getDateRangeSummary()).append("\n");
+        message.append(status).append("\n\n");
 
         for (TransactionItem item : items) {
+            double sub_total = item.sub_total;
+            String formatted_sub_total = String.format("%.2f", sub_total);
+
             message.append("Equipment Name: ").append(item.equipment.name).append("\n");
-            message.append("Subtotal: ₱ ").append(item.sub_total).append("\n\n");
+            message.append("Subtotal: ₱ ").append(formatted_sub_total).append("\n\n");
 
         }
+        message.append("________________________________________________").append("\n");
+        
         message.append("Total: ").append(total);
 
         Object[] options = {"Return equipments.", "Close"};
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        if (((String) customerTransactionLIstTable.getValueAt(i, 4)).equals("ongoing") && ((String) customerTransactionLIstTable.getValueAt(i, 2)).equals(dateFormatter.format(new Date()))) {
+        if (((String) customerTransactionLIstTable.getValueAt(i, 4)).equals("Ongoing") ) {
             int choice = JOptionPane.showOptionDialog(null, message.toString(), "Transaction Details", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
             if (choice == 0) {

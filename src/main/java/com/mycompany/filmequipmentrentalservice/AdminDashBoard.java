@@ -251,6 +251,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
         addEquipmentBtn.setBackground(new java.awt.Color(0, 102, 102));
         addEquipmentBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        addEquipmentBtn.setForeground(new java.awt.Color(255, 255, 255));
         addEquipmentBtn.setText("Add");
         addEquipmentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,6 +261,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
         refreshButton.setBackground(new java.awt.Color(0, 102, 102));
         refreshButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        refreshButton.setForeground(new java.awt.Color(255, 255, 255));
         refreshButton.setText("Refresh");
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,6 +271,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
         updateEquipmentButton.setBackground(new java.awt.Color(0, 102, 102));
         updateEquipmentButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        updateEquipmentButton.setForeground(new java.awt.Color(255, 255, 255));
         updateEquipmentButton.setText("Update");
         updateEquipmentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -377,7 +380,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(equipmentTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -539,7 +542,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
                         .addComponent(ucstomerNameLabel1)
                         .addGap(7, 7, 7)
                         .addComponent(customerAddressTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                         .addGroup(CustomerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(UpdateCustomerButton)
                             .addComponent(refreshCustomerButton1))))
@@ -729,7 +732,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
         for (int i = 0; i < transactions.size(); i++) {
             Transaction transaction = transactions.get(i);
-            String total = "₱ " + transaction.total.toString();
+            String total = "₱ " + String.format("%.2f", Double.valueOf(transaction.total.toString()));
 
             Object[] rowdata = {transaction.id, dateFormatter.format(transaction.startDate), dateFormatter.format(transaction.endDate), transaction.customer.name, transaction.status, total};
             transactionListTableModel.addRow(rowdata);
@@ -853,17 +856,21 @@ public class AdminDashBoard extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         int row = equipmentsTable.getSelectedRow();
+        System.out.println(row);
+        if (row < 0) {
+            JOptionPane.showMessageDialog(CustomerPane, "Please Select row to update.");
+            return;
+        }
         int equipmentId = (int) equipmentsTable.getValueAt(row, 0);
 
         String name = (String) equipmentNameInputField.getText();
         String description = dscriptionTextArea.getText();
 
         String updatedDailyFeeText = equipmentDailyFeeInputField.getText();
-        
+        double updatedDailyFee = Double.parseDouble(updatedDailyFeeText);
 
         String updatedWeeklyFeeText = equipmentWeeklyFeeInputField.getText();
-        
-        
+        double updatedWeeklyFee = Double.parseDouble(updatedWeeklyFeeText);
         Category category = CategoryService.getCategoryByName(equipmentCategoryCombobox.getSelectedItem().toString());
         String status = statusComboBox.getSelectedItem().toString();
 
@@ -871,11 +878,10 @@ public class AdminDashBoard extends javax.swing.JPanel {
                 || updatedWeeklyFeeText.isEmpty() || category == null) {
             JOptionPane.showMessageDialog(null, "Please complete the form.");
         } else {
-            double updatedDailyFee = Double.parseDouble(updatedDailyFeeText);
-            double updatedWeeklyFee = Double.parseDouble(updatedWeeklyFeeText);
             EquipmentService.updateEquipment(equipmentId, name, description, updatedDailyFee, updatedWeeklyFee, category.id, status);
             clearEquipmentForm();
             refreshEquipmentList();
+            JOptionPane.showMessageDialog(CustomerPane, "Update Successfully.");
         }
 
 
@@ -883,6 +889,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
     private void equipmentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_equipmentsTableMouseClicked
         // TODO add your handling code here:
+        addEquipmentBtn.setEnabled(false);
         int i = equipmentsTable.getSelectedRow();
         equipmentNameInputField.setText(equipmentsTable.getValueAt(i, 1).toString());
         dscriptionTextArea.setText(equipmentsTable.getValueAt(i, 2).toString());
@@ -935,32 +942,38 @@ public class AdminDashBoard extends javax.swing.JPanel {
         UUID transactionId = (UUID) transactionListTable.getValueAt(i, 0);
         String total = (String) transactionListTable.getValueAt(i, 5);
         String name = (String) transactionListTable.getValueAt(i, 3);
-        String startDate = "Start Date: " + (String) transactionListTable.getValueAt(i, 1);
-        String endDate = "   End Date: " + (String) transactionListTable.getValueAt(i, 2);
-        String status = "   Status: " + (String) transactionListTable.getValueAt(i, 4);
+        String startDate = "From: " + (String) transactionListTable.getValueAt(i, 1);
+        String endDate = "   To: " + (String) transactionListTable.getValueAt(i, 2);
+        String status = "Status: " + (String) transactionListTable.getValueAt(i, 4);
 
         List<TransactionItem> items = TransactionItemService.getTransactionItemsByTransactionId(transactionId);
+        Transaction transaction = TransactionService.getTransactionsByTransactionId(transactionId);
 
         StringBuilder message = new StringBuilder();
-        message.append("Transaction ID: ").append(transactionId).append("\n");
-        message.append(startDate).append(endDate).append(status).append("\n\n");
+        message.append("Transaction ID: ").append(transactionId).append("\n\n");
         message.append("Customer Name: ").append(name).append("\n");
+        message.append(startDate).append(endDate).append("  Total Days : ").append(transaction.getDateRangeSummary()).append("\n");
+        message.append(status).append("\n\n");
 
         for (TransactionItem item : items) {
+            double sub_total = item.sub_total;
+            String formatted_sub_total = String.format("%.2f", sub_total);
+
             message.append("Equipment Name: ").append(item.equipment.name).append("\n");
-            message.append("Subtotal: ₱ ").append(item.sub_total).append("\n\n");
+            message.append("Subtotal: ₱ ").append(formatted_sub_total).append("\n\n");
 
         }
+        message.append("________________________________________________").append("\n");
         message.append("Total: ").append(total);
 
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
         Object[] options = {"Customer pick-up the equipments.", "Close"};
-        if (((String) transactionListTable.getValueAt(i, 4)).equals("pending") && ((String) transactionListTable.getValueAt(i, 1)).equals(dateFormatter.format(new Date()))) {
+        if (((String) transactionListTable.getValueAt(i, 4)).equals("Pending") && ((String) transactionListTable.getValueAt(i, 1)).equals(dateFormatter.format(new Date()))) {
             int choice = JOptionPane.showOptionDialog(null, message.toString(), "Transaction Details", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
             if (choice == 0) {
-                TransactionService.updateTransactionStatus("ongoing", transactionId);
+                TransactionService.updateTransactionStatus("Ongoing", transactionId);
                 refreshTransactionList();
 
             }
@@ -993,6 +1006,10 @@ public class AdminDashBoard extends javax.swing.JPanel {
     private void UpdateCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCustomerButtonActionPerformed
         // TODO add your handling code here:
         int row = CustomerTable.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(CustomerPane, "Please Select row to update.");
+            return;
+        }
         int id = (int) CustomerTable.getValueAt(row, 0);
 
         String name = (String) customerNameTextFeild1.getText();
@@ -1001,9 +1018,16 @@ public class AdminDashBoard extends javax.swing.JPanel {
         String username = (String) customerUsernameTextFeild.getText();
         String address = (String) customerAddressTextFeild.getText();
 
-        CustomerService.updateCustomer(id, name, email, phone_number, username, address);
-        refreshCustomerList();
-        clearCustomerForm();
+        if (name.isEmpty() || email.isEmpty() || phone_number.isEmpty()
+                || username.isEmpty() || address.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please customer to update.");
+        } else {
+            CustomerService.updateCustomer(id, name, email, phone_number, username, address);
+            refreshCustomerList();
+            clearCustomerForm();
+            JOptionPane.showMessageDialog(CustomerPane, "Updated successfully. ");
+        }
+
     }//GEN-LAST:event_UpdateCustomerButtonActionPerformed
 
     private void CustomerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerTableMouseClicked

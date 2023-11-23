@@ -40,7 +40,7 @@ public class EquipmentService {
             String selectQuery = "SELECT equipments.*, categories.name AS category_name, "
                     + "(SELECT NOT EXISTS (SELECT * FROM transactions "
                     + "WHERE ((transactions.start_date <= '" + dateFormatter.format(endDate) + "' AND transactions.end_date >= '" + dateFormatter.format(startDate) + "' "
-                    + "AND transactions.status = 'pending') OR transactions.status = 'Ongoing') "
+                    + "AND transactions.status = 'Pending') OR transactions.status = 'Ongoing') "
                     + "AND transactions.id IN (SELECT transaction_items.transaction_id "
                     + "FROM transaction_items WHERE transaction_items.equipment_id = equipments.id))) AS is_available "
                     + "FROM equipments LEFT JOIN categories ON equipments.category_id = categories.id";

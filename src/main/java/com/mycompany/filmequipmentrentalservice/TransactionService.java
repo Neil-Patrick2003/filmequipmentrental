@@ -27,10 +27,6 @@ public class TransactionService {
     private static final String CUSTOMER_ID_COLUMN = "customer_id";
     private static final String STATUS_COLUMN = "status";
     private static final String TOTAL_COLUMN = "total";
-    
-    // pending
-    // ongoing
-    // completed
 
     public static List getAllTransactions() {
         List<Transaction> transactions = new ArrayList<>();
@@ -47,7 +43,7 @@ public class TransactionService {
                     + "customers.address AS customer_address, "
                     + "customers.phone_number AS customer_phone_number "
                     + "FROM transactions "
-                    + "LEFT JOIN customers ON transactions.customer_id = customers.id";
+                    + "LEFT JOIN customers ON transactions.customer_id = customers.id ORDER by transactions.status DESC";
 
             ResultSet resultSet = statement.executeQuery(selectQuery);
 
@@ -100,7 +96,7 @@ public class TransactionService {
                     + "customers.phone_number AS customer_phone_number "
                     + "FROM transactions "
                     + "LEFT JOIN customers ON transactions.customer_id = customers.id "
-                    + "WHERE transactions.customer_id = '" + customerId + "'";
+                    + "WHERE transactions.customer_id = '" + customerId + "' ORDER by transactions.status DESC";
 
             ResultSet resultSet = statement.executeQuery(selectQuery);
 
@@ -127,6 +123,58 @@ public class TransactionService {
             statement.close();
 
             return transactions;
+        } catch (Exception e) {
+            System.out.print(e);
+        } finally {
+            AccessDatabaseConnector.closeConnection(conn);
+        }
+
+        return null;
+    }
+
+    public static Transaction getTransactionsByTransactionId(UUID transactionId) {
+        Transaction transaction = null;
+
+        Connection conn = AccessDatabaseConnector.connect();
+        try {
+            Statement statement = conn.createStatement();
+
+            String selectQuery = "SELECT "
+                    + "*, "
+                    + "customers.name AS customer_name, "
+                    + "customers.email AS customer_email, "
+                    + "customers.username AS customer_username, "
+                    + "customers.address AS customer_address, "
+                    + "customers.phone_number AS customer_phone_number "
+                    + "FROM transactions "
+                    + "LEFT JOIN customers ON transactions.customer_id = customers.id "
+                    + "WHERE transactions.id = '" + transactionId.toString() + "' LIMIT 1";
+
+            ResultSet resultSet = statement.executeQuery(selectQuery);
+
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Process the results 
+            while (resultSet.next()) {
+
+                UUID id = UUID.fromString(resultSet.getString(ID_COLUMN));
+                Date startDate = dateFormatter.parse(resultSet.getString(START_DATE_COLUMN));
+                Date endDate = dateFormatter.parse(resultSet.getString(END_DATE_COLUMN));
+                Double total = resultSet.getDouble(TOTAL_COLUMN);
+                String status = resultSet.getString(STATUS_COLUMN);
+                int customerId = resultSet.getInt(CUSTOMER_ID_COLUMN);
+
+                transaction = new Transaction(id, startDate, endDate, customerId, status, total, new ArrayList<>());
+                Customer customer = new Customer(customerId, resultSet.getString("customer_name"), resultSet.getString("customer_name"), resultSet.getString("customer_phone_number"), resultSet.getString("customer_username"), "", resultSet.getString("customer_address"));
+                transaction.setCustomer(customer);
+
+            }
+
+            // Close the result set and statement
+            resultSet.close();
+            statement.close();
+
+            return transaction;
         } catch (Exception e) {
             System.out.print(e);
         } finally {
