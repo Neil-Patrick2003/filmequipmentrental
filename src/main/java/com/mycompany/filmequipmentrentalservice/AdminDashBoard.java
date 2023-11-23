@@ -815,10 +815,8 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
     private void addEquipmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEquipmentBtnActionPerformed
         String name = equipmentNameInputField.getText();
-        
-        String description = dscriptionTextArea.getText();
 
-        
+        String description = dscriptionTextArea.getText();
 
         String dailyFeeText = equipmentDailyFeeInputField.getText();
 
@@ -838,7 +836,7 @@ public class AdminDashBoard extends javax.swing.JPanel {
         } else {
             double dailyFee = Double.parseDouble(dailyFeeText);
             double weeklyFee = Double.parseDouble(weeklFeeText);
-            EquipmentService.addEquipment(name, description , dailyFee, weeklyFee, category.id);
+            EquipmentService.addEquipment(name, description, dailyFee, weeklyFee, category.id);
             clearEquipmentForm();
             refreshEquipmentList();
         }
@@ -861,16 +859,26 @@ public class AdminDashBoard extends javax.swing.JPanel {
         String description = dscriptionTextArea.getText();
 
         String updatedDailyFeeText = equipmentDailyFeeInputField.getText();
-        double updatedDailyFee = Double.parseDouble(updatedDailyFeeText);
+        
 
         String updatedWeeklyFeeText = equipmentWeeklyFeeInputField.getText();
-        double updatedWeeklyFee = Double.parseDouble(updatedWeeklyFeeText);
+        
+        
         Category category = CategoryService.getCategoryByName(equipmentCategoryCombobox.getSelectedItem().toString());
         String status = statusComboBox.getSelectedItem().toString();
 
-        EquipmentService.updateEquipment(equipmentId, name, description, updatedDailyFee, updatedWeeklyFee, category.id, status);
-        clearEquipmentForm();
-        refreshEquipmentList();
+        if (name.isEmpty() || description.isEmpty() || updatedDailyFeeText.isEmpty()
+                || updatedWeeklyFeeText.isEmpty() || category == null) {
+            JOptionPane.showMessageDialog(null, "Please complete the form.");
+        } else {
+            double updatedDailyFee = Double.parseDouble(updatedDailyFeeText);
+            double updatedWeeklyFee = Double.parseDouble(updatedWeeklyFeeText);
+            EquipmentService.updateEquipment(equipmentId, name, description, updatedDailyFee, updatedWeeklyFee, category.id, status);
+            clearEquipmentForm();
+            refreshEquipmentList();
+        }
+
+
     }//GEN-LAST:event_updateEquipmentButtonActionPerformed
 
     private void equipmentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_equipmentsTableMouseClicked
@@ -945,18 +953,16 @@ public class AdminDashBoard extends javax.swing.JPanel {
         }
         message.append("Total: ").append(total);
 
-        
-
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
         Object[] options = {"Customer pick-up the equipments.", "Close"};
         if (((String) transactionListTable.getValueAt(i, 4)).equals("pending") && ((String) transactionListTable.getValueAt(i, 1)).equals(dateFormatter.format(new Date()))) {
             int choice = JOptionPane.showOptionDialog(null, message.toString(), "Transaction Details", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-            
+
             if (choice == 0) {
                 TransactionService.updateTransactionStatus("ongoing", transactionId);
                 refreshTransactionList();
-                
+
             }
         } else {
             JOptionPane.showMessageDialog(null, message.toString(), "Transaction Details", JOptionPane.INFORMATION_MESSAGE);

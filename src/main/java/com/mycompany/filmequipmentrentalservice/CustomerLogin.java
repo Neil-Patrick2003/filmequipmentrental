@@ -88,6 +88,7 @@ public class CustomerLogin extends javax.swing.JPanel {
         passwordLabel.setText("Password");
 
         usernamerTextfeild.setBackground(new java.awt.Color(255, 255, 255));
+        usernamerTextfeild.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         usernamerTextfeild.setForeground(new java.awt.Color(0, 102, 102));
 
         loginButton.setBackground(new java.awt.Color(0, 102, 102));
@@ -114,6 +115,8 @@ public class CustomerLogin extends javax.swing.JPanel {
         jPasswordField1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jPasswordField1.setForeground(new java.awt.Color(0, 102, 102));
 
+        loginAsCustomerRadioBtn.setBackground(new java.awt.Color(255, 255, 255));
+        loginAsCustomerRadioBtn.setForeground(new java.awt.Color(0, 102, 102));
         loginAsCustomerRadioBtn.setText("Login as customer");
         loginAsCustomerRadioBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,6 +124,8 @@ public class CustomerLogin extends javax.swing.JPanel {
             }
         });
 
+        loginAsAdminRadioBtn.setBackground(new java.awt.Color(255, 255, 255));
+        loginAsAdminRadioBtn.setForeground(new java.awt.Color(0, 102, 102));
         loginAsAdminRadioBtn.setText("Login as admin");
         loginAsAdminRadioBtn.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -137,18 +142,15 @@ public class CustomerLogin extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(41, 41, 41)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(usernamerTextfeild, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(usernameLabel)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(14, 14, 14)
-                                            .addComponent(passwordLabel))))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(41, 41, 41)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(usernamerTextfeild, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(usernameLabel)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(14, 14, 14)
+                                        .addComponent(passwordLabel))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                             .addGap(24, 24, 24)
                                             .addComponent(loginAsCustomerRadioBtn)

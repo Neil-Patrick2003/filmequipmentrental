@@ -37,20 +37,13 @@ public class EquipmentService {
 
             SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
-            String selectQuery = "SELECT "
-                    + "equipments.*, "
-                    + "categories.name AS category_name, "
-                    + "( "
-                    + "SELECT NOT EXISTS "
-                    + "( "
-                    + "SELECT * from transactions where "
-                    + "( transactions.start_date BETWEEN '" + dateFormatter.format(startDate) + "' and '" + dateFormatter.format(endDate) + "' OR "
-                    + "transactions.end_date BETWEEN '" + dateFormatter.format(startDate) + "' and '" + dateFormatter.format(endDate) + "') "
-                    + "AND "
-                    + "transactions.id in ( SELECT transaction_items.transaction_id from transaction_items WHERE transaction_items.equipment_id = equipments.id) "
-                    + ") "
-                    + " ) as is_available "
-                    + "FROM equipments LEFT JOIN categories ON equipments.category_id = categories.id ";
+            String selectQuery = "SELECT equipments.*, categories.name AS category_name, "
+                    + "(SELECT NOT EXISTS (SELECT * FROM transactions "
+                    + "WHERE ((transactions.start_date <= '" + dateFormatter.format(endDate) + "' AND transactions.end_date >= '" + dateFormatter.format(startDate) + "' "
+                    + "AND transactions.status = 'pending') OR transactions.status = 'Ongoing') "
+                    + "AND transactions.id IN (SELECT transaction_items.transaction_id "
+                    + "FROM transaction_items WHERE transaction_items.equipment_id = equipments.id))) AS is_available "
+                    + "FROM equipments LEFT JOIN categories ON equipments.category_id = categories.id";
 
             System.out.println(selectQuery);
 
@@ -177,7 +170,7 @@ public class EquipmentService {
             String updateQuery = "Update " + EQUIPMENTS_TABLE + " SET " + NAME_COLUMN + " = '" + name + "', " + DESCRIPTION_COLUMN + " = '" + description + "', " + DAILY_RENTAL_FEE_COLUMN + " = '" + daily_rental_fee + "', " + WEEKLY_RENTAL_FEE_COLUMN + " = '" + weekly_rental_fee + "', " + CATEGORY_ID_COLUMN + " = '" + category_id + "', " + STATUS_COLUMN + " = '" + status + "' WHERE " + ID_COLUMN + " = " + equipmentId + ";";
             System.out.println(updateQuery);
             statement.executeUpdate(updateQuery);
-            
+
         } catch (SQLException e) {
             e.printStackTrace(); // Handle SQL exceptions
         } finally {

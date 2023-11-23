@@ -92,13 +92,14 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         myCartTab = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         myCartTable = new javax.swing.JTable();
         removeAllButton = new javax.swing.JButton();
         cartDurationLabel = new javax.swing.JLabel();
         cartTotalLabel = new javax.swing.JLabel();
         checkOutButton1 = new javax.swing.JButton();
+        myCartHeader = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         myTransactionTab = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         customerTransactionLIstTable = new javax.swing.JTable();
@@ -119,9 +120,10 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         Right.setPreferredSize(new java.awt.Dimension(250, 680));
 
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 102, 102));
         jButton4.setText("Log out");
+        jButton4.setBorder(null);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -244,15 +246,14 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 .addGroup(RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
                     .addGroup(RightLayout.createSequentialGroup()
-                        .addGroup(RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(RightLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(RightLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel3)))
+                        .addContainerGap()
+                        .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RightLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         RightLayout.setVerticalGroup(
             RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,14 +268,14 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 .addComponent(tab2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(tab3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(119, 119, 119))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
 
         getContentPane().add(Right, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 680));
 
-        jTabbedPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane2.setBackground(new java.awt.Color(72, 209, 204));
 
         HomeTab.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -353,7 +354,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         });
 
         startDatePicker.setBackground(new java.awt.Color(255, 255, 255));
-        startDatePicker.setForeground(new java.awt.Color(0, 0, 0));
+        startDatePicker.setForeground(new java.awt.Color(0, 102, 102));
         startDatePicker.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 startDatePickerPropertyChange(evt);
@@ -370,7 +371,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         warningLabel.setForeground(new java.awt.Color(255, 51, 51));
         warningLabel.setText("Please select date first.");
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(0, 139, 139));
+        jPanel2.setPreferredSize(new java.awt.Dimension(755, 125));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -380,20 +382,20 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
+            .addGap(0, 755, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(296, 296, 296)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(220, Short.MAX_VALUE)))
+                    .addContainerGap(232, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 65, Short.MAX_VALUE)
+            .addGap(0, 126, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(9, 9, 9)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                     .addContainerGap()))
         );
 
@@ -402,77 +404,69 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         HomeTabLayout.setHorizontalGroup(
             HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeTabLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(HomeTabLayout.createSequentialGroup()
                 .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HomeTabLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(allEquipmentScroolPane, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(HomeTabLayout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(HomeTabLayout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(3, 3, 3)
+                                        .addComponent(SearchTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(HomeTabLayout.createSequentialGroup()
+                                        .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(categoryFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(19, 19, 19))))))
                     .addGroup(HomeTabLayout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(HomeTabLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(HomeTabLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(SearchTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(HomeTabLayout.createSequentialGroup()
-                                    .addGap(425, 425, 425)
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeTabLayout.createSequentialGroup()
-                                    .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(categoryFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(132, 132, 132)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeTabLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(allEquipmentScroolPane, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
         );
         HomeTabLayout.setVerticalGroup(
             HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HomeTabLayout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(HomeTabLayout.createSequentialGroup()
+                .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HomeTabLayout.createSequentialGroup()
                         .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(SearchTextFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jLabel9))
-                .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(HomeTabLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(categoryFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))
-                    .addGroup(HomeTabLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(warningLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(allEquipmentScroolPane, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1049, 1049, 1049))
+                        .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8))
+                            .addComponent(endDatePicker, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(33, 33, 33)
+                .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(warningLabel)
+                    .addComponent(categoryFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(allEquipmentScroolPane, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("tab2", HomeTab);
 
         myCartTab.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setText("My Cart");
 
         myCartTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -504,6 +498,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         removeAllButton.setBackground(new java.awt.Color(0, 102, 102));
         removeAllButton.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        removeAllButton.setBorder(null);
         removeAllButton.setLabel("Remove all");
         removeAllButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -511,20 +506,47 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             }
         });
 
+        cartDurationLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cartDurationLabel.setForeground(new java.awt.Color(0, 102, 102));
         cartDurationLabel.setText("   ");
 
+        cartTotalLabel.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cartTotalLabel.setForeground(new java.awt.Color(0, 102, 102));
         cartTotalLabel.setText("   ");
 
         checkOutButton1.setBackground(new java.awt.Color(0, 102, 102));
         checkOutButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         checkOutButton1.setText("Check out");
+        checkOutButton1.setBorder(null);
         checkOutButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkOutButton1ActionPerformed(evt);
             }
         });
+
+        myCartHeader.setBackground(new java.awt.Color(0, 139, 139));
+        myCartHeader.setPreferredSize(new java.awt.Dimension(477, 126));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("My Cart");
+
+        javax.swing.GroupLayout myCartHeaderLayout = new javax.swing.GroupLayout(myCartHeader);
+        myCartHeader.setLayout(myCartHeaderLayout);
+        myCartHeaderLayout.setHorizontalGroup(
+            myCartHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myCartHeaderLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(193, 193, 193))
+        );
+        myCartHeaderLayout.setVerticalGroup(
+            myCartHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myCartHeaderLayout.createSequentialGroup()
+                .addContainerGap(52, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
+        );
 
         javax.swing.GroupLayout myCartTabLayout = new javax.swing.GroupLayout(myCartTab);
         myCartTab.setLayout(myCartTabLayout);
@@ -534,44 +556,47 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 .addGroup(myCartTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(myCartTabLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(myCartTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
-                            .addGroup(myCartTabLayout.createSequentialGroup()
-                                .addGroup(myCartTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cartDurationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cartTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 2, Short.MAX_VALUE))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myCartTabLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(checkOutButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(removeAllButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(checkOutButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeAllButton, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(169, 169, 169))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myCartTabLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(myCartTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cartTotalLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cartDurationLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
+            .addComponent(myCartHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
         );
         myCartTabLayout.setVerticalGroup(
             myCartTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(myCartTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(myCartHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cartDurationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cartDurationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cartTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(myCartTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(removeAllButton)
-                    .addComponent(checkOutButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(cartTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(myCartTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkOutButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(removeAllButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("tab1", myCartTab);
 
         myTransactionTab.setBackground(new java.awt.Color(255, 255, 255));
+        myTransactionTab.setPreferredSize(new java.awt.Dimension(755, 500));
 
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane2.setMaximumSize(new java.awt.Dimension(500, 500));
+        jScrollPane2.setMinimumSize(new java.awt.Dimension(500, 300));
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(468, 203));
 
         customerTransactionLIstTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -596,7 +621,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(customerTransactionLIstTable);
 
-        jPanel1.setBackground(new java.awt.Color(0, 75, 75));
+        jPanel1.setBackground(new java.awt.Color(0, 139, 139));
+        jPanel1.setPreferredSize(new java.awt.Dimension(755, 125));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
@@ -610,12 +636,12 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(169, 169, 169)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(22, 22, 22))
         );
@@ -625,18 +651,20 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         myTransactionTabLayout.setHorizontalGroup(
             myTransactionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myTransactionTabLayout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
-                .addGroup(myTransactionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myTransactionTabLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         myTransactionTabLayout.setVerticalGroup(
             myTransactionTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(myTransactionTabLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(194, 194, 194))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("tab3", myTransactionTab);
@@ -672,13 +700,14 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    void setColor(JPanel panel){
-        panel.setBackground(new Color(32,178,170));
+    void setColor(JPanel panel) {
+        panel.setBackground(new Color(32, 178, 170));
     }
-    void resetColor(JPanel panel){
-        panel.setBackground(new Color(0,128,128));
+
+    void resetColor(JPanel panel) {
+        panel.setBackground(new Color(0, 128, 128));
     }
-    
+
     private void refreshTransactionList() {
         DefaultTableModel transactionListTableModel = (DefaultTableModel) customerTransactionLIstTable.getModel();
         transactionListTableModel.setRowCount(0);
@@ -770,8 +799,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             frame.pack(); // Resize the frame to fit the component
             frame.setVisible(true);
             frame.setLocationRelativeTo(null);
-            
-            
+
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -794,7 +822,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         int id = (int) equipmentsTable.getValueAt(i, 0);
         String is_available = (String) equipmentsTable.getValueAt(i, 6);
 
-        if (this.cart.getNumberOfDays() <= 0) {
+        if (this.cart.getTotalNumberOfDays() <= 0) {
             return;
         }
         if ("Not Available".equals(is_available)) {
@@ -806,7 +834,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             int response = JOptionPane.showConfirmDialog(this, "Do you want to add this?", "Select Option", JOptionPane.YES_NO_OPTION);
             if (response == JOptionPane.YES_OPTION) {
                 Equipment equipment = EquipmentService.getEquipmentById(id);
-                TransactionItem item = new TransactionItem(UUID.randomUUID(), this.cart.id, equipment.id, equipment.daily_fee * this.cart.getNumberOfDays());
+                Double subTotal = (this.cart.getNumberOfDays() * equipment.daily_fee) + (this.cart.getNumberOfWeeks() * equipment.weekly_fee);
+                TransactionItem item = new TransactionItem(UUID.randomUUID(), this.cart.id, equipment.id, subTotal);
                 item.setEquipment(equipment);
                 this.cart.addItem(item);
                 refreshCartList();
@@ -817,12 +846,18 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
     private void removeAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAllButtonActionPerformed
         // TODO add your handling code here:
-        int response = JOptionPane.showConfirmDialog(this, "Do you want to remove this?", "Select Option", JOptionPane.YES_NO_OPTION);
+        if(this.cart.items.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Cart is Empty.");
+        }
+        else{
+            int response = JOptionPane.showConfirmDialog(this, "Do you want to remove this?", "Select Option", JOptionPane.YES_NO_OPTION);
         if (response == JOptionPane.YES_OPTION) {
             this.cart.clearItems();
             refreshCartList();
             updateCartSummary();
         }
+        }
+        
     }//GEN-LAST:event_removeAllButtonActionPerformed
 
     private void myCartTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myCartTableMouseClicked
@@ -861,16 +896,23 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_endDatePickerPropertyChange
 
     private void checkOutButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkOutButton1ActionPerformed
-        TransactionService.saveTransaction(this.cart);
-        for (TransactionItem item : this.cart.items) {
-            TransactionItemService.saveTransactionItem(item);
-        }
-        JOptionPane.showMessageDialog(null, "Succesful!");
+        if (this.cart.items.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Cart is Empty.");
 
-        // JOptionPane.showConfirmDialog(this, "Success! ", "Select Option ", JOptionPane.OK_OPTION);
-        this.cart.clearItems();
-        refreshCartList();
-        updateCartSummary();
+        } else {
+            TransactionService.saveTransaction(this.cart);
+            for (TransactionItem item : this.cart.items) {
+                TransactionItemService.saveTransactionItem(item);
+            }
+            JOptionPane.showMessageDialog(null, "Succesful!");
+
+            // JOptionPane.showConfirmDialog(this, "Success! ", "Select Option ", JOptionPane.OK_OPTION);
+            this.cart.clearItems();
+            refreshCartList();
+            updateCartSummary();
+            refreshEquipmentList();
+
+        }
 
 
     }//GEN-LAST:event_checkOutButton1ActionPerformed
@@ -900,7 +942,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         Object[] options = {"Return equipments.", "Close"};
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        if (((String) customerTransactionLIstTable.getValueAt(i, 4)).equals("ongoing") && ((String) customerTransactionLIstTable.getValueAt(i, 1)).equals(dateFormatter.format(new Date()))) {
+        if (((String) customerTransactionLIstTable.getValueAt(i, 4)).equals("ongoing") && ((String) customerTransactionLIstTable.getValueAt(i, 2)).equals(dateFormatter.format(new Date()))) {
             int choice = JOptionPane.showOptionDialog(null, message.toString(), "Transaction Details", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
             if (choice == 0) {
@@ -932,7 +974,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         setColor(tab2);
         resetColor(tab1);
         resetColor(tab3);
-        
+
     }//GEN-LAST:event_tab2MouseClicked
 
     private void tab3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tab3MouseClicked
@@ -942,7 +984,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         setColor(tab3);
         resetColor(tab1);
         resetColor(tab2);
-        
+
     }//GEN-LAST:event_tab3MouseClicked
 
     public void updateCartSummary() {
@@ -951,7 +993,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         }
 
         if (this.cart.startDate != null && this.cart.endDate != null) {
-            cartDurationLabel.setText(this.cart.startDate.toString() + " - " + this.cart.endDate.toString());
+            cartDurationLabel.setText(this.cart.startDate.toString() + " - " + this.cart.endDate.toString() + " : " + this.cart.getDateRangeSummary());
         }
 
         cartTotalLabel.setText("Total: " + this.cart.total.toString());
@@ -1028,6 +1070,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JPanel myCartHeader;
     private javax.swing.JPanel myCartTab;
     private javax.swing.JTable myCartTable;
     private javax.swing.JPanel myTransactionTab;

@@ -81,12 +81,43 @@ public class Transaction {
         return equipmentIds.contains(equipmentId);
     }
 
-    public int getNumberOfDays() {
+    public int getTotalNumberOfDays() {
         if (this.endDate != null && this.startDate != null) {
-            return (int) ChronoUnit.DAYS.between(this.startDate.toInstant(), this.endDate.toInstant());
+            return (int) ChronoUnit.DAYS.between(this.startDate.toInstant(), this.endDate.toInstant()) + 1;
         }
 
         return 0;
+    }
+
+    public int getNumberOfDays() {
+        return this.getTotalNumberOfDays() % 7;
+    }
+
+    public int getNumberOfWeeks() {
+        return this.getTotalNumberOfDays() / 7;
+    }
+
+    public String getDateRangeSummary() {
+        int totalDays = this.getTotalNumberOfDays();
+        int weeks = this.getNumberOfWeeks();
+        int days = this.getNumberOfDays();
+
+        String weekLabel = weeks > 1 ? "weeks" : "week";
+        String dayLabel = days > 1 ? "days" : "day";
+
+        if (totalDays == 0) {
+            return "";
+        }
+
+        if (weeks > 0 && days > 0) {
+            return String.valueOf(weeks) + " " + weekLabel + " and " + String.valueOf(days) + " " + dayLabel;
+        }
+
+        if (weeks > 0) {
+            return String.valueOf(weeks) + " " + weekLabel;
+        }
+
+        return String.valueOf(days) + " " + dayLabel;
     }
 
     public Double computeTotal() {
