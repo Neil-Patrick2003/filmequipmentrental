@@ -320,29 +320,28 @@ public class AdminDashBoard extends javax.swing.JPanel {
                         .addComponent(EqupmentNameLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(99, 99, 99))
                     .addGroup(equipmentTabLayout.createSequentialGroup()
-                        .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(scrollpaneDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                                .addComponent(equipmentDailyFeeInputField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(equipmentFormTitle, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(EqupmentNameLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(equipmentNameInputField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(equipmentWeeklyFeeInputField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(scrollpaneDescription, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                            .addComponent(equipmentDailyFeeInputField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(equipmentFormTitle)
+                            .addComponent(jLabel3)
+                            .addComponent(EqupmentNameLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(equipmentNameInputField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(equipmentWeeklyFeeInputField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel9)
                             .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(equipmentCategoryCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(equipmentCategoryCombobox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(equipmentTabLayout.createSequentialGroup()
                         .addComponent(addEquipmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(updateEquipmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(602, 602, 602)
                 .addComponent(filterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
@@ -381,9 +380,9 @@ public class AdminDashBoard extends javax.swing.JPanel {
                 .addComponent(statusComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(equipmentTabLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(41, 41, 41)
                 .addGroup(equipmentTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addEquipmentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(updateEquipmentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -809,8 +808,6 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
         String weeklFeeText = equipmentWeeklyFeeInputField.getText();
 
-        System.out.println("Good");
-
         Category category = null;
 
         if (equipmentCategoryCombobox.getSelectedIndex() >= 0) {
@@ -831,8 +828,10 @@ public class AdminDashBoard extends javax.swing.JPanel {
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         // TODO add your handling code here:
+
         refreshEquipmentList();
         clearEquipmentForm();
+        addEquipmentBtn.setEnabled(true);
 
     }//GEN-LAST:event_refreshButtonActionPerformed
 
@@ -872,18 +871,22 @@ public class AdminDashBoard extends javax.swing.JPanel {
     }//GEN-LAST:event_updateEquipmentButtonActionPerformed
 
     private void equipmentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_equipmentsTableMouseClicked
-        // TODO add your handling code here:
-        addEquipmentBtn.setEnabled(false);
         int i = equipmentsTable.getSelectedRow();
-        equipmentNameInputField.setText(equipmentsTable.getValueAt(i, 1).toString());
-        dscriptionTextArea.setText(equipmentsTable.getValueAt(i, 2).toString());
-        equipmentDailyFeeInputField.setText(equipmentsTable.getValueAt(i, 3).toString());
-        equipmentWeeklyFeeInputField.setText(equipmentsTable.getValueAt(i, 4).toString());
 
-        equipmentCategoryCombobox.setSelectedItem(equipmentsTable.getValueAt(i, 5).toString());
-        statusComboBox.setSelectedItem(equipmentsTable.getValueAt(i, 7).toString());
+        if (i >= 0) {
+            addEquipmentBtn.setEnabled(false);
 
-        equipmentFormTitle.setText("Edit Equipment");
+            equipmentNameInputField.setText(equipmentsTable.getValueAt(i, 1).toString());
+            dscriptionTextArea.setText(equipmentsTable.getValueAt(i, 2).toString());
+            equipmentDailyFeeInputField.setText(equipmentsTable.getValueAt(i, 3).toString());
+            equipmentWeeklyFeeInputField.setText(equipmentsTable.getValueAt(i, 4).toString());
+
+            equipmentCategoryCombobox.setSelectedItem(equipmentsTable.getValueAt(i, 5).toString());
+            statusComboBox.setSelectedItem(equipmentsTable.getValueAt(i, 7).toString());
+
+            equipmentFormTitle.setText("Edit Equipment");
+        }
+
     }//GEN-LAST:event_equipmentsTableMouseClicked
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked

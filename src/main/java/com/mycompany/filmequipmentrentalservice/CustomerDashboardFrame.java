@@ -137,11 +137,11 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         Right.setForeground(new java.awt.Color(255, 255, 255));
         Right.setPreferredSize(new java.awt.Dimension(250, 680));
 
-        log_outButton.setBackground(new java.awt.Color(255, 255, 255));
+        log_outButton.setBackground(new java.awt.Color(0, 102, 102));
         log_outButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        log_outButton.setForeground(new java.awt.Color(0, 102, 102));
+        log_outButton.setForeground(new java.awt.Color(255, 255, 255));
         log_outButton.setText("Log out");
-        log_outButton.setBorder(null);
+        log_outButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         log_outButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 log_outButtonActionPerformed(evt);
@@ -170,7 +170,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Home, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         tab1Layout.setVerticalGroup(
             tab1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,11 +257,11 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
 
         jSeparator1.setBackground(new java.awt.Color(255, 255, 255));
 
-        profileButton.setBackground(new java.awt.Color(255, 255, 255));
+        profileButton.setBackground(new java.awt.Color(0, 102, 102));
         profileButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        profileButton.setForeground(new java.awt.Color(0, 102, 102));
+        profileButton.setForeground(new java.awt.Color(255, 255, 255));
         profileButton.setText("Profile");
-        profileButton.setBorder(null);
+        profileButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         profileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 profileButtonActionPerformed(evt);
@@ -334,7 +334,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -446,7 +446,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HomeTabLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(HomeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(allEquipmentScroolPane, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(HomeTabLayout.createSequentialGroup()
                                 .addGap(15, 15, 15)
@@ -460,8 +460,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                                     .addGroup(HomeTabLayout.createSequentialGroup()
                                         .addComponent(warningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(categoryFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(19, 19, 19))))))
+                                        .addComponent(categoryFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(HomeTabLayout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addComponent(jLabel8)
@@ -788,6 +787,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         addressText.setForeground(new java.awt.Color(0, 102, 102));
         addressText.setBorder(null);
 
+        editProfileBtn.setBackground(new java.awt.Color(0, 102, 102));
+        editProfileBtn.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         editProfileBtn.setText("Edit Profile");
         editProfileBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -795,6 +796,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
             }
         });
 
+        saveProfileBtn.setBackground(new java.awt.Color(0, 102, 102));
+        saveProfileBtn.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         saveProfileBtn.setText("Save");
         saveProfileBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -832,8 +835,8 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                         .addComponent(addressText))
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(editProfileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(editProfileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(saveProfileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(251, Short.MAX_VALUE))
         );
@@ -863,7 +866,7 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addressLabel)
                     .addComponent(addressText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editProfileBtn)
                     .addComponent(saveProfileBtn))
@@ -997,27 +1000,51 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
     private void equipmentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_equipmentsTableMouseClicked
         int i = equipmentsTable.getSelectedRow();
         int id = (int) equipmentsTable.getValueAt(i, 0);
+
+        String equipment_name = (String) equipmentsTable.getValueAt(i, 1);
+        String description = (String) equipmentsTable.getValueAt(i, 2);
+        String daily_fee = (String) equipmentsTable.getValueAt(i, 3).toString();
+        String weekly_fee = (String) equipmentsTable.getValueAt(i, 4).toString();
+        String category = (String) equipmentsTable.getValueAt(i, 5);
+
         String is_available = (String) equipmentsTable.getValueAt(i, 6);
 
-        if (this.cart.getTotalNumberOfDays() <= 0) {
-            return;
-        }
-        if ("Not Available".equals(is_available)) {
-            JOptionPane.showMessageDialog(myTransactionTab, "This equipment is not available on your selected Date.");
-            return;
-        }
+        Boolean showAddToCart = this.cart.getTotalNumberOfDays() > 0 && "Available".equals(is_available) && !this.cart.isEquipmentAlreadyAdded(id);
 
-        if (!this.cart.isEquipmentAlreadyAdded(id)) {
-            int response = JOptionPane.showConfirmDialog(this, "Do you want to add this?", "Select Option", JOptionPane.YES_NO_OPTION);
-            if (response == JOptionPane.YES_OPTION) {
+        StringBuilder details = new StringBuilder();
+        details.append("Equipment name: ").append(equipment_name).append("  -  ").append(category).append("\n");
+
+        details.append("Daily Fee").append(daily_fee).append("\n");
+        details.append("Weekly Fee: ").append(weekly_fee).append("\n\n");
+        details.append("Description: ").append("\n").append(description).append("\n");
+
+        if (showAddToCart) {
+            Object[] option = {"Add to Cart.", "Close"};
+
+            int choices = JOptionPane.showOptionDialog(null, details.toString(), "Transaction Details", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
+            if (choices == 0) {
                 Equipment equipment = EquipmentService.getEquipmentById(id);
                 Double subTotal = (this.cart.getNumberOfDays() * equipment.daily_fee) + (this.cart.getNumberOfWeeks() * equipment.weekly_fee);
                 TransactionItem item = new TransactionItem(UUID.randomUUID(), this.cart.id, equipment.id, subTotal);
                 item.setEquipment(equipment);
                 this.cart.addItem(item);
-
             }
+
+//            int response = JOptionPane.showConfirmDialog(this, "Do you want to add this?", "Select Option", JOptionPane.YES_NO_OPTION);
+//            if (response == JOptionPane.YES_OPTION) {
+//                Equipment equipment = EquipmentService.getEquipmentById(id);
+//                Double subTotal = (this.cart.getNumbe rOfDays() * equipment.daily_fee) + (this.cart.getNumberOfWeeks() * equipment.weekly_fee);
+//                TransactionItem item = new TransactionItem(UUID.randomUUID(), this.cart.id, equipment.id, subTotal);
+//                item.setEquipment(equipment);
+//                this.cart.addItem(item);
+//
+//            }
+        } else {
+            JOptionPane.showMessageDialog(null, details.toString());
+
+          
         }
+
         refreshCartList();
         updateCartSummary();
     }//GEN-LAST:event_equipmentsTableMouseClicked
@@ -1232,13 +1259,12 @@ public class CustomerDashboardFrame extends javax.swing.JFrame {
         String phone_number = (String) phone_numberText.getText();
         String username = (String) usernameText.getText();
         String address = (String) addressText.getText();
-        
-        
+
         if (name.isEmpty() || email.isEmpty() || phone_number.isEmpty()
                 || username.isEmpty() || address.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please customer to update.");
-        }else{
-            CustomerService.updateCustomer( this.authCustomer.id, name, email, phone_number, username, address);
+        } else {
+            CustomerService.updateCustomer(this.authCustomer.id, name, email, phone_number, username, address);
             editProfileBtn.setText("Edit Profile");
             saveProfileBtn.setVisible(false);
             JOptionPane.showMessageDialog(rootPane, "Updated Successfully.");
